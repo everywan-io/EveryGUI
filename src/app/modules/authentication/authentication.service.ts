@@ -47,7 +47,7 @@ export class AuthenticationService {
         return this.loggedIn;
     }
 
-    signin(data: { username: string, password: string }): Observable<Operator> {
+    signin(data: { username: string, password: string, domain: string }): Observable<Operator> {
         const payload = {
             client_id: ClientKeys.id,
             client_secret: ClientKeys.secret,

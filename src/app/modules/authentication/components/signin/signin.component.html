@@ -2,8 +2,13 @@
     <div class="row">
         <div class="col-12">
             <div id="signin-container" class="form-group mx-auto p-4">
-                <img class="w-100 mb-3" src="/assets/images/logo_istituzionale.png" alt="Logo everywan">
+                <img class="w-100 mb-3" src="/assets/images/logo_istituzionale.png" alt="Logo Everywan">
                 <form class="w-100 d-flex flex-column" [formGroup]="form">
+                    <label for="domain">{{ 'auth.signin.fields.domain.label' | translate }}</label>
+                    <input type="text" id="domain" formControlName="domain"
+                           [placeholder]="'auth.signin.fields.domain.placeholder' | translate" value="Default">
+                    <small class="error" invalidControlCheck="domain">{{ form.get('domain').errors | serializeErrors:'errors.validations' }}</small>
+
                     <label for="username">{{ 'auth.signin.fields.username.label' | translate }}</label>
                     <input type="text" id="username" formControlName="username"
                            [placeholder]="'auth.signin.fields.username.placeholder' | translate">

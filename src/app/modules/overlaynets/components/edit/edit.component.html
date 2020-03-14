@@ -1,0 +1,59 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="overlaynet-edit" class="form-group ml-2">
+                    <div class="row">
+                        <div class="row pt-4">
+
+                            <div class="col-12 col-md-6 d-flex flex-column">
+                                <label for="name">{{ 'overlaynets.edit.fields.name.label' | translate }}</label>
+                                <input type="text" id="name" formControlName="name" [placeholder]="'overlaynets.edit.fields.name.placeholder' | translate">
+                                <small class="error" invalidControlCheck="name">{{ form.get('name').errors | serializeErrors:'errors.validations' }}</small>
+                            </div>
+                            <div class="col-12 col-md-6 d-flex flex-column">
+                                <label for="description">{{ 'overlaynets.edit.fields.description.label' | translate }}</label>
+                                <input type="text" id="description" formControlName="description" [placeholder]="'overlaynets.edit.fields.description.placeholder' | translate">
+                                <small class="error" invalidControlCheck="description">{{ form.get('description').errors | serializeErrors:'errors.validations' }}</small>
+                            </div>
+
+                            <div class="col-12 col-md-6 d-flex flex-column">
+                                <label for="type">{{ 'overlaynets.edit.fields.type.label' | translate }}</label>
+                                <select id="type" class="w-100 form-control" formControlName="type">
+                                    <option value="" selected>{{ 'overlaynets.edit.fields.type.placeholder' | translate }}</option>
+                                    <option *ngFor="let category of overlaynetTypes" [value]="category.value">{{ category.title }}</option>
+                                </select>
+                                <small class="error" invalidControlCheck="type">{{ form.get('type').errors | serializeErrors:'errors.validations' }}</small>
+                            </div>
+
+                            <div class="col-12 col-md-6 d-flex flex-column">
+                                <label for="tunnelType">{{ 'overlaynets.edit.fields.tunnelType.label' | translate }}</label>
+                                <select id="tunnelType" class="w-100 form-control" formControlName="tunnelType">
+                                    <option value="" selected>{{ 'overlaynets.edit.fields.tunnelType.placeholder' | translate }}</option>
+                                    <option *ngFor="let category of tunnelTypes" [value]="category.value">{{ category.title }}</option>
+                                </select>
+                                <small class="error" invalidControlCheck="tunnelType">{{ form.get('tunnelType').errors | serializeErrors:'errors.validations' }}</small>
+                            </div>
+                            <div  *ngFor="let interface of interfaces" class="col-6 col-md-6 d-flex flex-column">
+                                <div class="card-item">
+                                    <app-dev-int-card [devInterface]='interface' (interfaceChange)="onDeviceInterfaceSelected($event)"></app-dev-int-card>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" *ngIf="mode !== 'configure'">
+                        <div class="col-12 pt-4 d-flex justify-content-end">
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()" *hideItBootstrap="['xs', 'sm']"></app-button>
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()" *showItBootstrap="['xs', 'sm']" class="w-100"></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+

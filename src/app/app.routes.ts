@@ -15,41 +15,20 @@ export const ApplicationRoutes: Routes = [{
     children: [{
         path: '',
         pathMatch: 'full',
-        redirectTo: 'audit'
+        redirectTo: 'devices'
     },
         {
-        path: 'audit',
-        loadChildren: '@everywan/modules/audit/audit.module#AuditModule'
-    }, {
-        path: 'operators',
-        loadChildren: '@everywan/modules/operators/operators.module#OperatorsModule'
-    }, {
-        path: 'users',
-        loadChildren: '@everywan/modules/users/users.module#UsersModule'
+        path: 'dashboard',
+        loadChildren: '@everywan/modules/dashboard/dashboard.module#DashboardModule'
     }, {
         path: 'devices',
         loadChildren: '@everywan/modules/devices/devices.module#DevicesModule'
     }, {
-        path: 'groups',
-        loadChildren: '@everywan/modules/usergroups/usergroups.module#UsergroupsModule'
+        path: 'overlaynets',
+        loadChildren: '@everywan/modules/overlaynets/overlaynets.module#OverlayNetsModule'
     }, {
-        path: 'notices',
-        loadChildren: '@everywan/modules/notices/notices.module#NoticesModule'
-    }, {
-        path: 'areyoufine',
-        loadChildren: '@everywan/modules/areyoufine/areyoufine.module#AreyoufineModule'
-    }, {
-        path: 'geoclaim',
-        loadChildren: '@everywan/modules/geoclaim/geoclaim.module#GeoclaimModule'
-    }, {
-        path: 'categories',
-        loadChildren: '@everywan/modules/categories/categories.module#CategoriesModule'
-    }, {
-        path: 'userslocation',
-        loadChildren: '@everywan/modules/userslocation/userslocation.module#UserslocationModule'
-    }, {
-        path: 'signals',
-        loadChildren: '@everywan/modules/signals/signals.module#SignalsModule'
+        path: 'tenants',
+        loadChildren: '@everywan/modules/tenants/tenants.module#TenantsModule'
     }, {
         path: 'settings',
         component: MenuComponent,

@@ -4,67 +4,34 @@
             <div id="avatar" [style.backgroundImage]="(operator | async)?.avatar | asBackgroundUrl"></div>
         </div>
         <div class="d-flex flex-column align-items-center mt-4">
-            <span class="fullname">{{ (operator | async)?.fullname | capitalize:'words' }}</span>
-            <span class="role">{{ 'commons.roles.' + (operator | async)?.role | translate }}</span>
+            <span class="fullname">{{ (operator | async)?.username | capitalize:'words' }}</span>
+            <span class="role">Tenant: {{ (operator | async)?.project_name }}</span>
         </div>
     </div>
     <div id="menu" class="d-flex flex-column mt-4 pt-4">
-        <div class="menu-item no-outline" routerLink="/audit" [class.active]="isLinkActive('/audit')">
+        <div class="menu-item no-outline" routerLink="/dashboard" [class.active]="isLinkActive('/dashboard')">
             <i class="mdi mdi-view-dashboard-outline ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.dashboard' | translate }}</span>
+        </div>
+        
+        <div class="menu-item no-outline" routerLink="/devices" [class.active]="isLinkActive('/devices')">
+            <i class="mdi mdi-network-router ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.devices' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/overlaynets" [class.active]="isLinkActive('/overlaynets')">
+            <i class="mdi mdi-hexagon-slice-2 ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.overlayNets' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/tenants/details" [class.active]="isLinkActive('/tenants/details')">
+            <i class="mdi mdi-settings-outline ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.tenantDetails' | translate }}</span>
         </div>
         <div *ngIf="(operator | async).role == 'admin'" class="menu-item no-outline" routerLink="/operators"
              [class.active]="isLinkActive('/operators')">
             <i class="mdi mdi-account-multiple-outline ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.operators' | translate }}</span>
         </div>
-        <div class="menu-item no-outline" routerLink="/users" [class.active]="isLinkActive('/users')">
-            <i class="mdi mdi-account-multiple ml-4 ml-xl-5"></i>
-            <span class="title">{{ 'layout.menu.users' | translate }}</span>
-        </div>
-        <div class="menu-item no-outline" routerLink="/userslocation" [class.active]="isLinkActive('/userslocation')">
-            <i class="mdi mdi-map-marker-radius ml-4 ml-xl-5"></i>
-            <span class="title">{{ 'layout.menu.usersLocation' | translate }}</span>
-        </div>
-        <div class="menu-item no-outline" routerLink="/groups" [class.active]="isLinkActive('/groups')">
-            <i class="mdi mdi-account-group ml-4 ml-xl-5"></i>
-            <span class="title">{{ 'layout.menu.groups' | translate }}</span>
-        </div>
-        <div class="menu-item no-outline" routerLink="/devices" [class.active]="isLinkActive('/devices')">
-            <i class="mdi mdi-cellphone ml-4 ml-xl-5"></i>
-            <span class="title">{{ 'layout.menu.devices' | translate }}</span>
-        </div>
-        <div class="menu-item no-outline" routerLink="/signals" [class.active]="isLinkActive('/signals')">
-            <i class="mdi mdi-cellphone-wireless ml-4 ml-xl-5" style="padding-left: 4px"></i>
-            <span class="title" style="margin-left: 16px">{{ 'layout.menu.signals' | translate }}</span>
-        </div>
-        <div class="menu-item no-outline" ngbDropdown
-             placement="bottom-right"
-             [class.active]="isLinkActive('/notices') ||
-                             isLinkActive('/categories')">
-            <i class="mdi mdi-bell-outline ml-4 ml-xl-5"></i>
-            <span class="title" ngbDropdownToggle>{{ 'layout.menu.notifications.label' | translate }}</span>
-            <div ngbDropdownMenu aria-labelledby="dropdown">
-                <button ngbDropdownItem routerLink="/categories">
-                    {{ 'layout.menu.notifications.categories' | translate }}
-                </button>
-                <button ngbDropdownItem routerLink="/notices">
-                    {{ 'layout.menu.notifications.notices' | translate }}
-                </button>
-            </div>
-        </div>
-        <div class="menu-item no-outline" routerLink="/areyoufine" [class.active]="isLinkActive('/areyoufine')">
-            <i class="mdi mdi-hand-okay ml-4 ml-xl-5"></i>
-            <span class="title" style="margin-left: 16px">
-                {{ 'layout.menu.notifications.areYouFine' | translate }}
-            </span>
-        </div>
-        <div class="menu-item no-outline" routerLink="/geoclaim" [class.active]="isLinkActive('/geoclaim')">
-            <i class="mdi mdi-map-marker-check ml-4 ml-xl-5"></i>
-            <span class="title" style="margin-left: 16px">
-                {{ 'layout.menu.notifications.geoClaim' | translate }}
-            </span>
-        </div>
+        
         <div class="menu-item no-outline" routerLink="/auth/signout" routerLinkActive="active">
             <i class="mdi mdi-exit-to-app ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.signout' | translate }}</span>

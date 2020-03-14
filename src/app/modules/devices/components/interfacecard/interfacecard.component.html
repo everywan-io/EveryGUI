@@ -1,0 +1,8 @@
+<div class="card" style="width: 20rem;">
+    <div class="card-body">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="{{ interface.name }}" (change)="isChecked($event)">
+            <label class="custom-control-label" for="{{ interface.name }}"><span><i class="mdi mdi-network-router ml-4 ml-xl-5"></i></span> {{ interface.name }} ({{ interface.type }})</label>
+        </div>
+    </div>
+</div>

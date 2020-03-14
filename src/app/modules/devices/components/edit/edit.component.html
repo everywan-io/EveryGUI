@@ -1,0 +1,143 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="device-edit" class="form-group ml-2">
+                    <div class="row pt-4">
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label
+                                for="registration_timestamp">{{ 'devices.details.fields.registration_timestamp' | translate }}</label>
+                            <span
+                                class="text">{{ (device.registrationTimestamp !== null) ? device.registrationTimestamp : "--"}}</span>
+                        </div>
+
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="natType">{{ 'devices.details.fields.natType' | translate }}</label>
+                            <span class="text">{{ (device.natType !== null) ? device.natType : "--"}}</span>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="connected">{{ 'devices.details.fields.connected' | translate }}</label>
+                            <span *ngIf="device.connected; else notConnectedBlock "
+                                class="text upper">{{ 'commons.yes' | translate }}</span>
+                            <ng-template #notConnectedBlock><span
+                                    class="text upper">{{ 'commons.no' | translate }}</span></ng-template>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="enabled">{{ 'devices.details.fields.enabled' | translate }}</label>
+                            <span *ngIf="device.enabled; else notEnabledBlock "
+                                class="text upper">{{ 'commons.yes' | translate }}</span>
+                            <ng-template #notEnabledBlock><span class="text upper">{{ 'commons.no' | translate }}</span>
+                            </ng-template>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="configured">{{ 'devices.details.fields.configured' | translate }}</label>
+                            <span *ngIf="device.configured; else notConfiguredBlock "
+                                class="text">{{ 'commons.yes' | translate }}</span>
+                            <ng-template #notConfiguredBlock><span class="text">{{ 'commons.no' | translate }}</span>
+                            </ng-template>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="mgmtip">{{ 'devices.details.fields.mgmtip' | translate }}</label>
+                            <span class="text">{{ (device.mgmtip !== null) ? device.mgmtip : "--"}}</span>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="name">{{ 'devices.edit.fields.name.label' | translate }}</label>
+                            <input type="text" id="name" formControlName="name"
+                                [placeholder]="'devices.edit.fields.name.placeholder' | translate">
+                            <small class="error"
+                                invalidControlCheck="name">{{ form.get('name').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex  flex-column">
+                            <label for="description">{{ 'devices.edit.fields.description.label' | translate }}</label>
+                            <input type="text" id="description" formControlName="description"
+                                [placeholder]="'devices.edit.fields.description.placeholder' | translate">
+                            <small class="error"
+                                invalidControlCheck="description">{{ form.get('description').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+                    </div>
+                    <ng-container formArrayName="interfaces">
+                        <div *ngFor="let interface of device.interfaces;  let i=index" class="row pt-4">
+                            <!-- <app-devices-edit-interfaces formControlName="interfaces" [interface]=interface></app-devices-edit-interfaces> -->
+                            <ng-container [formGroupName]="i">
+
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-column">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="{{ interface.name }}" (change)="interfaceIsChecked($event, i)">
+                                            <label class="custom-control-label" for="{{ interface.name }}"><span><i class="mdi mdi-pencil">Interface: {{ interface.name }}</i></span> </label>
+                                            <input type="hidden" formControlName="name"  #name>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-12 col-md-4 d-flex flex-column">
+                                        <label
+                                            for="type">{{ 'devicesInterfaces.configure.fields.type.label' | translate }}</label>
+                                        <select  class="w-100 form-control" formControlName="type"  (change)="interfaceTypeSelected($event, i)"> 
+                                            <option value="" selected>
+                                                {{ 'devicesInterfaces.configure.fields.type.placeholder' | translate }}
+                                            </option>
+                                            <option *ngFor="let intType of interfaceTypes" [value]="intType.value">
+                                                {{ intType.title }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-4 d-flex flex-column">
+                                        <label
+                                            for="ipv4_addrs">{{ 'devicesInterfaces.configure.fields.ipv4_addrs.label' | translate }}</label>
+                                        <input type="text" formControlName="ipv4_addrs"
+                                            [placeholder]="'devicesInterfaces.configure.fields.ipv4_addrs.placeholder' | translate"
+                                            #ipv4addrs>
+                                        <!--         <small class="error"
+                                                invalidControlCheck="mgmtip">{{ form.get('mgmtip').errors | serializeErrors:'errors.validations' }}</small> -->
+                                    </div>
+                                    <div class="col-12 col-md-4 d-flex flex-column">
+                                        <label
+                                            for="ipv6_addrs">{{ 'devicesInterfaces.configure.fields.ipv6_addrs.label' | translate }}</label>
+                                        <input type="text" formControlName="ipv6_addrs"
+                                            [placeholder]="'devicesInterfaces.configure.fields.ipv6_addrs.placeholder' | translate"
+                                            #ipv4addrs>
+                                        <!--         <small class="error"
+                                                invalidControlCheck="mgmtip">{{ form.get('mgmtip').errors | serializeErrors:'errors.validations' }}</small> -->
+                                    </div>
+                                    <div class="col-12 col-md-4 d-flex flex-column">
+                                        <label
+                                            for="ipv4_subnets">{{ 'devicesInterfaces.configure.fields.ipv4_subnets.label' | translate }}</label>
+                                        <textarea type="text" formControlName="ipv4_subnets"
+                                            [placeholder]="'devicesInterfaces.configure.fields.ipv4_subnets.placeholder' | translate"
+                                            #ipv4subnets></textarea>
+                                        <!--         <small class="error"
+                                                invalidControlCheck="mgmtip">{{ form.get('mgmtip').errors | serializeErrors:'errors.validations' }}</small> -->
+                                    </div>
+                                    
+                                    <div class="col-12 col-md-4 d-flex flex-column">
+                                        <label
+                                            for="ipv6_subnets">{{ 'devicesInterfaces.configure.fields.ipv6_subnets.label' | translate }}</label>
+                                            <textarea type="text" formControlName="ipv6_subnets"
+                                            [placeholder]="'devicesInterfaces.configure.fields.ipv6_subnets.placeholder' | translate"
+                                            #ipv4subnets></textarea>
+                                        <!--         <small class="error"
+                                                invalidControlCheck="mgmtip">{{ form.get('mgmtip').errors | serializeErrors:'errors.validations' }}</small> -->
+                                    </div>
+
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </ng-container>
+
+                    <div class="row">
+                        <div class="col-12 pt-4 d-flex justify-content-end">
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()"
+                                *hideItBootstrap="['xs', 'sm']"></app-button>
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()"
+                                *showItBootstrap="['xs', 'sm']" class="w-100"></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

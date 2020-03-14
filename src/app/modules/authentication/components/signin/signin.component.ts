@@ -1,16 +1,15 @@
-import {Router} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { NgProgress } from '@ngx-progressbar/core';
+import { finalize } from 'rxjs/operators';
 
-import {finalize} from 'rxjs/operators';
-
-import {TranslateService} from '@ngx-translate/core';
-import {NgProgress} from '@ngx-progressbar/core';
-import {Operator} from '@models/operators.model';
-import {ButtonStates} from '@modules/shared/components/button/button.component';
-import {CustomValidators} from '@everyup/validators/custom.validators';
-import {AuthenticationService} from '@modules/authentication/authentication.service';
-import {NotificationsService} from '@modules/notifications/notifications.service';
+import { Operator } from '@models/operators.model';
+import { ButtonStates } from '@modules/shared/components/button/button.component';
+import { CustomValidators } from '@everyup/validators/custom.validators';
+import { AuthenticationService } from '@modules/authentication/authentication.service';
+import { NotificationsService } from '@modules/notifications/notifications.service';
 
 @Component({
     selector: 'app-auth-signin',
@@ -23,16 +22,17 @@ export class SigninComponent implements OnInit {
     submitState: ButtonStates;
 
     constructor(private authentication: AuthenticationService,
-                private notifications: NotificationsService,
-                private translator: TranslateService,
-                private progress: NgProgress,
-                private router: Router) {
+        private notifications: NotificationsService,
+        private translator: TranslateService,
+        private progress: NgProgress,
+        private router: Router) {
 
         this.submitState = ButtonStates.DISABLED;
         this.form = this.defineForm();
         this.errors = {
             username: null,
-            password: null
+            password: null,
+            domain: null
         };
     }
 
@@ -56,15 +56,15 @@ export class SigninComponent implements OnInit {
         this.submitState = ButtonStates.LOADING;
         this.progress.ref().start();
 
-
         this.authentication.signin({
             username: this.form.get('username').value,
-            password: this.form.get('password').value
+            password: this.form.get('password').value,
+            domain: this.form.get('domain').value
         }).pipe(
             finalize(() => this.submitState = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED)
         ).subscribe(
             (operator: Operator) => {
-                this.router.navigate(['/audit']);
+                this.router.navigate(['/dashboard']);
             },
             (error: any) => {
                 this.progress.ref().complete();
@@ -79,8 +79,9 @@ export class SigninComponent implements OnInit {
     private defineForm(): FormGroup {
         return new FormGroup({
             submitted: new FormControl(false),
-            username: new FormControl(null, [Validators.required, CustomValidators.email]),
-            password: new FormControl(null, [Validators.required, Validators.minLength(6)])
+            username: new FormControl(null, [Validators.required]),
+            password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+            domain: new FormControl(null, [Validators.required, Validators.minLength(3)])
         });
     }
 }

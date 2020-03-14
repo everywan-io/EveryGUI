@@ -1,0 +1,125 @@
+<div class="container-fluid">
+    <div id="filters" class="row mx-0">
+        <div class="col-12 px-4">
+            <app-overlaynets-filters (filtersChange)="onFiltersChange($event)"></app-overlaynets-filters>
+        </div>
+    </div>
+    <div id="overlaynets" class="row">
+        <div class="col-12 px-0">
+            <table class="w-100 mw-100"
+                   [infiniteScrollDistance]="1"
+                   [infiniteScrollThrottle]="300"
+                   [infiniteScrollDisabled]="paginator.pagination.disabled"
+                   (scrolled)="onLoadMore()"
+                   infiniteScroll>
+                <thead>
+                    <tr *hideItBootstrap="['xs', 'sm']">
+                        <td>{{ 'overlaynets.list.headers.id' | translate }}</td>
+                        <td>{{ 'overlaynets.list.headers.name' | translate }}</td>
+                        <td>{{ 'overlaynets.list.headers.type' | translate }}</td>
+                        <td>{{ 'overlaynets.list.headers.tunnelType' | translate }}</td>
+                        <td>{{ 'overlaynets.list.headers.numSlices' | translate }}</td>
+                        <td>{{ 'overlaynets.list.headers.actions' | translate }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *hideItBootstrap="['xs', 'sm']">
+                        <tr *ngFor="let overlaynet of instances">
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ overlaynet.id }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ overlaynet.name }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ overlaynet.type }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ overlaynet.tunnelType }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ overlaynet.slices.length }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <div ngbDropdown>
+                                    <button
+                                        class="action-item"
+                                        id="dropdown" ngbDropdownToggle>
+                                        {{ 'overlaynets.list.headers.actions' | translate }}
+                                    </button>
+
+                                    <div ngbDropdownMenu aria-labelledby="dropdown">
+                                        <button ngbDropdownItem [routerLink]="['/overlaynets', overlaynet.id, 'configure']">
+                                            {{ 'overlaynets.list.actions.configure.short' | translate }}
+                                        </button>
+                                        <button ngbDropdownItem (click)="onOverlayNetDelete(overlaynet.id)" >
+                                            {{ 'overlaynets.list.actions.delete.short' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                  <!--   <ng-container *showItBootstrap="['xs', 'sm']">
+                        <tr *ngFor="let overlaynet of instances">
+                            <td class="d-flex flex-column">
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column ml-3 overflow-hidden">
+                                        <span class="text">{{ overlaynet.id }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="role d-inline-flex align-items-center">
+
+                                        <span class="dot"></span>
+                                        <span class="text">{{ 'overlaynet.types.' + overlaynet.type | translate}}</span>
+                                    </span>
+                                </div>
+
+                                <table>
+                                    <tr>
+                                        <td class="px-0">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                            <span class="d-inline-flex align-items-center">
+                                            <app-button class="mt-0 pl-0"
+                                                        [title]="'overlaynets.list.actions.edit.short' | translate"
+                                                        [type]="'clear'"
+                                                        [routerLink]="['/overlaynets', overlaynet.id, 'edit']" >
+                                            </app-button>
+                                        </span>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </ng-container>
+                     -->
+                </tbody>
+                <tfoot>
+                    <td colspan="3">
+                        <div class="row" *ngIf="paginator.loading">
+                            <div class="col-12 pt-5 d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

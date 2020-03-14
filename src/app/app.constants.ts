@@ -7,7 +7,8 @@ export const StorageKeys = {
     STORAGE_PREFIX: 'everywan',
     STORAGE_USER_KEY: 'user',
     STORAGE_TOKEN_EXP_KEY: 'expat',
-    STORAGE_TOKEN_KEY: 'auth'
+    STORAGE_TOKEN_KEY: 'auth',
+    STORAGE_TOKEN_TYPE: 'auth_type',
 };
 
 export const StoreActions = {
