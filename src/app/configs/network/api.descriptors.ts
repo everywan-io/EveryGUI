@@ -1,3 +1,5 @@
+
+
 export interface LoginDescriptorInterface {
     token_type: string;
     expired_in: string;
@@ -12,9 +14,12 @@ export interface OperatorDescriptorInterface {
     avatar: string;
     name: string;
     surname: string;
-    email: string;
-    phone_main: string;
+    username: string;
     phone_country: string;
+    phone_main: string;
+    email: string;
+    project_id: string;
+    project_name: string;
 }
 
 export enum Gender {
@@ -22,310 +27,92 @@ export enum Gender {
     female = 'f'
 }
 
-export enum UserAccount {
-    pending = 'pending',
-    active = 'active'
-}
-
-export interface UserDescriptorInterface {
-    id: string;
-    email: string;
-    name: string;
-    surname: string;
-    gender: Gender;
-    account: UserAccount;
-    fiscal_code: string;
-    phone_country: string;
-    phone_main: string;
-    info: string;
-    emergency_contacts: string;
-    residential_address: string;
-    resident: boolean;
-    location: {
-        latitude: string;
-        longitude: string;
-        name: string;
-    };
-    birthplace: string;
-    avatar: string;
-    dob:	string;
-    created_at:	string;
-    updated_at: string;
-}
-
-export interface UserFilters {
-    platform_name: string;
-    term: string;
-    gender: string;
-    from_date_dob: string;
-    to_date_dob:	string;
-    resident: boolean;
+export enum DeviceType {
+    ROUTER = 'router',
 }
 
 
-export interface UserGroupDescriptorInterface {
-    id: string;
-    name: string;
-    description: string;
-    filters: UserFilters;
-    createdAt: number;
-    updatedAt: number;
-}
-
-export enum NoticeType {
-    normal = 'normal',
-    scheduled = 'scheduled'
-}
-
-export interface NoticeAttachmentMeta {
-    name: string;
-    type: string;
-    url: string;
-}
-
-export interface NoticeDescriptorInterface {
-    id: string;
-    title: string;
-    body: string;
-    titlePreview: string;
-    bodyPreview: string;
-    frequencyDate: string;
-    frequencyTime: string;
-    type: NoticeType;
-    category: CategoryDescriptorInterface;
-    attachments: NoticeAttachmentMeta[];
-    recipientsGroupName: string;
-}
-
-export interface CompactUser {
-    id: string;
-    fullName: string;
-    avatar: string;
-}
-
-export enum NoticeStatus {
-    sent = 'sent',
-    delivered = 'delivered',
-    readed = 'readed'
-}
-
-export interface NoticeLogs {
-    status: string;
-    date: string;
-}
-
-export interface NoticeFeedDescriptorInterface {
-    receiver: CompactUser;
-    status: NoticeStatus;
-    log: NoticeLogs[];
-    updatedAt: string;
-}
-
-export interface InquiryOperator {
-    id: string;
-    fullname: string;
-    avatar: string;
-}
-
-export interface InquiryDescriptorInterface {
-    id: string;
-    type: string;
-    recipientsGroupName: string;
-    operator: InquiryOperator;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export enum InquiryFeedStatus {
-    sent = 'sent',
-    delivered = 'delivered',
-    readed = 'readed',
-    withResponse = 'withResponse'
-}
-
-export interface InquiryFeedLogs {
-    status: string;
-    date: string;
-}
-
-export interface InquiryFeedDescriptorInterface {
-    receiver: CompactUser;
-    operator: InquiryOperator;
-    status: InquiryFeedStatus;
-    type: string;
-    origin: string;
-    receiver_payload: {
-        status: string;
-        latitude: string;
-        longitude: string;
-    };
-    logs: InquiryFeedLogs[];
-    createdAt: string;
-    updatedAt: string;
-}
-
-export enum PlatformName {
-    ios = 'ios',
-    android = 'android'
+export enum NatType {
+    OPEN = 'Open',
+    FULL_CONE_NAT = 'Full-cone NAT',
+    RESTRICTED_CONE_NAT = 'Restricted-cone NAT',
+    RESTRICTED_PORT_NAT = 'Restricted-port NAT',
+    SYMMETRIC_NAT = 'Symmetric NAT',
+    UDP_FIREWALL = 'UDP Firewall',
+    BLOCKED = 'Blocked'
 }
 
 export interface DeviceDescriptorInterface {
-    id: string;
-    fcm: string;
-    model: string;
-    platformName: PlatformName;
-    platformVersion: string;
-    name: string;
-    user: CompactUser;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface CategoryDescriptorInterface {
-    id: string;
+    deviceid: string;
+    type: DeviceType;
+    loopbackip: string;
     name: string;
     description: string;
-    color: string;
-    createdAt: string;
-    updatedAt: string;
+    loopbacknet: string;
+    mgmtip: string;
+    interfaces: [];
+    features: [];
+    nat_type: NatType;
+    registration_timestamp: string;
+    connected: boolean;
+    enabled: boolean;
+    configured: boolean;
+    tenantid: string;
+    tunnel_info: string;
+    tunnel_mode: string;
 }
 
-export interface NoticeFeedStatsDescriptorInterface {
-    receivers: string;
-    readed: {
-        amount: string,
-        percentage: string
-    };
-    delivered: {
-        amount: string,
-        percentage: string
-    };
-    sent: {
-        amount: string,
-        percentage: string
-    };
+export enum InterfaceType {
+    LAN = 'lan',
+    WAN = 'wan',
+    UNKNOWN = 'unknown'
 }
 
-export interface InquiryFeedStatsDescriptorInterface {
-    receivers: string;
-    sent: {
-        amount: string;
-        percentage: string;
-    };
-    delivered: {
-        amount: string;
-        percentage: string
-    };
-    readed: {
-        amount: string;
-        percentage: string
-    };
-    with_response: {
-        amount: string;
-        percentage: string
-    };
+export interface InterfaceDescriptorInterface {
+    deviceid: string;
+    name: string;
+    mac_addr: string;
+    ipv4_addrs: [];
+    ipv6_addrs: [];
+    ipv4_subnets: [];
+    ipv6_subnets: [];
+    ext_ipv4_addrs: [];
+    ext_ipv6_addrs: [];
+    type: InterfaceType;
 }
 
-export interface AuditDescriptorInterface {
-    operator: {
-        operators: string,
-        administrators: string
-    };
-    users: {
-        registered: string
-    };
-    groups: {
-        registered: string
-    };
-    notices: {
-        sent: string,
-        latest: {
-            delivered: {
-                amount: string,
-                percentage: string
-            },
-            readed: {
-                amount: string,
-                percentage: string
-            },
-            sent: {
-                amount: string,
-                percentage: string
-            }
-        }
-    };
-    inquiry: {
-        geoclaim: {
-            sent: string
-        };
-        areyoufine: {
-            sent: string
-        };
-    };
-    signals: {
-        received: string
-    };
-    devices: {
-        registered: string
-    };
-}
-
-export interface UsersStatsDescriptorInterface {
-    locations: {
-        registered: {
-            amount: string,
-            percentage: string
-        },
-        unregistered: {
-            amount: string,
-            percentage: string
-        }
-    };
-}
-
-export interface UserLocationDescriptorInterface {
-    id: string;
-    full_name: string;
-    avatar: string;
-    location: {
-        latitude: string,
-        longitude: string,
-        name: string
-    };
-}
-
-export interface SignalResponseAttachmentMetaDescriptorInterface {
+export interface SliceDescriptorInterface {
     name: string;
     type: string;
-    url: string;
+    mode: string;
+    interfaces: [];
+    tenantid: string;
 }
 
-export interface SignalResponseDescriptorInterface {
+
+export interface OverlayNetDescriptorInterface {
     id: string;
-    body: string;
-    sender: {
-        id: string,
-        full_name: string,
-        avatar: string
-    };
-    attachments: [SignalResponseAttachmentMetaDescriptorInterface];
-    created_at: string;
+    name: string;
+    type: string;
+    slices: [];
+    tenantid: string;
+    tunnel_mode: string;
 }
 
-export interface SignalDescriptorInterface {
+export interface TenantConfigDescriptorInterface {
+    port: string;
+    info: string;
+}
+
+export interface TenantDescriptorInterface {
     id: string;
-    object: string;
-    body: string;
-    category: CategoryDescriptorInterface;
-    responses: [SignalResponseDescriptorInterface];
-    attachments: [
-        {
-            name: string,
-            type: string,
-            url: string
-        }
-    ];
-    sender: CompactUser;
-    created_at: string;
-    updated_at: string;
+    name: string;
+    domain_id: string;
+    config: TenantConfigDescriptorInterface;
+    token: string;
+}
+
+
+export interface DashboardDescriptorInterface {
+    
 }
