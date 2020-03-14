@@ -21,7 +21,8 @@ export class OperatorsFactory {
     }
 
     static createFromDescriptor(descriptor: OperatorDescriptorInterface): Operator {
-        const duplicateKeys = ['id', 'name', 'surname', 'avatar', 'email', 'role'];
+        const duplicateKeys = ['id', 'name', 'surname', 'avatar', 'email', 'role', 'username', 'project_id', 'project_name'];
+
         const instance: Operator = new Operator();
 
         duplicateKeys.forEach(key => instance[key] = descriptor[key]);

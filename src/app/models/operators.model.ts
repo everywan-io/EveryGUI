@@ -11,6 +11,9 @@ export class Operator {
     surname: string;
     fullname: string;
     email: string;
+    username: string;
+    project_id: string;
+    project_name: string;
     phone: {
         readable: string;
         prefix: string;

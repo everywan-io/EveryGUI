@@ -1,9 +1,8 @@
-import { DeviceDescriptorInterface } from '@configs/network/api.descriptors';
 import { Device } from '@models/devices.model';
-
+import { DeviceDescriptorInterface } from '@configs/network/api.descriptors';
 
 export class DevicesFactory {
-    static create(source: DeviceDescriptorInterface[] | DeviceDescriptorInterface | Device ): Device[] | Device {
+    static create(source: DeviceDescriptorInterface[] | DeviceDescriptorInterface | Device): Device[] | Device {
         if (source instanceof Array) {
             return source.map((descriptor: DeviceDescriptorInterface) => this.createFromDescriptor(descriptor));
         }
@@ -11,7 +10,6 @@ export class DevicesFactory {
         return (source instanceof Device) ?
             this.createFromInstance(source) :
             this.createFromDescriptor(source);
-
     }
 
     static createFromInstance(instance: Device): Device {
@@ -23,42 +21,44 @@ export class DevicesFactory {
     }
 
     static createFromDescriptor(descriptor: DeviceDescriptorInterface): Device {
-        const duplicateKeys = [
-            'id',
-            'fcm',
-            'model',
-            'platformName',
-            'platformVersion',
-            'name',
-            'user',
-            'createdAt',
-            'updatedAt'
-        ];
+        const duplicateKeys = {
+            id: 'deviceid',
+            type: 'type',
+            name: 'name',
+            description: 'description',
+            mgmtip: 'mgmtip',
+            natType: 'nat_type',
+            interfaces: 'interfaces',
+            features: 'features',
+            registrationTimestamp: 'registration_timestamp',
+            enabled: 'enabled',
+            connected: 'connected',
+            configured: 'configured',
+            tenantid: 'tenantid',
+            tunnelInfo: 'tunnel_info',
+            tunnelMode: 'tunnel_mode'
+        };
+
         const instance: Device = new Device();
-
-        duplicateKeys.forEach((key) => {
-            if (key === 'platformName') {
-                instance[key] = descriptor['platform_name'];
-            } else if (key === 'platformVersion') {
-                instance[key] = descriptor['platform_version'];
-            } else if (key === 'createdAt') {
-                instance[key] = descriptor['created_at'];
-            } else if (key === 'updatedAt') {
-                instance[key] = descriptor['updated_at'];
-            } else {
-                instance[key] = descriptor[key];
+        // TODO type: DeviceType; 
+        for (const key in duplicateKeys) {
+            if (duplicateKeys.hasOwnProperty(key)) {
+                const value = duplicateKeys[key];
+                instance[key] = descriptor[value];
             }
-        });
-
-        // FIXME
-        if (!instance.user.avatar) {
-            instance.user.avatar = 'http://lorempixel.com/400/400/people/';
         }
-
-        instance['user'].fullName = instance['user']['full_name'];
-        delete instance['user']['full_name'];
+        instance.defineExtraProperties();
 
         return instance;
     }
 
+    static restoreFromStorage(descriptor): Device {
+        const instance = new Device();
+
+        Object.keys(descriptor).forEach(key => instance[key] = descriptor[key]);
+
+        instance.defineExtraProperties();
+
+        return instance;
+    }
 }
