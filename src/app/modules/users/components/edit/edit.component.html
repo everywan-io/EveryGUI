@@ -1,0 +1,190 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="user-edit" class="form-group mx-auto">
+                    <div class="row pt-4">
+
+                        <div class="col-12 d-flex flex-column mb-3">
+
+                            <div class="avatar text-center">
+
+                                <img class="avatar-img"
+                                     width="150"
+                                     height="150"
+                                     [src]="imageURL"
+                                     alt="Avatar Image">
+
+                                <div class="browse-button">
+                                    <i class="mdi mdi-pencil"></i>
+                                    <input class="browse-input" type="file" accept="image/*"
+                                           id="avatar"
+                                           formControlName="avatar"
+                                           (change)="showPreview($event)" />
+                                </div>
+
+                                <small class="error" invalidControlCheck="avatar">{{ form.get('avatar').errors | serializeErrors:'errors.validations' }}</small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="name">{{ 'users.edit.fields.name.label' | translate }}</label>
+                            <input type="text" id="name" formControlName="name"
+                                   [placeholder]="'users.edit.fields.name.placeholder' | translate"
+                                   (keyup)="onFieldChange()">
+                            <small class="error" invalidControlCheck="name">{{ form.get('name').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="surname">{{ 'users.edit.fields.surname.label' | translate }}</label>
+                            <input type="text" id="surname" formControlName="surname"
+                                   [placeholder]="'users.edit.fields.surname.placeholder' | translate"
+                                   (keyup)="onFieldChange()">
+                            <small class="error" invalidControlCheck="surname">{{ form.get('surname').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="fiscal-code">{{ 'users.edit.fields.fiscalCode.label' | translate }}</label>
+                            <input id="fiscal-code" formControlName="fiscal_code" type="text" class="form-control"
+                                   [placeholder]="'users.edit.fields.fiscalCode.placeholder' | translate"
+                                   (keyup)="onFiscalCodeKeyInput($event.target.value)">
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <ng-container *ngTemplateOutlet="gender;
+                            context:{
+                                hint: 'users.edit.fields.gender.placeholder' | translate,
+                                formControl: form.get('gender'),
+                                options: genderValues
+                                }"></ng-container>
+                            <small class="error" invalidControlCheck="gender">{{ form.get('gender').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <ng-container *ngTemplateOutlet="dob;
+                                context:{
+                                    hint: 'users.edit.fields.dob.label' | translate,
+                                    formControl: form.get('dob'),
+                                    options: {
+                                        minDate: {year: 1919, month: 1, day: 1},
+                                        maxDate: {year: 2600, month: 1, day: 1}
+                                    }
+                                }"></ng-container>
+                            <small class="error" invalidControlCheck="dob">{{ form.get('dob').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="birth-place">{{ 'users.edit.fields.birthplace.label' | translate }}</label>
+                            <input id="birth-place" formControlName="birthplace" type="text" class="form-control"
+                                   [placeholder]="'users.edit.fields.birthplace.placeholder' | translate"
+                                   (keyup)="onFieldChange()">
+                            <small class="error" invalidControlCheck="birthplace">{{ form.get('birthplace').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <ng-container *ngTemplateOutlet="resident;
+                            context:{
+                                hint: 'users.edit.fields.resident.placeholder' | translate,
+                                formControl: form.get('resident'),
+                                options: residentValues
+                                }"></ng-container>
+                            <small class="error" invalidControlCheck="resident">{{ form.get('resident').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <label for="residentialAddress">
+                                {{ 'users.edit.fields.residentialAddress.label' | translate }}
+                            </label>
+                            <textarea id="residentialAddress"
+                                      class="form-control"
+                                      rows="2"
+                                      formControlName="residential_address"
+                                      [placeholder]="'users.edit.fields.residentialAddress.placeholder' | translate"></textarea>
+                            <small class="error" invalidControlCheck="residential_address">{{ form.get('residential_address').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="phone">{{ 'users.edit.fields.phone.label' | translate }}</label>
+                            <international-phone-number id="phone" placeholder="{{ 'users.edit.fields.phone.placeholder' | translate }}"
+                                                        [defaultCountry]="'it'"
+                                                        [required]="true"
+                                                        [maxlength]="20"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="phone"
+                                                        #phoneComponent>
+
+                            </international-phone-number>
+                            <small class="error" invalidControlCheck="phone_main">{{ form.get('phone_main').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="email">{{ 'users.edit.fields.email.label' | translate }}</label>
+                            <input id="email" type="text" formControlName="email" [placeholder]="'operators.edit.fields.email.placeholder' | translate">
+                            <small class="error" invalidControlCheck="email">{{ form.get('email').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <label for="info">{{ 'users.edit.fields.info.label' | translate }}</label>
+                            <textarea id="info" class="form-control" rows="5" formControlName="info"
+                                      [placeholder]="'users.edit.fields.info.placeholder' | translate"></textarea>
+                            <small class="error" invalidControlCheck="info">{{ form.get('info').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <label for="emergency-contacts">{{ 'users.edit.fields.emergencyContacts.label' | translate }}</label>
+                            <textarea id="emergency-contacts" class="form-control" rows="5" formControlName="emergency_contacts"
+                                      [placeholder]="'users.edit.fields.emergencyContacts.placeholder' | translate"></textarea>
+                            <small class="error" invalidControlCheck="emergency_contacts">{{ form.get('emergency_contacts').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pt-4 d-flex justify-content-end">
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()" *hideItBootstrap="['xs', 'sm']"></app-button>
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()" *showItBootstrap="['xs', 'sm']" class="w-100"></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-template #gender let-hintText="hint" let-formControl="formControl" let-options="options">
+        <label for="theGender">{{ 'users.edit.fields.gender.label' | translate }}</label>
+        <select id="theGender" class="option form-control" [formControl]="formControl" (change)="onFieldChange()" >
+            <option value="" selected>{{ hintText }}</option>
+            <option *ngFor="let option of options" [value]="option.value">{{ option.title }}</option>
+        </select>
+</ng-template>
+
+<ng-template #resident let-hintText="hint" let-formControl="formControl" let-options="options">
+    <label for="resident">{{ 'users.edit.fields.resident.label' | translate }}</label>
+    <select id="resident" class="option form-control col-3"
+            [formControl]="formControl"
+            (change)="onFieldChange()" >
+        <option value="" selected>{{ hintText }}</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.title }}</option>
+    </select>
+</ng-template>
+
+<ng-template #dob let-hintText="hint" let-options="options" let-formControl="formControl">
+    <label for="theDob">{{ 'users.edit.fields.dob.label' | translate }}</label>
+    <div id="theDob" class="date-picker input-group">
+        <input type="text"
+               class="form-control"
+               [formControl]="formControl"
+               ngbDatepicker
+               #datePicker="ngbDatepicker"
+               [placeholder]="hintText"
+               [minDate]="options['minDate']"
+               [maxDate]="options['maxDate']"
+               (click)="datePicker.toggle()">
+
+        <div class="input-group-append" (click)="datePicker.toggle()">
+            <i class="mdi mdi-calendar-range"></i>
+        </div>
+    </div>
+</ng-template>

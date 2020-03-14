@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <div id="filters" class="row mx-0">
+        <div class="col-12 px-4">
+            <app-operators-filters (filtersChange)="onFiltersChange($event)"></app-operators-filters>
+        </div>
+    </div>
+    <div id="operators" class="row">
+        <div class="col-12 px-0">
+            <table class="w-100 mw-100"
+                   [infiniteScrollDistance]="1"
+                   [infiniteScrollThrottle]="300"
+                   [infiniteScrollDisabled]="paginator.pagination.disabled"
+                   (scrolled)="onLoadMore()"
+                   infiniteScroll>
+
+                <thead>
+                    <tr *hideItBootstrap="['xs', 'sm']">
+                        <td>{{ 'operators.list.headers.fullname' | translate }}</td>
+                        <td>{{ 'operators.list.headers.role' | translate }}</td>
+                        <td>{{ 'operators.list.headers.actions' | translate }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *hideItBootstrap="['xs', 'sm']">
+                        <tr *ngFor="let operator of instances">
+                            <td class="d-flex" [routerLink]="['/operators', operator.id, 'details']">
+                                <div class="avatar" [style.backgroundImage]="operator.avatar + '?t=' + timestamp | asBackgroundUrl"></div>
+                                <div class="d-flex flex-column ml-3 overflow-hidden">
+                                    <span class="fullname">{{ operator.fullname }}</span>
+                                    <span class="email">{{ operator.email }}</span>
+                                </div>
+                            </td>
+                            <td [routerLink]="['/operators', operator.id, 'details']">
+                                <span class="role d-inline-flex align-items-center"
+                                      [class.operator]="operator.role === OperatorRoles.OPERATOR"
+                                      [class.admin]="operator.role === OperatorRoles.ADMIN">
+
+                                    <span class="dot"></span>
+                                    <span class="text">{{ 'commons.roles.' + operator.role | translate}}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <div ngbDropdown>
+                                    <button
+                                        class="action-item"
+                                        id="dropdown" ngbDropdownToggle>
+                                        {{ 'operators.list.headers.actions' | translate }}
+                                    </button>
+
+                                    <div ngbDropdownMenu aria-labelledby="dropdown">
+                                        <button ngbDropdownItem [routerLink]="['/operators', operator.id, 'edit']">
+                                            {{ 'operators.list.actions.edit.short' | translate }}
+                                        </button>
+                                        <button ngbDropdownItem (click)="onOperatorDelete(operator.id)" >
+                                            {{ 'operators.list.actions.delete.short' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                    <ng-container *showItBootstrap="['xs', 'sm']">
+                        <tr *ngFor="let operator of instances">
+                            <td class="d-flex flex-column">
+                                <div class="d-flex">
+                                    <div class="avatar" [style.backgroundImage]="operator.avatar | asBackgroundUrl"></div>
+                                    <div class="d-flex flex-column ml-3 overflow-hidden">
+                                        <span class="fullname">{{ operator.fullname }}</span>
+                                        <span class="email">{{ operator.email }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="role d-inline-flex align-items-center"
+                                          [class.operator]="operator.role === OperatorRoles.OPERATOR"
+                                          [class.admin]="operator.role === OperatorRoles.ADMIN">
+
+                                        <span class="dot"></span>
+                                        <span class="text">{{ 'commons.roles.' + operator.role | translate}}</span>
+                                    </span>
+                                </div>
+
+                                <table>
+                                    <tr>
+                                        <td class="px-0">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="d-inline-flex align-items-center">
+                                                    <app-button class="mt-0 pl-0"
+                                                                [title]="'operators.list.actions.details.short' | translate"
+                                                                [type]="'clear'"
+                                                                [routerLink]="['/operators', operator.id, 'details']" >
+                                                    </app-button>
+                                                </span>
+                                                <span class="d-inline-flex align-items-center">
+                                                    <app-button class="mt-0 pl-0"
+                                                                [title]="'operators.list.actions.edit.short' | translate"
+                                                                [type]="'clear'"
+                                                                [routerLink]="['/operators', operator.id, 'edit']" >
+                                                    </app-button>
+                                                </span>
+                                                <span class="d-inline-flex align-items-center">
+                                                    <app-button class="mt-0 pr-0"
+                                                                [title]="'operators.list.actions.delete.short' | translate"
+                                                                [type]="'clear'"
+                                                                (click)="onOperatorDelete(operator.id)">
+                                                    </app-button>
+                                        </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+                <tfoot>
+                    <td colspan="3">
+                        <div class="row" *ngIf="paginator.loading">
+                            <div class="col-12 pt-5 d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

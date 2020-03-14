@@ -1,0 +1,35 @@
+<div id="actions" class="row mb-3" *showItBootstrap="['xs', 'sm']">
+    <div class="col-6 pl-0 py-2 text-left" (click)="filters.visible = !filters.visible">
+        <span class="action">{{ 'userGroups.list.actions.filter' | translate }}</span>
+    </div>
+    <div class="col-6 pr-0 py-2 text-right" [routerLink]="['./create']" >
+        <span class="action">{{ 'userGroups.list.actions.create' | translate }}</span>
+    </div>
+</div>
+
+<form class="w-100">
+    <div id="filters" class="row form-group align-items-center mt-0" [hidden]="!filters.visible">
+
+        <div id="search"
+             class="col-12 col-md-5 col-xl-5 d-flex flex-column pl-0 pr-md-3 pr-0 mb-2 mb-md-0">
+            <ng-container *ngTemplateOutlet="search; context:{ key: 'term', hint: 'userGroups.list.filters.fields.term.placeholder' | translate }"></ng-container>
+        </div>
+
+        <app-button class="ml-auto" *hideItBootstrap="['xs', 'sm']" [title]="'userGroups.list.filters.action.create' | translate" [routerLink]="['./create']" ></app-button>
+    </div>
+</form>
+
+<ng-template #search let-filterKey="key" let-hintText="hint">
+    <div class="search input-group">
+        <input type="text"
+               class="form-control"
+               [placeholder]="hintText"
+               (keyup)="filters.subject.next({ key: filterKey, value: $event.target['value'] })">
+
+        <div class="input-group-append">
+            <i class="mdi mdi-magnify" *ngIf="!loading.term"></i>
+            <i class="mdi mdi-loading" *ngIf="loading.term"></i>
+        </div>
+    </div>
+</ng-template>
+

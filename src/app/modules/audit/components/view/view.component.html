@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div id="audit">
+        <div class="row">
+            <div class="panel col-12 col-md-4 col-xl pl-4 mb-3">
+                <div class="item">
+                    <div class="description">
+                        <div>{{ 'audit.view.operators' | translate }}</div>
+                        <div class="description-stats">{{ audit.operator.operators }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel col-12 col-md-4 col-xl pl-4 mb-3">
+                <div class="item">
+                    <div class="description">
+                        <div>{{ 'audit.view.administrators' | translate }}</div>
+                        <div class="description-stats">{{ audit.operator.administrators }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel col-12 col-md-4 col-xl pl-4 mb-3">
+                <div class="item">
+                    <div class="description">
+                        <div>{{ 'audit.view.users' | translate }}</div>
+                        <div class="description-stats">{{ audit.users.registered }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel col-12 col-md-6 col-xl pl-4 mb-3">
+                <div class="item">
+                    <div class="description">
+                        <div>{{ 'audit.view.devices' | translate }}</div>
+                        <div class="description-stats">{{ audit.devices.registered }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel col-12 col-md-6 col-xl pl-4 mb-3">
+                <div class="item">
+                    <div class="description">
+                        <div>{{ 'audit.view.groups' | translate }}</div>
+                        <div class="description-stats">{{ audit.groups.registered }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel col-12 col-xl-6 pl-4 mb-3">
+                <div class="item">
+                    <div class="description">
+                        <div>{{ 'audit.view.noticeTitle' | translate }}</div>
+                        <div #containerPieChart></div>
+                        <div *ngIf="!showPieChart">
+                            <div class="description-stats mt-3">
+                                {{ 'audit.view.noNotices' | translate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel col-12 col-xl-6 pl-4 mb-3">
+                <div class="item">
+                    <div class="description" *ngIf="showPieChart">
+                        <div>{{ 'audit.view.lastNotice.label' | translate }}</div>
+                        <div class="description-stats mt-3">
+                            {{ 'audit.view.lastNotice.readed' | translate }}: {{ audit.notices.latest.readed.amount }}
+                        </div>
+                        <div class="description-stats mt-3">
+                            {{ 'audit.view.lastNotice.percentage' | translate }}: {{ audit.notices.latest.readed.percentage }}
+                        </div>
+                    </div>
+                    <div class="description" *ngIf="!showPieChart">
+                        <div>{{ 'audit.view.lastNotice.label' | translate }}</div>
+                        <div class="description-stats mt-3">
+                            {{ 'audit.view.lastNotice.noNotices' | translate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

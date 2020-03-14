@@ -1,0 +1,60 @@
+@import "index";
+
+$columns-x-padding: 25px;
+
+#feeds {
+    thead,
+    tbody {
+        th,
+        tr {
+            @include transition(200ms);
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            td {
+                padding-top: 10px;
+                padding-bottom: 10px;
+
+                &:nth-child(1) {
+                    max-width: 400px;
+                    min-width: 100px;
+                    padding-left: $columns-x-padding;
+                    padding-right: $columns-x-padding;
+
+                    @include media-breakpoint-down(md) {
+                        width: 100%;
+                        max-width: 100%;
+                        min-width: inherit;
+                    }
+                }
+
+                &:nth-child(2) {
+                    min-width: 100px;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                font-size: 14px;
+
+                .title {
+                    cursor: default;
+                    font-weight: 500;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+#stats {
+    &.row {
+        padding-left: $columns-x-padding;
+    }
+}

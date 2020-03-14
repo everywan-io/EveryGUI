@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <div id="users" class="row">
+        <div class="col-9 px-0">
+            <table class="w-100 mw-100"
+                   [infiniteScrollDistance]="1"
+                   [infiniteScrollThrottle]="300"
+                   [infiniteScrollDisabled]="paginator.pagination.disabled"
+                   (scrolled)="onLoadMore()"
+                   infiniteScroll>
+                <thead>
+                <tr *hideItBootstrap="['xs', 'sm']">
+                    <td>{{ 'users.list.headers.fullname' | translate }}</td>
+                    <td>{{ 'users.list.headers.dob' | translate }}</td>
+                    <td>{{ 'users.list.headers.gender' | translate }}</td>
+                    <td>{{ 'users.list.headers.createdAt' | translate }}</td>
+                    <td>{{ 'users.list.headers.updatedAt' | translate }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *hideItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let user of instances">
+                        <td class="d-flex">
+                            <div class="avatar"
+                                 [style.backgroundImage]="user.avatar | asBackgroundUrl">
+                            </div>
+                            <div class="d-flex flex-column ml-3 overflow-hidden">
+                                <span class="fullname">{{ user.fullname }}</span>
+                                <span class="email">{{ user.email }}</span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">
+                                    {{ user.dob | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">{{ user.stringifyGender() | translate }}</span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">
+                                    {{ user.createdAt | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">
+                                    {{ user.updatedAt | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+                <tfoot>
+                <td colspan="6">
+                    <div class="row" *ngIf="paginator.loading">
+                        <div class="col-12 pt-5 d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="filterBar" class="col-3 px-0" *hideItBootstrap="['xs', 'sm']">
+    <app-user-groups-filterbar (filtersChange)="onFiltersChange($event)"></app-user-groups-filterbar>
+</div>
+<div id="filterBarMobile" class="col-12 px-0" *showItBootstrap="['xs', 'sm']">
+    <app-user-groups-filterbar (filtersChange)="onFiltersChange($event)"></app-user-groups-filterbar>
+</div>

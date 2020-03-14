@@ -1,0 +1,116 @@
+<div class="container-fluid">
+    <div id="filters" class="row mx-0">
+        <div class="col-12 px-4">
+            <app-categories-filter (filtersChange)="onFiltersChange($event)"></app-categories-filter>
+        </div>
+    </div>
+    <div id="categories" class="row">
+        <div class="col-12 px-0">
+            <table class="w-100 mw-100"
+                   [infiniteScrollDistance]="1"
+                   [infiniteScrollThrottle]="300"
+                   [infiniteScrollDisabled]="paginator.pagination.disabled"
+                   (scrolled)="onLoadMore()"
+                   infiniteScroll>
+                <thead>
+                <tr *hideItBootstrap="['xs', 'sm']">
+                    <td>{{ 'categories.list.headers.name' | translate }}</td>
+                    <td>{{ 'categories.list.headers.description' | translate }}</td>
+                    <td>{{ 'categories.list.headers.actions' | translate }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *hideItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let category of instances">
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="name"
+                                      [ngStyle]="{'background-color': category.color}">{{ category.name }}</span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="description">
+                                    {{ category.description }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div ngbDropdown>
+                                <button
+                                    class="action-item"
+                                    id="dropdown" ngbDropdownToggle>
+                                    {{ 'categories.list.headers.actions' | translate }}
+                                </button>
+
+                                <div ngbDropdownMenu aria-labelledby="dropdown">
+                                    <button ngbDropdownItem [routerLink]="['/categories', category.id, 'edit']">
+                                        {{ 'categories.list.actions.edit.short' | translate }}
+                                    </button>
+                                    <button ngbDropdownItem (click)="onCategoryDelete(category.id)">
+                                        {{ 'categories.list.actions.delete.short' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-container>
+
+                <ng-container *showItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let category of instances">
+                        <td class="d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="name" [ngStyle]="{'background-color': category.color}">
+                                        {{ category.name }}
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="description">{{ category.description }}
+                                    </span>
+                                </span>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td class="px-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="d-inline-flex align-items-center">
+                                            <app-button class="mt-0 pl-0"
+                                                        [title]="'categories.list.actions.edit.short' | translate"
+                                                        [type]="'clear'"
+                                                        [routerLink]="['/categories', category.id, 'edit']"  >
+                                            </app-button>
+                                        </span>
+                                            <span class="d-inline-flex align-items-center">
+                                            <app-button class="mt-0 pr-0"
+                                                        [title]="'categories.list.actions.delete.short' | translate"
+                                                        [type]="'clear'"
+                                                        (click)="onCategoryDelete(category.id)">
+                                            </app-button>
+                                        </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+                <tfoot>
+                <td colspan="6">
+                    <div class="row" *ngIf="paginator.loading">
+                        <div class="col-12 pt-5 d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

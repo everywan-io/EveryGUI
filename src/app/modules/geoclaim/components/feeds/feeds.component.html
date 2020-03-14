@@ -1,0 +1,151 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+
+<div class="container-fluid">
+    <div id="stats" class="row mb-4 w-100">
+        <div class="col-12 mb-2 pl-0">
+                <span class="title">
+                    <b>{{ 'geoClaim.stats.headers.receivers' | translate }}:</b> {{ stats.receivers }}
+                </span>
+        </div>
+
+        <div class="col-12 mb-2 pl-0">
+                <span class="title">
+                    <b>{{ 'geoClaim.stats.headers.sent' | translate }} :</b> ({{ stats.sent.amount }}) {{ stats.sent.percentage }}
+                </span>
+        </div>
+
+        <div class="col-12 mb-2 pl-0">
+                <span class="title">
+                    <b>{{ 'geoClaim.stats.headers.delivered' | translate }}: </b> ({{ stats.delivered.amount }}) {{ stats.delivered.percentage }}
+                </span>
+        </div>
+
+        <div class="col-12 mb-2 pl-0">
+                <span class="title">
+                    <b>{{ 'geoClaim.stats.headers.withResponse' | translate }}:</b> ({{ stats.withResponse.amount }}) {{ stats.withResponse.percentage }}
+                </span>
+        </div>
+
+    </div>
+    <div id="filters" class="row mx-0">
+        <div class="col-12 px-4">
+            <app-geoclaim-feeds-filters (filtersChange)="onFiltersChange($event)"></app-geoclaim-feeds-filters>
+        </div>
+    </div>
+
+    <div id="usersLocator" class="row">
+        <div class="col-12 map-container">
+            <div class="map-frame">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="feeds" class="row">
+        <div class="col-12 px-0">
+            <table class="w-100 mw-100"
+                   [infiniteScrollDistance]="1"
+                   [infiniteScrollThrottle]="300"
+                   [infiniteScrollDisabled]="paginator.pagination.disabled"
+                   (scrolled)="onLoadMore()"
+                   infiniteScroll>
+                <thead>
+                <tr *hideItBootstrap="['xs', 'sm']">
+                    <td>{{ 'geoClaim.feeds.headers.fullName' | translate }}</td>
+                    <td>{{ 'geoClaim.feeds.headers.status' | translate }}</td>
+                    <td>{{ 'geoClaim.feeds.headers.lat' | translate }}</td>
+                    <td>{{ 'geoClaim.feeds.headers.long' | translate }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *hideItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let feed of instances">
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="title">{{ feed.receiver.fullName }}</span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="title">
+                                    {{ 'geoClaim.feeds.status.' + feed.status | translate }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="title" *ngIf="feed.status === 'with_response'">
+                                    {{ feed.receiverPayload.latitude }}
+                                </span>
+                                <span class="title" *ngIf="feed.status !== 'with_response'">
+                                    <b>-</b>
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="title" *ngIf="feed.status === 'with_response'">
+                                    {{ feed.receiverPayload.longitude }}
+                                </span>
+                                <span class="title" *ngIf="feed.status !== 'with_response'">
+                                    <b>-</b>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <ng-container *showItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let feed of instances">
+                        <td class="d-flex flex-column">
+                            <div class="d-flex">
+                                <div class="d-flex flex-column overflow-hidden">
+                                    <span class="date">
+                                        <b>{{ 'geoClaim.feeds.headers.fullName' | translate }} :</b>
+                                        {{ feed.receiver.fullName }}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="title">
+                                        <b>{{ 'geoClaim.feeds.headers.status' | translate }} :</b>
+                                        {{ feed.status }}
+                                    </span>
+                                </span>
+                            </div><div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="title">
+                                        <b>{{ 'geoClaim.feeds.headers.lat' | translate }} :</b>
+                                        {{ feed.payload.lat }}
+                                    </span>
+                                </span>
+                            </div><div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="title">
+                                        <b>{{ 'geoClaim.feeds.headers.long' | translate }} :</b>
+                                        {{ feed.payload.long }}
+                                    </span>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+                <tfoot>
+                <td colspan="6">
+                    <div class="row" *ngIf="paginator.loading && firstTime">
+                        <div class="col-12 pt-5 d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+@import "index";
+
+#actions {
+    font-family: Brown-Regular, sans-serif;
+    color: $color-primary;
+}
+
+#filters {
+    app-button::ng-deep {
+        button {
+            height: 42px !important;
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.dropdown-toggle::after {
+    display: none!important;
+}
+
+.option {
+    &.form-control {
+        line-height: 17px;
+    }
+}
+
+h6 {
+    text-align: center;
+}

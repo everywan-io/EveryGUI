@@ -1,0 +1,78 @@
+@import "index";
+
+$columns-x-padding: 25px;
+
+#signals {
+    thead,
+    tbody {
+        th,
+        tr {
+            @include transition(200ms);
+
+            cursor: pointer;
+
+            td {
+                padding-top: 10px;
+                padding-bottom: 10px;
+
+                &:nth-child(1) {
+                    max-width: 400px;
+                    min-width: 100px;
+                    padding-left: $columns-x-padding;
+                    padding-right: $columns-x-padding;
+
+                    @include media-breakpoint-down(md) {
+                        width: 100%;
+                        max-width: 100%;
+                        min-width: inherit;
+                    }
+                }
+
+                &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+                    min-width: 100px;
+                }
+
+                font-size: 14px;
+                padding-right: 20px;
+
+                .fullName, .title, .date {
+                    font-weight: 500;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+
+                    &.body {
+                        white-space: nowrap;
+                        max-width: 250px;
+                    }
+
+                }
+
+                .avatar {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .no-responses {
+                    color: red;
+                    float: right
+                }
+
+                .yes-responses {
+                    color: green;
+                    float: right;
+                }
+
+            }
+        }
+    }
+
+    thead {
+        tr{
+            cursor: default!important;
+        }
+    }
+
+}

@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div id="signal-details" class="ml-2">
+                <div class="d-flex object">
+                    <span>{{ signal.object }}</span>
+                </div>
+                <div class="d-flex mt-4">
+                    <div class="avatar"
+                         [style.backgroundImage]="signal.sender.avatar + '?t=' + timestamp | asBackgroundUrl">
+                    </div>
+                    <div class="d-flex flex-column ml-3 fullName">
+                        <span><b>{{ signal.sender.fullName }}</b></span>
+                        <span class="date">
+                            {{ signal.createdAt | amLocale:'it' | amDateFormat:'DD/MM/YYYY HH:mm:ss' }}
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex mt-4 mb-3">
+                    <span class="title">
+                        {{ signal.body }}
+                    </span>
+                </div>
+
+                <div class="responses mb-2" *ngFor="let response of signal.responses">
+                    <div class="d-flex mt-4">
+                        <div *ngIf="response.sender.avatar" class="avatar"
+                             [style.backgroundImage]="response.sender.avatar + '?t=' + timestamp | asBackgroundUrl">
+                        </div>
+                        <div *ngIf="!response.sender.avatar" class="avatar"
+                             [style.backgroundImage]="'/assets/images/avatar_default.jpg' + '?t=' + timestamp | asBackgroundUrl">
+                        </div>
+                        <div class="d-flex flex-column ml-3 fullName">
+                            <span><b>{{ response.sender.fullname }}</b></span>
+                            <span class="date">
+                            {{ response.createdAt | amLocale:'it' | amDateFormat:'DD/MM/YYYY HH:mm:ss' }}
+                        </span>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        <span class="title mb-2">
+                            {{ response.body }}
+                        </span>
+                    </div>
+                    <div class="d-flex flex-column" *ngIf="response.attachments.length > 0">
+                        <b>
+                            <label>{{ response.attachments.length }} {{ 'signals.response.fields.attachments.label' | translate }}</label>
+                        </b>
+                        <span *ngFor="let attachment of response.attachments">
+                            <b>
+                                <a target="_blank" [href]="attachment.url">
+                                    {{attachment.name}}
+                                </a>
+                            </b>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="d-flex mt-4 mb-4">
+                    <app-button [title]="button.title | translate" [state]="button.state" [routerLink]="['/signals', signal.id, 'response']" *hideItBootstrap="['xs', 'sm']"></app-button>
+                    <app-button [title]="button.title | translate" [state]="button.state" [routerLink]="['/signals', signal.id, 'response']" *showItBootstrap="['xs', 'sm']" class="w-100"></app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

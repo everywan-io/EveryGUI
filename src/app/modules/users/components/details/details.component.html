@@ -1,0 +1,165 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="user-details" class="form-group mx-auto">
+                    <div class="row pt-4">
+
+                        <div class="col-12 d-flex flex-column mb-3">
+
+                            <div class="avatar text-center">
+
+                                <img class="avatar-img"
+                                     width="150"
+                                     height="150"
+                                     [src]="imageURL"
+                                     alt="Avatar Image">
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="name">{{ 'users.details.fields.name.label' | translate }}</label>
+                            <input type="text" id="name" formControlName="name"
+                                   [placeholder]="'users.details.fields.name.placeholder' | translate">
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="surname">{{ 'users.details.fields.surname.label' | translate }}</label>
+                            <input type="text" id="surname" formControlName="surname"
+                                   [placeholder]="'users.details.fields.surname.placeholder' | translate">
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="fiscal-code">{{ 'users.details.fields.fiscalCode.label' | translate }}</label>
+                            <input id="fiscal-code" formControlName="fiscal_code" type="text" class="form-control"
+                                   [placeholder]="'users.details.fields.fiscalCode.placeholder' | translate">
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <ng-container *ngTemplateOutlet="gender;
+                            context:{
+                                hint: 'users.details.fields.gender.placeholder' | translate,
+                                formControl: form.get('gender'),
+                                options: genderValues
+                                }"></ng-container>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <ng-container *ngTemplateOutlet="dob;
+                                context:{
+                                    hint: 'users.details.fields.dob.label' | translate,
+                                    formControl: form.get('dob'),
+                                    options: {
+                                        minDate: {year: 1919, month: 1, day: 1},
+                                        maxDate: {year: 2600, month: 1, day: 1}
+                                    }
+                                }"></ng-container>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="birth-place">{{ 'users.details.fields.birthplace.label' | translate }}</label>
+                            <input id="birth-place" formControlName="birthplace" type="text" class="form-control"
+                                   [placeholder]="'users.details.fields.birthplace.placeholder' | translate">
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <ng-container *ngTemplateOutlet="resident;
+                            context:{
+                                hint: 'users.details.fields.resident.placeholder' | translate,
+                                formControl: form.get('resident'),
+                                options: residentValues
+                                }"></ng-container>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <label for="residentialAddress">
+                                {{ 'users.details.fields.residentialAddress.label' | translate }}
+                            </label>
+                            <textarea id="residentialAddress"
+                                      class="form-control"
+                                      rows="2"
+                                      formControlName="residential_address"
+                                      [placeholder]="'users.details.fields.residentialAddress.placeholder' | translate"></textarea>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="phone">{{ 'users.details.fields.phone.label' | translate }}</label>
+                            <input type="text" id="phone" formControlName="phone_main">
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="email">{{ 'users.details.fields.email.label' | translate }}</label>
+                            <input id="email" formControlName="email" [placeholder]="'users.edit.fields.email.placeholder' | translate">
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <label for="info">{{ 'users.details.fields.info.label' | translate }}</label>
+                            <textarea id="info" class="form-control" rows="5" formControlName="info"
+                                      [placeholder]="'users.details.fields.info.placeholder' | translate"></textarea>
+                        </div>
+
+                        <div class="col-12 d-flex flex-column">
+                            <label for="emergency-contacts">{{ 'users.details.fields.emergencyContacts.label' | translate }}</label>
+                            <textarea id="emergency-contacts" class="form-control" rows="5" formControlName="emergency_contacts"
+                                      [placeholder]="'users.details.fields.emergencyContacts.placeholder' | translate"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pt-4 d-flex justify-content-end">
+                            <app-button
+                                [title]="button.title | translate"
+                                [state]="button.state"
+                                [routerLink]="['/users', user.id, 'edit']"
+                                *hideItBootstrap="['xs', 'sm']"></app-button>
+                            <app-button
+                                [title]="button.title | translate"
+                                [state]="button.state"
+                                [routerLink]="['/users', user.id, 'edit']"
+                                *showItBootstrap="['xs', 'sm']"
+                                class="w-100"></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-template #gender let-hintText="hint" let-formControl="formControl" let-options="options">
+    <label for="theGender">{{ 'users.details.fields.gender.label' | translate }}</label>
+    <select id="theGender" class="option form-control" [formControl]="formControl">
+        <option value="" selected>{{ hintText }}</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.title }}</option>
+    </select>
+</ng-template>
+
+<ng-template #resident let-hintText="hint" let-formControl="formControl" let-options="options">
+    <label for="resident">{{ 'users.details.fields.resident.label' | translate }}</label>
+    <select id="resident" class="option form-control col-3"
+            [formControl]="formControl">
+        <option value="" selected>{{ hintText }}</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.title }}</option>
+    </select>
+</ng-template>
+
+<ng-template #dob let-hintText="hint" let-options="options" let-formControl="formControl">
+    <label for="theDob">{{ 'users.details.fields.dob.label' | translate }}</label>
+    <div id="theDob" class="date-picker input-group">
+        <input type="text"
+               class="form-control"
+               [formControl]="formControl"
+               ngbDatepicker
+               #datePicker="ngbDatepicker"
+               [placeholder]="hintText"
+               [minDate]="options['minDate']"
+               [maxDate]="options['maxDate']"
+               (click)="datePicker.toggle()">
+
+        <div class="input-group-append" (click)="datePicker.toggle()">
+            <i class="mdi mdi-calendar-range"></i>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,25 @@
+@import "index";
+
+#category-edit {
+    max-width: 800px;
+}
+
+.preview-row {
+    padding: 0 15px;
+
+    p {
+        color: white;
+        padding: 0 10px;
+        border-radius: 11px;
+        font-size: 14px;
+        //padding-bottom: 4px;
+        cursor: default;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
+.twitter-hash, .twitter-input {
+    display: none!important;
+ }

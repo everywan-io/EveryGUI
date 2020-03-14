@@ -1,0 +1,182 @@
+<div class="container-fluid">
+    <div id="filters" class="row mx-0">
+        <div class="col-12 px-4">
+            <app-users-filters (filtersChange)="onFiltersChange($event)"></app-users-filters>
+        </div>
+    </div>
+    <div id="users" class="row">
+        <div class="col-12 px-0">
+            <table class="w-100 mw-100"
+                   [infiniteScrollDistance]="1"
+                   [infiniteScrollThrottle]="300"
+                   [infiniteScrollDisabled]="paginator.pagination.disabled"
+                   (scrolled)="onLoadMore()"
+                   infiniteScroll>
+                <thead>
+                <tr *hideItBootstrap="['xs', 'sm']">
+                    <td>{{ 'users.list.headers.fullname' | translate }}</td>
+                    <td>{{ 'users.list.headers.dob' | translate }}</td>
+                    <td>{{ 'users.list.headers.gender' | translate }}</td>
+                    <td>{{ 'users.list.headers.account' | translate }}</td>
+                    <td>{{ 'users.list.headers.createdAt' | translate }}</td>
+                    <td>{{ 'users.list.headers.updatedAt' | translate }}</td>
+                    <td>{{ 'users.list.headers.actions' | translate }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *hideItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let user of instances">
+                        <td class="d-flex" [routerLink]="['/users', user.id, 'details']">
+                            <div class="avatar"
+                                 [style.backgroundImage]="user.avatar + '?t=' + timestamp | asBackgroundUrl">
+                            </div>
+                            <div class="d-flex flex-column ml-3 overflow-hidden">
+                                <span class="fullname">{{ user.fullname }}</span>
+                                <span class="email">{{ user.email }}</span>
+                            </div>
+                        </td>
+
+                        <td [routerLink]="['/users', user.id, 'details']">
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">
+                                    {{ user.dob | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td [routerLink]="['/users', user.id, 'details']">
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="gender">{{ user.stringifyGender() | translate }}</span>
+                            </div>
+                        </td>
+
+                        <td [routerLink]="['/users', user.id, 'details']">
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="account">{{ 'users.list.filters.fields.account.' + user.account | translate }}</span>
+                            </div>
+                        </td>
+
+                        <td [routerLink]="['/users', user.id, 'details']">
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">
+                                    {{ user.createdAt | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td [routerLink]="['/users', user.id, 'details']">
+                            <div class="d-flex flex-column overflow-hidden">
+                                <span class="dob">
+                                    {{ user.updatedAt | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div ngbDropdown>
+                                <button
+                                    class="action-item"
+                                    id="dropdown" ngbDropdownToggle>
+                                    {{ 'users.list.headers.actions' | translate }}
+                                </button>
+
+                                <div ngbDropdownMenu aria-labelledby="dropdown">
+                                    <button ngbDropdownItem [routerLink]="['/users', user.id, 'edit']">
+                                        {{ 'users.list.actions.edit.short' | translate }}
+                                    </button>
+                                    <button ngbDropdownItem (click)="onUserDelete(user.id)">
+                                        {{ 'users.list.actions.delete.short' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <ng-container *showItBootstrap="['xs', 'sm']">
+                    <tr *ngFor="let user of instances">
+                        <td class="d-flex flex-column">
+                            <div class="d-flex">
+                                <div class="avatar"
+                                     [style.backgroundImage]="user.avatar | asBackgroundUrl">
+                                </div>
+                                <div class="d-flex flex-column ml-3 overflow-hidden">
+                                    <span class="fullname">{{ user.fullname }}</span>
+                                    <span class="email">{{ user.email }}</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="text">
+                                        <b>{{ 'users.list.headers.dob' | translate }}
+                                            :</b> {{ user.dob | amLocale:'it' | amDateFormat:'DD/MM/YYYY' }}
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="text">
+                                        <b>{{ 'users.list.headers.gender' | translate }}
+                                            :</b> {{ user.stringifyGender() | translate }}
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="d-inline-flex align-items-center">
+                                    <span class="text">
+                                        <b>{{ 'users.list.headers.account' | translate }}
+                                            :</b> {{ 'users.list.filters.fields.account.' + user.account | translate }}
+                                    </span>
+                                </span>
+                            </div>
+
+                            <table>
+                                <tr>
+                                    <td class="px-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="d-inline-flex align-items-center">
+                                                <app-button class="mt-0 pl-0"
+                                                            [title]="'users.list.actions.details.short' | translate"
+                                                            [type]="'clear'"
+                                                            [routerLink]="['/users', user.id, 'details']"  >
+
+                                                </app-button>
+                                            </span>
+                                            <span class="d-inline-flex align-items-center">
+                                                <app-button class="mt-0 pl-0"
+                                                            [title]="'users.list.actions.edit.short' | translate"
+                                                            [type]="'clear'"
+                                                            [routerLink]="['/users', user.id, 'edit']"  >
+
+                                                </app-button>
+                                            </span>
+                                            <span class="d-inline-flex align-items-center">
+                                            <app-button class="mt-0 pr-0"
+                                                        [title]="'users.list.actions.delete.short' | translate"
+                                                        [type]="'clear'"
+                                                        (click)="onUserDelete(user.id)">
+                                            </app-button>
+                                        </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+                <tfoot>
+                <td colspan="6">
+                    <div class="row" *ngIf="paginator.loading">
+                        <div class="col-12 pt-5 d-flex justify-content-center">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="category-edit" class="form-group ml-2">
+                    <div class="row pt-4">
+                        <div class="col-12 col-md-8 d-flex flex-column">
+                            <div class="row d-flex justify-content-between preview-row">
+                                <div>
+                                    <label for="name">{{ 'categories.edit.fields.name.label' | translate }}</label>
+                                </div>
+                                <div>
+                                    <p [ngStyle]="{'background-color': color}" >{{preview}}</p>
+                                </div>
+                            </div>
+                            <input type="text" id="name" formControlName="name" [placeholder]="'categories.edit.fields.name.placeholder' | translate">
+                            <small class="error" invalidControlCheck="name">{{ form.get('name').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div style="padding-left: 15px" class="row">
+                                <div>
+                                    <label for="colorPicker">{{ 'categories.edit.fields.color.label' | translate }}</label>
+                                </div>
+                            </div>
+                            <color-twitter id="colorPicker"
+                                triangle="hide"
+                                width="100%"
+                                [color]="color"
+                                [colors]="colors"
+                                (onChange)="onColorChange($event.color.hex)"></color-twitter>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-12 d-flex flex-column">
+                            <label for="description">{{ 'categories.edit.fields.description.label' | translate }}</label>
+                            <textarea
+                                class="w-100 form-control"
+                                id="description" cols="40" rows="4"
+                                formControlName="description"
+                                placeholder="{{ 'categories.edit.fields.description.placeholder' | translate }}">
+                            </textarea>
+                            <small class="error" invalidControlCheck="description">{{ form.get('description').errors | serializeErrors:'errors.validations' }}</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pt-4 d-flex justify-content-end">
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()" *hideItBootstrap="['xs', 'sm']"></app-button>
+                            <app-button [title]="button.title | translate" [state]="button.state" (click)="onSubmit()" *showItBootstrap="['xs', 'sm']" class="w-100"></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

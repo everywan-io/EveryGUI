@@ -1,0 +1,75 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="operator-details" class="form-group mx-auto">
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="card d-flex flex-column align-items-center justify-content-center px-3 py-4"
+                                 [class.active]="form.get('role').value === OperatorRoles.ADMIN">
+
+                                <svg-icon src="/assets/icons/roles/admin.svg"></svg-icon>
+                                <span>{{ 'commons.roles.admin' | translate }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex justify-content-start">
+                            <div class="card d-flex flex-column align-items-center justify-content-center px-3 py-4"
+                                 [class.active]="form.get('role').value === OperatorRoles.OPERATOR">
+
+                                <svg-icon src="/assets/icons/roles/operator.svg"></svg-icon>
+                                <span>{{ 'commons.roles.operator' | translate }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pt-4">
+                        <div class="col-12 d-flex flex-column mb-3">
+
+                            <div class="avatar text-center">
+
+                                <img class="avatar-img"
+                                     width="150"
+                                     height="150"
+                                     [src]="imageURL"
+                                     alt="Avatar Image">
+
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="name">{{ 'operators.details.fields.name.label' | translate }}</label>
+                            <input type="text" id="name" formControlName="name" [placeholder]="'operators.details.fields.name.placeholder' | translate">
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="surname">{{ 'operators.details.fields.surname.label' | translate }}</label>
+                            <input type="text" id="surname" formControlName="surname" [placeholder]="'operators.details.fields.surname.placeholder' | translate">
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="phone">{{ 'operators.details.fields.phone.label' | translate }}</label>
+                            <input type="text" id="phone" formControlName="phone">
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-column">
+                            <label for="email">{{ 'operators.details.fields.email.label' | translate }}</label>
+                            <input id="email" formControlName="email" [placeholder]="'operators.details.fields.email.placeholder' | translate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pt-4 d-flex justify-content-end">
+                            <app-button
+                                [title]="button.title | translate"
+                                [state]="button.state"
+                                [routerLink]="['/operators', operator.id, 'edit']"
+                                *hideItBootstrap="['xs', 'sm']"></app-button>
+                            <app-button
+                                [title]="button.title | translate"
+                                [state]="button.state"
+                                [routerLink]="['/operators', operator.id, 'edit']"
+                                *showItBootstrap="['xs', 'sm']"
+                                class="w-100"></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

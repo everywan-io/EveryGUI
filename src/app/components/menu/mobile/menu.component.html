@@ -1,0 +1,59 @@
+<div id="mobile-menu" class="row w-100 m-0">
+    <div id="header" class="col-12 mt-2">
+        <div>
+            <div id="avatar" [style.backgroundImage]="(operator | async)?.avatar | asBackgroundUrl"></div>
+        </div>
+        <div class="d-flex flex-column align-items-center mt-4">
+            <span class="fullname">{{ (operator | async)?.fullname | capitalize:'words' }}</span>
+            <span class="role">{{ 'commons.roles.' + (operator | async)?.role | translate }}</span>
+        </div>
+    </div>
+    <div id="menu" class="col-12 mt-4 pt-4">
+        <div class="menu-item no-outline" routerLink="/userslocation">
+            <i class="mdi mdi-map-marker-radius ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.usersLocation' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/groups">
+            <i class="mdi mdi-account-group ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.groups' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/devices">
+            <i class="mdi mdi-cellphone ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.devices' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/signals">
+            <i class="mdi mdi-cellphone-wireless ml-4 ml-xl-5" style="padding-left: 4px"></i>
+            <span class="title" style="margin-left: 16px">{{ 'layout.menu.signals' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline">
+            <i class="mdi mdi-bell-outline ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.notifications.label' | translate }}</span>
+        </div>
+        <div class="sub-menu">
+            <div class="menu-item no-outline" routerLink="/categories" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="mdi mdi-menu-right-outline ml-4 ml-xl-5"></i>
+                <span class="title">{{ 'layout.menu.notifications.categories' | translate }}</span>
+            </div>
+            <div class="menu-item no-outline" routerLink="/notices" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="mdi mdi-menu-right-outline ml-4 ml-xl-5"></i>
+                <span class="title">{{ 'layout.menu.notifications.notices' | translate }}</span>
+            </div>
+        </div>
+        <div class="menu-item no-outline" routerLink="/areyoufine">
+            <i class="mdi mdi-hand-okay ml-4 ml-xl-5"></i>
+            <span class="title">
+                {{ 'layout.menu.notifications.areYouFine' | translate }}
+            </span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/geoclaim">
+            <i class="mdi mdi-map-marker-check ml-4 ml-xl-5"></i>
+            <span class="title">
+                {{ 'layout.menu.notifications.geoClaim' | translate }}
+            </span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/auth/signout" routerLinkActive="active">
+            <i class="mdi mdi-exit-to-app ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.signout' | translate }}</span>
+        </div>
+    </div>
+</div>

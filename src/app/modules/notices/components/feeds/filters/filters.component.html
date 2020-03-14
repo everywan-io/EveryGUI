@@ -1,0 +1,38 @@
+<div id="actions" class="row mb-3" *showItBootstrap="['xs', 'sm']">
+    <div class="col-6 pl-0 py-2 text-left" (click)="filters.visible = !filters.visible">
+        <span class="action">{{ 'notices.list.actions.filter' | translate }}</span>
+    </div>
+</div>
+
+<form class="w-100">
+    <div id="filters" class="row d-flex justify-content-between form-group align-items-center mt-0" *ngIf="filters.visible">
+        <div id="type" class="col-12 col-md-6 col-xl-4 px-0 mb-2 mr-2">
+            <ng-container *ngTemplateOutlet="status; context:{ key: 'status', hint: 'notices.feeds.filters.fields.status.placeholder' | translate, options: filterOptionsDescriptors.status }"></ng-container>
+        </div>
+        <div class="col-12 col-md-4 col-xl-4 px-0 mb-2 d-md-flex justify-content-md-end">
+            <div ngbDropdown placement="bottom-right" class="d-inline-block">
+                <app-button id="button" ngbDropdownToggle
+                            [title]="button.title | translate"
+                            [state]="button.state">
+                </app-button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem
+                            [innerHTML]="'notices.feeds.actions.reSend.notReceived' | translate"
+                            (click)="onResend('sent')"></button>
+                    <button ngbDropdownItem
+                            [innerHTML]="'notices.feeds.actions.reSend.notReaded' | translate"
+                            (click)="onResend('delivered')"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-template #status let-filterKey="key" let-hintText="hint" let-selected="default" let-options="options">
+    <select class="option form-control"
+            [ngModel]="queryStatus"
+            (change)="onSelectChange(filterKey, $event.target['value'])">
+        <option value="" selected>{{ hintText }}</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.title }}</option>
+    </select>
+</ng-template>
