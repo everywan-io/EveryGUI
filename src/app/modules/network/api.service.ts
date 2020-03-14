@@ -18,28 +18,21 @@ export class ApiService {
 
     public Authentication: any;
     public Operators: any;
-    public Users: any;
-    public UserGroup: any;
-    public Notices: any;
-    public Inquiry: any;
-    public Devices: any;
-    public Categories: any;
-    public Audit: any;
-    public Signals: any;
+    public Devices: any; 
+    public OverlayNets: any; 
+    public Dashboard: any; 
+    public Tenants: any; 
 
     constructor(private http: HttpClient) {
         this.url = `${Definitions.servers[0].url}`;
 
         this.Authentication = this.constructApisForGroup('Authentication');
         this.Operators = this.constructApisForGroup('Operators');
-        this.Users = this.constructApisForGroup('Users');
-        this.UserGroup = this.constructApisForGroup('UserGroup');
-        this.Notices = this.constructApisForGroup('Notices');
-        this.Inquiry = this.constructApisForGroup('Inquiry');
         this.Devices = this.constructApisForGroup('Devices');
-        this.Categories = this.constructApisForGroup('Categories');
-        this.Audit = this.constructApisForGroup('Audit');
-        this.Signals = this.constructApisForGroup('Signals');
+        this.OverlayNets = this.constructApisForGroup('Overlays');
+        this.Dashboard = this.constructApisForGroup('Dashboard');
+        this.Tenants = this.constructApisForGroup('Tenants');
+        
     }
 
     private constructApisForGroup(group: string): ApiGroup {
