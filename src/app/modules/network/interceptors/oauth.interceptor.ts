@@ -38,9 +38,15 @@ export class OAuthInterceptor implements HttpInterceptor {
         try {
             // We'll going to extend the request only if the route is protected as specified by the swagger
             if (ApiDefinitions.paths[currentPath][currentMethod].hasOwnProperty('security')) {
-                request = request.clone({
-                    headers: request.headers.set('Authorization', this.storage.get(StorageKeys.STORAGE_TOKEN_KEY) || '')
-                });
+                if (this.storage.get(StorageKeys.STORAGE_TOKEN_TYPE) === 'JWT') {
+                    request = request.clone({
+                        headers: request.headers.set('Authorization', this.storage.get(StorageKeys.STORAGE_TOKEN_KEY) || '')
+                    });
+                } else if (this.storage.get(StorageKeys.STORAGE_TOKEN_TYPE) === 'X-Auth-Token') {
+                    request = request.clone({
+                        headers: request.headers.set('X-Auth-Token', this.storage.get(StorageKeys.STORAGE_TOKEN_KEY) || '')
+                    });
+                }
             }
         } catch (error) {
             console.error('OAuthInterceptor', 'Unable to handle incoming request');
@@ -54,8 +60,13 @@ export class OAuthInterceptor implements HttpInterceptor {
                     // Saving token into local storage if it is an authorization route
                     if (this.mustHandleToken(event.url, event.body)) {
                         const expirationDate = Moment().add(event.body.expires_in - 60, 'seconds');
-                        const accessToken = `${event.body.token_type} ${event.body.access_token.replace('JWT', '').trim()}`;
-
+                        let accessToken = '';
+                        if (event.body.token_type === 'JWT') {
+                            accessToken = `${event.body.token_type} ${event.body.access_token.replace('JWT', '').trim()}`;
+                        } else if (event.body.token_type === 'X-Auth-Token') {
+                            accessToken = event.body.access_token;
+                        }
+                        this.storage.set(StorageKeys.STORAGE_TOKEN_TYPE, event.body.token_type);
                         this.storage.set(StorageKeys.STORAGE_TOKEN_EXP_KEY, expirationDate.toISOString());
                         this.storage.set(StorageKeys.STORAGE_TOKEN_KEY, accessToken);
                     }
@@ -63,10 +74,11 @@ export class OAuthInterceptor implements HttpInterceptor {
             },
             (response: any) => {
                 if (response instanceof HttpErrorResponse) {
-                    if (response.status === 401 && response.error && response.error.error === 'invalid_token') {
+                    if (response.status === 401 ) {
                         this.storage.unset(StorageKeys.STORAGE_USER_KEY);
                         this.storage.unset(StorageKeys.STORAGE_TOKEN_KEY);
                         this.storage.unset(StorageKeys.STORAGE_TOKEN_EXP_KEY);
+                        this.storage.unset(StorageKeys.STORAGE_TOKEN_TYPE);
 
                         this.store.dispatch(new AuthenticationUserSignout());
 
@@ -90,7 +102,7 @@ export class OAuthInterceptor implements HttpInterceptor {
     }
 
     private mustHandleToken(url, body): boolean {
-        const urlMatchesRegex = url.match(/\/auth\/operator\/(signin|signup)$/) != null;
+        const urlMatchesRegex = url.match(/\/auth\/(signin|signup)$/) != null;
         const hasAccessToken = urlMatchesRegex && body.expires_in != null && body.token_type != null && body.access_token != null;
 
         return hasAccessToken;
