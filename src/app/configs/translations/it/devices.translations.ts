@@ -1,62 +1,221 @@
 export const DevicesLanguagePartialDefinition = {
     list: {
-        title: 'Gestione Dispositivi',
+        title: 'Devices',
         filters: {
             fields: {
-                model: {
-                    placeholder: 'Cerca un modello...'
+                term: {
+                    placeholder: 'Search...'
                 },
-                os: {
-                    placeholder: 'Seleziona in sistema operativo'
+                type: {
+                    placeholder: 'All type',
                 },
-                dateRange: {
-                    placeholder: 'Cerca per data di registrazione',
-                    fromDate: 'Registrati dal',
-                    toDate: 'al'
+                status: {
+                    placeholder: 'All status'
                 }
-            },
-            action: {
-                create: 'Crea Dispositivo'
             }
         },
         headers: {
-            name: 'Nome',
-            model: 'Modello',
-            dor: 'Data di registrazione',
-            platform_name: 'Sistema Operativo',
-            platform_version: 'Versione',
-            user: 'Utente associato',
-            createdAt: 'Creato',
-            updatedAt: 'Modificato',
-            actions: 'Azioni'
+            actions: 'Actions',
+            id: 'Id',
+            name: 'Name',
+            type: 'Type',
+            natType: 'NAT Type',
+            connected: 'Connected',
+            interfaces: 'Interfaces',
+            enabled: 'Enabled',
+            configured: 'Configured',
+            registration_timestamp: 'Registered at',
+            mgmtip: 'Mgmt IP',
+            status: 'Status'
         },
         actions: {
-            filter: 'Filtra',
-            create: 'Crea dispositivo',
+            filter: 'Filter',
+            enable: {
+                long: 'Enable device',
+                short: 'Enable'
+            },
+            disable: {
+                long: 'Disable device',
+                short: 'Disable'
+            },
             edit: {
-                long: 'Modifica dispositivo',
-                short: 'Modifica'
+                long: 'Configure device',
+                short: 'Configure'
+            },
+            details: {
+                long: 'Show device',
+                short: 'Show'
             },
             delete: {
-                long: 'Cancella dispositivo',
-                short: 'Cancella'
+                long: 'Remove device',
+                short: 'Remove'
             }
         },
         modals: {
             delete: {
-                title: 'Elimina dispositivo',
-                message: 'Stai per eliminare il dispositivo <b>{{ device.name }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
+                title: 'Remove device',
+                message: 'Stai per eliminare device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
                 actions: {
-                    confirm: 'Elimina',
-                    cancel: 'Annulla'
+                    confirm: 'Remove',
+                    cancel: 'Cancel'
+                }
+            },
+            enable: {
+                title: 'Enable device',
+                message: 'Stai per abilitare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                }
+            },
+            disable: {
+                title: 'Disable device',
+                message: 'Stai per disabilitare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
                 }
             }
         },
         notifications: {
             delete: {
-                title: 'Elimina dispositivo',
-                message: 'Dispositivo eliminato correttamente'
+                title: 'Remove device',
+                message: 'Device eliminato correttamente'
+            },
+            enable: {
+                title: 'Enable device',
+                message: 'Device successful enbled'
+            },
+            disable: {
+                title: 'Disable device',
+                message: 'Device successful disabled'
+            },
+            edit: {
+                title: 'Edit device',
+                message: 'Device modificato correttamente'
             }
-        }
+        },
+    },
+    edit: {
+        title: {
+            edit: 'Configure device'
+        },
+        fields: {
+            name: {
+                label: 'Name',
+                placeholder: 'Insert a name'
+            },
+            type: {
+                label: 'Type',
+                placeholder: ''
+            },
+            description: {
+                label: 'Description',
+                placeholder: 'Insert a description'
+            },
+            natType: {
+                label: 'NAT Type'
+            },
+            registration_timestamp: {
+                label: 'Registered at'
+            },
+            mgmtip:  {
+                label: 'Mgmt IP'
+            },
+            status:  {
+                label: 'Status'
+            }
+        },
+        actions: {
+            edit: 'Edit device'
+        },
+        notifications: {
+            edit: {
+                title: 'Edit device',
+                message: 'Il device <b>{{ fullname }}</b> è stato modificato con successo'
+            }
+        },
+        modals: {
+            edit: {
+                title: 'Configure device',
+                message: 'Stai per configurare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Configure',
+                    cancel: 'Cancel'
+                }
+            },
+            approve: {
+                title: 'Enable device',
+                message: 'Stai per approvare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                }
+            }
+        },
+    },
+    details: {
+        title: 'Details device',
+        fields: {
+            deviceId: 'Device Id',
+            name: 'Name',
+            type: 'Type',
+            description: 'Description',
+            natType: 'NAT Type',
+            connected: 'Connected',
+            interfaces: 'Interfaces',
+            enabled: 'Enabled',
+            configured: 'Configured',
+            registration_timestamp: 'Registered at',
+            mgmtip: 'Mgmt IP',
+            status: 'Status'
+        },
+        actions: {
+            edit: 'Edit device'
+        },
+        notifications: {
+            delete: {
+                title: 'Remove device',
+                message: 'Device eliminato correttamente'
+            },
+            enable: {
+                title: 'Enable device',
+                message: 'Device successful enbled'
+            },
+            disable: {
+                title: 'Disable device',
+                message: 'Device successful disabled'
+            },
+        },
+        modals: {
+            edit: {
+                title: 'Configure device',
+                message: 'Stai per configurare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Configure',
+                    cancel: 'Cancel'
+                }
+            },
+            enable: {
+                title: 'Enable device',
+                message: 'Stai per abilitare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                }
+            },
+            disable: {
+                title: 'Disable device',
+                message: 'Stai per disabilitare il device <b>{{ device }}</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                }
+            }
+        },
+    },
+    types: {
+        undefined: 'Undefined',
+        router: 'Router'
     }
 };

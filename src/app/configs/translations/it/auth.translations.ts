@@ -8,6 +8,10 @@ export const AuthenticationLanguagePartialDefinition = {
             password: {
                 label: 'Password',
                 placeholder: 'Inserisci la password'
+            },
+            domain: {
+                label: 'Domain',
+                placeholder: 'Inserisci il dominio'
             }
         },
         actions: {

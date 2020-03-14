@@ -1,10 +1,13 @@
 export const CommonsLanguagePartialDefinition = {
     roles: {
-        admin: 'Amministratore',
-        operator: 'Operatore'
+        admin: 'Amministrator',
+        operator: 'Operator'
     },
     gender: {
-        male: 'Maschio',
-        female: 'Femmina'
-    }
+        male: 'Male',
+        female: 'Female'
+    },
+    warning: 'Warning',
+    yes: 'yes',
+    no: 'no'
 };

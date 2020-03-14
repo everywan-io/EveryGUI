@@ -5,18 +5,10 @@ export const LayoutLanguagePartialDefinition = {
     menu: {
         dashboard: 'Dashboard',
         operators: 'Operatori',
-        users: 'Utenti',
-        usersLocation: 'Domicilio',
-        groups: 'Gruppi',
-        devices: 'Dispositivi',
-        signals: 'Signals',
-        notifications: {
-            label: 'Comunicazioni',
-            categories: 'Categorie',
-            notices: 'Notices',
-            areYouFine: 'Are You fine',
-            geoClaim: 'Geo Claim'
-        },
+        devices: 'Devices',
+        overlayNets: 'Overlay Nets',
+        tenants: 'Tenants',
+        tenantDetails: 'Tenant Details',
         signout: 'Logout',
         settings: 'Menu'
     }

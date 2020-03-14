@@ -17,22 +17,18 @@ export const OperatorsLanguagePartialDefinition = {
         headers: {
             fullname: 'Operatore',
             role: 'Ruolo',
-            actions: 'Azioni'
+            actions: 'Actions'
         },
         actions: {
-            filter: 'Filtra',
+            filter: 'Filter',
             create: 'Crea operatore',
-            details: {
-                long: 'Dettagli operatore',
-                short: 'Dettagli'
-            },
             edit: {
                 long: 'Modifica operatore',
-                short: 'Modifica'
+                short: 'Edit'
             },
             delete: {
                 long: 'Elimina operatore',
-                short: 'Elimina'
+                short: 'Delete'
             }
         },
         modals: {
@@ -40,7 +36,7 @@ export const OperatorsLanguagePartialDefinition = {
                 title: 'Elimina operatore',
                 message: 'Stai per eliminare l\'operatore <b>{{ operator }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
                 actions: {
-                    confirm: 'Elimina',
+                    confirm: 'Delete',
                     cancel: 'Annulla'
                 }
             }
@@ -53,10 +49,7 @@ export const OperatorsLanguagePartialDefinition = {
         },
     },
     edit: {
-        title: {
-            create: 'Crea operatore',
-            edit: 'Modifica operatore',
-        },
+        title: 'Modifica operatore',
         fields: {
             name: {
                 label: 'Nome',
@@ -89,53 +82,17 @@ export const OperatorsLanguagePartialDefinition = {
         },
         actions: {
             create: 'Crea operatore',
-            edit: 'Aggiorna'
+            edit: 'Modifica operatore'
         },
         notifications: {
             create: {
-                title: 'Creazione operatore',
+                title: 'Creation operatore',
                 message: 'L\'operatore <b>{{ fullname }}</b> è stato creato con successo'
             },
             edit: {
                 title: 'Modifica operatore',
                 message: 'L\'operatore <b>{{ fullname }}</b> è stato modificato con successo'
             }
-        }
-    },
-    details: {
-        title: 'Dettagli operatore',
-        fields: {
-            name: {
-                label: 'Nome',
-                placeholder: 'Inserisci il nome dell\'operatore'
-            },
-            surname: {
-                label: 'Cognome',
-                placeholder: 'Inserisci il cognome dell\'operatore'
-            },
-            type: {
-                label: 'Tipo account',
-                placeholder: 'Seleziona tipologia account'
-            },
-            phone: {
-                label: 'Numero di telefono',
-                placeholder: 'Inserisci numero di telefono'
-            },
-            email: {
-                label: 'Indirizzo email',
-                placeholder: 'Inserisci email'
-            },
-            password: {
-                label: 'Password',
-                placeholder: 'Inserisci la password'
-            },
-            passwordConfirm: {
-                label: 'Conferma password',
-                placeholder: 'Reinserisci la password'
-            }
-        },
-        actions: {
-            edit: 'Modifica operatore'
         }
     }
 };

@@ -1,10 +1,21 @@
-export const AuditLanguagePartialDefinition = {
+export const DashboardLanguagePartialDefinition = {
     view: {
-        operators: 'Operatori',
-        administrators: 'Amministratori',
-        users: 'Utenti',
-        groups: 'Gruppi',
-        notices: 'Notices',
+        panel: {
+            operators: {
+                
+            },
+            devices: {
+
+            },
+            tenants: {
+
+            },
+            overlays: {
+
+            }
+        },
+        
+       
         devices: 'Dispositivi',
         geoclaim: 'Geo Claim',
         areyoufine: 'Are You Fine',
