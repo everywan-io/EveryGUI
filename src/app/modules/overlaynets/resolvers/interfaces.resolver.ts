@@ -26,7 +26,7 @@ export class InterfaceAvailableResolver implements Resolve<Observable<Interface[
             take(1),
             switchMap((overlaynet: OverlayNet) => {
                 // if (!user || user.id !== overlaynetIdentifier) {
-                return this.Devices.getInterfaces({availabe: true});
+                return this.Devices.getInterfaces({available: true});
                 // }
 
                 // return of(user);

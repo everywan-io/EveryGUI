@@ -22,10 +22,19 @@ export class TenantsFactory {
 
     static createFromDescriptor(descriptor: TenantDescriptorInterface): Tenant {
         const duplicateKeys = {
-            id: 'id',
+            id: 'tenantid',
             name: 'name',
+            configured: 'configured',
             domainId: 'domain_id',
+            vtepipIndex: 'vtep_ip_index',
+            reuVtepIpAddr: 'reu_vtep_ip_addr',
+            assignedVtepIpAddr: 'assigned_vtep_ip_addr',
+            vniIndex: 'vni_index',
+            assignedVni: 'assigned_vni',
+            reuVni: 'reu_vni',
+            counters: 'counters',
             config: 'config',
+            info: 'info',
             token: 'token'
         };
 

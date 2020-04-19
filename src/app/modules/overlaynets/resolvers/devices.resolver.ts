@@ -26,7 +26,7 @@ export class DeviceAvailableResolver implements Resolve<Observable<Device[]>> {
             take(1),
             switchMap((overlaynet: OverlayNet) => {
                 // if (!user || user.id !== overlaynetIdentifier) {
-                return this.devices.fetch({availabe: true});
+                return this.devices.fetch({available: true});
                 // }
 
                 // return of(user);

@@ -37,6 +37,7 @@ export class DetailsComponent implements OnInit {
     ngOnInit() {
         this.title.set(`tenants.details.title`);
         this.tenant = this.route.snapshot.data['tenant'];
+        console.log(this.tenant)
     }
 
 }

@@ -100,16 +100,23 @@ export interface OverlayNetDescriptorInterface {
 }
 
 export interface TenantConfigDescriptorInterface {
-    port: string;
-    info: string;
+    vxlan_port: string;
 }
 
 export interface TenantDescriptorInterface {
-    id: string;
+    tenantid: string;
     name: string;
     domain_id: string;
+    vtep_ip_index: number;
+    reutep_ip_addr: [];
+    assigned_vtep_ip_addr: number;
+    vni_index: number;
+    reu_vni: [];
+    assigned_vni: number;
+    counters: {};
     config: TenantConfigDescriptorInterface;
     token: string;
+    info: string;
 }
 
 

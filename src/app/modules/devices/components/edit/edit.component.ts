@@ -66,7 +66,7 @@ export class EditComponent implements OnInit {
             this.button.state = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED;
         });
 
-        this.title.set(`devices.edit.actions.edit`);
+        this.title.set(`devices.edit.title.edit`);
 
     }
 

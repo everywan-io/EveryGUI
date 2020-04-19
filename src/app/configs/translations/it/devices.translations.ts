@@ -1,6 +1,6 @@
 export const DevicesLanguagePartialDefinition = {
     list: {
-        title: 'Devices',
+        title: 'EveryEdge routers',
         filters: {
             fields: {
                 term: {
@@ -91,7 +91,7 @@ export const DevicesLanguagePartialDefinition = {
                 message: 'Device successful disabled'
             },
             edit: {
-                title: 'Edit device',
+                title: 'Edit EveryEdge',
                 message: 'Device modificato correttamente'
             }
         },
@@ -127,11 +127,11 @@ export const DevicesLanguagePartialDefinition = {
             }
         },
         actions: {
-            edit: 'Edit device'
+            edit: 'Save configuration'
         },
         notifications: {
             edit: {
-                title: 'Edit device',
+                title: 'Edit EveryEdge',
                 message: 'Il device <b>{{ fullname }}</b> è stato modificato con successo'
             }
         },
@@ -171,7 +171,7 @@ export const DevicesLanguagePartialDefinition = {
             status: 'Status'
         },
         actions: {
-            edit: 'Edit device'
+            edit: 'Edit EveryEdge'
         },
         notifications: {
             delete: {

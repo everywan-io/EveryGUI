@@ -15,7 +15,7 @@
         </div>
         
         <div class="menu-item no-outline" routerLink="/devices" [class.active]="isLinkActive('/devices')">
-            <i class="mdi mdi-network-router ml-4 ml-xl-5"></i>
+            <i class="mdi mdi-router-network ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.devices' | translate }}</span>
         </div>
         <div class="menu-item no-outline" routerLink="/overlaynets" [class.active]="isLinkActive('/overlaynets')">
@@ -23,7 +23,7 @@
             <span class="title">{{ 'layout.menu.overlayNets' | translate }}</span>
         </div>
         <div class="menu-item no-outline" routerLink="/tenants/details" [class.active]="isLinkActive('/tenants/details')">
-            <i class="mdi mdi-settings-outline ml-4 ml-xl-5"></i>
+            <i class="mdi mdi-details ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.tenantDetails' | translate }}</span>
         </div>
         <div *ngIf="(operator | async).role == 'admin'" class="menu-item no-outline" routerLink="/operators"

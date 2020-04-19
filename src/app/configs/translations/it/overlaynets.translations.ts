@@ -1,6 +1,6 @@
 export const OverlayNetsLanguagePartialDefinition = {
     list: {
-        title: 'Overlay Nets',
+        title: 'Overlay Networks',
         filters: {
             fields: {
                 term: {
@@ -92,7 +92,7 @@ export const OverlayNetsLanguagePartialDefinition = {
                 placeholder: 'Select Tunnel'
             },
             devices: {
-                label: 'Devices'
+                label: 'EveryEdge routers'
             },
             interfaces: {
                 label: 'Interface',

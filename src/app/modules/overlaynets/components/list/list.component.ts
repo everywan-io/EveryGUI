@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.paginator.createStream(this.overlaynetService.fetch.bind(this.overlaynetService)).subscribe(
+        this.paginator.createStream(this.overlaynetService.fetch.bind(this.overlaynetService, {do: 'o'})).subscribe(
             (overlaynets: OverlayNet[]) => this.handleSubscriptionResponse(overlaynets),
             (error: any) => this.handleSubscriptionError(error)
         );

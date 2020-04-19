@@ -67,7 +67,7 @@ export const DevicesIterfacesLanguagePartialDefinition = {
                 message: 'Device successful disabled'
             },
             edit: {
-                title: 'Edit device',
+                title: 'Edit EveryEdge',
                 message: 'Device modificato correttamente'
             }
         },

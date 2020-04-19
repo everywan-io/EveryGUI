@@ -5,8 +5,8 @@ export const LayoutLanguagePartialDefinition = {
     menu: {
         dashboard: 'Dashboard',
         operators: 'Operatori',
-        devices: 'Devices',
-        overlayNets: 'Overlay Nets',
+        devices: 'EveryEdge routers',
+        overlayNets: 'Overlay Networks',
         tenants: 'Tenants',
         tenantDetails: 'Tenant Details',
         signout: 'Logout',
