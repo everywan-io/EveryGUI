@@ -117,11 +117,12 @@ export class EditComponent implements OnInit {
         
         this.devices.configure(payload)
             .subscribe(
-                (device: Device) => {
+                (device_edited: Device) => {
+
                     this.router.navigate(['/devices']);
                     this.notifications.success(
                         this.translator.instant(`devices.edit.notifications.edit.title`),
-                        this.translator.instant(`devices.edit.notifications.edit.message`, { fullname: device.name })
+                        this.translator.instant(`devices.edit.notifications.edit.message`, { fullname: this.device.id })
                     );
                 },
                 (error: any) => {
