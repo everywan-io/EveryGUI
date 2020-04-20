@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit {
             finalize(() => this.submitState = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED)
         ).subscribe(
             (operator: Operator) => {
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/']);
             },
             (error: any) => {
                 this.progress.ref().complete();

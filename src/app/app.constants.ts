@@ -13,6 +13,7 @@ export const StorageKeys = {
 
 export const StoreActions = {
     STORE_CONFIG_UPSERT: 'config::upsert',
+    STORE_CONFIG_BREADCRUMB_UPDATE: 'config::breadcrumb::update',
     STORE_CONFIG_TITLE_UPDATE: 'config::title::update',
     STORE_AUTH_SIGNIN: 'auth::signin',
     STORE_AUTH_SIGNOUT: 'auth::signout',

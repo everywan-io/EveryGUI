@@ -19,6 +19,7 @@ import { ModalConfirmComponent } from '@modules/shared/components/modals/confirm
 import { NotificationsService } from '@modules/notifications/notifications.service';
 import * as Moment from 'moment';
 import { Interface } from '@everywan/models/interfaces.model';
+import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 
 
 @Component({
@@ -54,13 +55,14 @@ export class EditComponent implements OnInit {
 
 
     constructor(private title: TitleService,
-        private route: ActivatedRoute,
-        private overlaynetService: OverlayNetsService,
-        private modal: NgbModal,
-        private translator: TranslateService,
-        private router: Router,
-        private notifications: NotificationsService,
-        private progress: NgProgress) {
+                private breadcrumb: BreadcrumbService,
+                private route: ActivatedRoute,
+                private overlaynetService: OverlayNetsService,
+                private modal: NgbModal,
+                private translator: TranslateService,
+                private router: Router,
+                private notifications: NotificationsService,
+                private progress: NgProgress) {
 
         this.button = {
             state: ButtonStates.DISABLED,
@@ -91,6 +93,7 @@ export class EditComponent implements OnInit {
             });
 
         this.title.set(`overlaynets.edit.title.${this.route.snapshot.data['mode']}`);
+        this.breadcrumb.set([]);
 
     }
 

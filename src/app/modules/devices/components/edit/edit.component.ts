@@ -12,6 +12,7 @@ import { ButtonStates } from '@modules/shared/components/button/button.component
 import { DevicesService } from '@modules/devices/devices.service';
 import { NotificationsService } from '@modules/notifications/notifications.service';
 import { TitleService } from '@services/title.service';
+import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class EditComponent implements OnInit {
                 private translator: TranslateService,
                 private router: Router,
                 private route: ActivatedRoute,
+                private breadcrumb: BreadcrumbService,
                 private title: TitleService) {
 
         this.button = {
@@ -67,6 +69,7 @@ export class EditComponent implements OnInit {
         });
 
         this.title.set(`devices.edit.title.edit`);
+        this.breadcrumb.set([]);
 
     }
 

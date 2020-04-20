@@ -15,7 +15,7 @@ export const ApplicationRoutes: Routes = [{
     children: [{
         path: '',
         pathMatch: 'full',
-        redirectTo: 'devices'
+        redirectTo: 'dashboard'
     },
         {
         path: 'dashboard',

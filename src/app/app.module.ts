@@ -24,6 +24,8 @@ import {MenuComponent as MenuMobileComponent} from '@everywan/components/menu/mo
 import {ApplicationReducers} from '@services/store/store.reducers';
 import {StorageService} from '@services/storage/storage.service';
 import {TitleService} from '@services/title.service';
+import { BreadcrumbComponent } from '@everywan/components/header/breadcrumb/breadcrumb.component';
+import { BreadcrumbService } from './services/breadcrumb.service';
 
 @NgModule({
     declarations: [
@@ -31,6 +33,7 @@ import {TitleService} from '@services/title.service';
         IndexComponent,
         HeaderComponent,
         FooterComponent,
+        BreadcrumbComponent,
         MenuDesktopComponent,
         MenuMobileComponent],
     imports: [
@@ -50,7 +53,8 @@ import {TitleService} from '@services/title.service';
     ],
     providers: [
         StorageService,
-        TitleService
+        TitleService,
+        BreadcrumbService
     ],
     bootstrap: [AppComponent]
 })

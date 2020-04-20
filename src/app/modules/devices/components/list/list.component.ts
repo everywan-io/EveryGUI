@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { NotificationsService } from '@modules/notifications/notifications.service';
 import { NgProgress } from '@ngx-progressbar/core';
+import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 
 @Component({
     selector: 'app-devices-list',
@@ -28,15 +29,16 @@ export class ListComponent implements OnInit {
     instances: Device[];
 
     constructor(private title: TitleService,
-        private deviceService: DevicesService,
-        private device: ResponsiveState,
-        public paginator: PaginatorService,
-        private modal: NgbModal,
-        private translator: TranslateService,
-        private router: Router,
-        private notifications: NotificationsService,
-        private progress: NgProgress,
-        private dropDownConfig: NgbDropdownConfig) {
+                private breadcrumb: BreadcrumbService,
+                private deviceService: DevicesService,
+                private device: ResponsiveState,
+                public paginator: PaginatorService,
+                private modal: NgbModal,
+                private translator: TranslateService,
+                private router: Router,
+                private notifications: NotificationsService,
+                private progress: NgProgress,
+                private dropDownConfig: NgbDropdownConfig) {
 
         this.instances = [];
         this.dropDownConfig.placement = 'bottom-right';
@@ -51,6 +53,7 @@ export class ListComponent implements OnInit {
         this.paginator.itemHeight = this.device.isMobile() ? 120 : 60;
 
         this.title.set('devices.list.title');
+        this.breadcrumb.set([]);
         this.subscription = timer(10000, 10000)
             .subscribe(() => {
                 this.paginator.setFilters(this.lastFilters);

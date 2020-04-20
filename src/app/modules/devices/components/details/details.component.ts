@@ -13,6 +13,7 @@ import {ButtonStates} from '@modules/shared/components/button/button.component';
 import {DevicesService} from '@modules/devices/devices.service';
 import {NotificationsService} from '@modules/notifications/notifications.service';
 import { TitleService } from '@services/title.service';
+import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 
 
 
@@ -31,6 +32,7 @@ export class DetailsComponent implements OnInit {
                 private translator: TranslateService,
                 private router: Router,
                 private route: ActivatedRoute,
+                private breadcrumb: BreadcrumbService,
                 private title: TitleService) {
 
 
@@ -41,6 +43,7 @@ export class DetailsComponent implements OnInit {
         this.device  = this.route.snapshot.data['device'];
         
         this.title.set(`devices.details.title`);
+        this.breadcrumb.set([]);
 
     }
 

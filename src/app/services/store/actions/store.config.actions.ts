@@ -17,4 +17,12 @@ export class ConfigTitleChange implements Action {
     }
 }
 
-export type StoreConfigActions = ConfigUpsert | ConfigTitleChange;
+export class ConfigBreadcrumbChange implements Action {
+    readonly type = StoreActions.STORE_CONFIG_BREADCRUMB_UPDATE;
+
+    constructor(public payload: any) {
+
+    }
+}
+
+export type StoreConfigActions = ConfigUpsert | ConfigTitleChange | ConfigBreadcrumbChange;

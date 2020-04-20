@@ -18,4 +18,5 @@ export class TitleService {
             ? this.store.dispatch(new ConfigTitleChange(''))
             : this.store.dispatch(new ConfigTitleChange(this.translator.instant(title)));
     }
+
 }

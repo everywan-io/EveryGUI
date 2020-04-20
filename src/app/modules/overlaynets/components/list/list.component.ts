@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { NotificationsService } from '@modules/notifications/notifications.service';
 import { NgProgress } from '@ngx-progressbar/core';
+import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 
 @Component({
     selector: 'app-overlaynets-list',
@@ -26,6 +27,7 @@ export class ListComponent implements OnInit {
     instances: OverlayNet[];
 
     constructor(private title: TitleService,
+                private breadcrumb: BreadcrumbService,
                 private overlaynetService: OverlayNetsService,
                 private overlaynet: ResponsiveState,
                 public paginator: PaginatorService,
@@ -49,7 +51,7 @@ export class ListComponent implements OnInit {
         this.paginator.itemHeight = this.overlaynet.isMobile() ? 120 : 60;
 
         this.title.set('overlaynets.list.title');
-
+        this.breadcrumb.set([]);
     }
 
     handleSubscriptionResponse(overlaynets: OverlayNet[], reset: boolean = this.paginator.pagination.offset === 0) {

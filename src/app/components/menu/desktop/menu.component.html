@@ -4,8 +4,10 @@
             <div id="avatar" [style.backgroundImage]="(operator | async)?.avatar | asBackgroundUrl"></div>
         </div>
         <div class="d-flex flex-column align-items-center mt-4">
-            <span class="fullname">{{ (operator | async)?.username | capitalize:'words' }}</span>
-            <span class="role">Tenant: {{ (operator | async)?.project_name }}</span>
+            <!-- <span class="fullname">{{ (operator | async)?.username | capitalize:'words' }}</span> -->
+            <!-- <span class="role">Tenant: {{ (operator | async)?.project_name }}</span> -->
+            <span class="fullname">Beep Beep</span>
+            <span class="role">Tenant: ACME corp.</span>
         </div>
     </div>
     <div id="menu" class="d-flex flex-column mt-4 pt-4">

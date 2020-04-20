@@ -17,6 +17,7 @@ import { DatesService } from '@services/dates.service';
 import { ModalConfirmComponent } from '@modules/shared/components/modals/confirm/confirm.component';
 import { NotificationsService } from '@modules/notifications/notifications.service';
 import * as Moment from 'moment';
+import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 
 @Component({
     selector: 'app-tenant-details',
@@ -26,16 +27,18 @@ import * as Moment from 'moment';
 export class DetailsComponent implements OnInit {
     tenant: Tenant;
     constructor(private title: TitleService,
-        private route: ActivatedRoute,
-        private tenantService: TenantsService,
-        private modal: NgbModal,
-        private translator: TranslateService,
-        private router: Router,
-        private notifications: NotificationsService,
-        private progress: NgProgress) { }
+                private route: ActivatedRoute,
+                private breadcrumb: BreadcrumbService,
+                private tenantService: TenantsService,
+                private modal: NgbModal,
+                private translator: TranslateService,
+                private router: Router,
+                private notifications: NotificationsService,
+                private progress: NgProgress) { }
 
     ngOnInit() {
         this.title.set(`tenants.details.title`);
+        this.breadcrumb.set([]);
         this.tenant = this.route.snapshot.data['tenant'];
         console.log(this.tenant)
     }
