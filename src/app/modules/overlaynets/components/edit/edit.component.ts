@@ -93,8 +93,19 @@ export class EditComponent implements OnInit {
             });
 
         this.title.set(`overlaynets.edit.title.${this.route.snapshot.data['mode']}`);
-        this.breadcrumb.set([]);
-
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            },
+            {
+                url: '/overlays',
+                label: 'Overalay Networks'
+            },
+            {
+                label:  this.mode === 'create' ? 'Create'  : 'Configure'
+            }
+        ]);
     }
 
     /* tslint:disable object-literal-key-quotes */

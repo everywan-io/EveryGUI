@@ -28,9 +28,8 @@ export class BreadcrumbComponent implements OnInit {
         this.store.pipe(
             select('config'),
             select('breadcrumb')
-        ).subscribe((breadcrumb: any) => {
-
-            console.log("pane settato");
+        ).subscribe((breadcrumb: []) => {
+            this.breadcrumbs = breadcrumb;
         });
     }
 

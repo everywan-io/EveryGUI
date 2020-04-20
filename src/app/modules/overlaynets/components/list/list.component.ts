@@ -51,7 +51,15 @@ export class ListComponent implements OnInit {
         this.paginator.itemHeight = this.overlaynet.isMobile() ? 120 : 60;
 
         this.title.set('overlaynets.list.title');
-        this.breadcrumb.set([]);
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            },
+            {
+                label: 'Overalay Networks'
+            }
+        ]);
     }
 
     handleSubscriptionResponse(overlaynets: OverlayNet[], reset: boolean = this.paginator.pagination.offset === 0) {

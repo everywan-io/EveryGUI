@@ -53,7 +53,15 @@ export class ListComponent implements OnInit {
         this.paginator.itemHeight = this.device.isMobile() ? 120 : 60;
 
         this.title.set('devices.list.title');
-        this.breadcrumb.set([]);
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            },
+            {
+                label: 'EveryEdges'
+            }
+        ]);
         this.subscription = timer(10000, 10000)
             .subscribe(() => {
                 this.paginator.setFilters(this.lastFilters);

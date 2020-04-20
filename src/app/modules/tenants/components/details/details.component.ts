@@ -38,9 +38,17 @@ export class DetailsComponent implements OnInit {
 
     ngOnInit() {
         this.title.set(`tenants.details.title`);
-        this.breadcrumb.set([]);
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            },
+            {
+                label: 'Tenant details'
+            }
+        ]);
         this.tenant = this.route.snapshot.data['tenant'];
-        console.log(this.tenant)
+        
     }
 
 }

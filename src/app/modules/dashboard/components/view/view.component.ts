@@ -13,19 +13,22 @@ import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 })
 export class DashboardViewComponent implements OnInit, AfterViewInit {
 
-
-    dashboard;
+    dashboard: any;
 
     constructor(private route: ActivatedRoute,
-        private title: TitleService,
-        private breadcrumb: BreadcrumbService,
-        private translator: TranslateService, ) { }
+                private title: TitleService,
+                private breadcrumb: BreadcrumbService) { }
 
 
 
     ngOnInit() {
         this.title.set('layout.titles.dashboard');
-        this.breadcrumb.set({ "dio": "grade" });
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            }
+        ]);
         this.dashboard = this.route.snapshot.data['dashboard'];
 
 

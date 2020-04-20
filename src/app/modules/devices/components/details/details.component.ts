@@ -43,7 +43,19 @@ export class DetailsComponent implements OnInit {
         this.device  = this.route.snapshot.data['device'];
         
         this.title.set(`devices.details.title`);
-        this.breadcrumb.set([]);
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            },
+            {
+                url: '/devices',
+                label: 'EveryEdges'
+            },
+            {
+                label: 'Details'
+            }
+        ]);
 
     }
 

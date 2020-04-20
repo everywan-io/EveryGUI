@@ -69,7 +69,19 @@ export class EditComponent implements OnInit {
         });
 
         this.title.set(`devices.edit.title.edit`);
-        this.breadcrumb.set([]);
+        this.breadcrumb.set([
+            {
+                url: '/',
+                label: 'Home'
+            },
+            {
+                url: '/devices',
+                label: 'EveryEdges'
+            },
+            {
+                label: 'Configure'
+            }
+        ]);
 
     }
 
