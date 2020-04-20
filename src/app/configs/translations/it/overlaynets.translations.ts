@@ -12,7 +12,7 @@ export const OverlayNetsLanguagePartialDefinition = {
                 }
             },
             action: {
-                create: 'Create Overlay Net'
+                create: 'Create Overlay Network'
             }
         },
         headers: {
@@ -27,26 +27,26 @@ export const OverlayNetsLanguagePartialDefinition = {
         actions: {
             filter: 'Filter',
             create: {
-                long: 'Create Overlay Net',
+                long: 'Create Overlay Network',
                 short: 'Create'
             },
             configure: {
-                long: 'Configure Overlay Net',
+                long: 'Configure Overlay Network',
                 short: 'Configure'
             },
             edit: {
-                long: 'Edit Overlay Net',
+                long: 'Edit Overlay Network',
                 short: 'Edit'
             },
             delete: {
-                long: 'Delete Overlay Net',
+                long: 'Delete Overlay Network',
                 short: 'Delete'
             }
         },
         modals: {
             delete: {
-                title: 'Delete OverlayNet',
-                message: 'Stai per eliminare overlaynet <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
+                title: 'Delete Overlay Network',
+                message: 'Stai per eliminare Overlay Network <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
                 actions: {
                     confirm: 'Delete',
                     cancel: 'Cancel'
@@ -55,24 +55,24 @@ export const OverlayNetsLanguagePartialDefinition = {
         },
         notifications: {
             create: {
-                title: 'Creation OverlayNet',
-                message: 'L\'OverlayNet <b>{{ fullname }}</b> è stata creato con successo'
+                title: 'Creation Overlay Network',
+                message: 'L\'Overlay Network è stata creato con successo'
             },
             delete: {
-                title: 'Delete OverlayNet',
-                message: 'OverlayNet eliminato correttamente'
+                title: 'Delete Overlay Network',
+                message: 'Overlay Network eliminato correttamente'
             },
             edit: {
-                title: 'Edit OverlayNet',
-                message: 'OverlayNet modificato correttamente'
+                title: 'Edit Overlay Network',
+                message: 'Overlay Network modificato correttamente'
             }
         },
     },
     edit: {
         title: {
-            create: 'Create OverlayNet',
-            edit: 'Mofidica OverlayNet',
-            configure: 'Configure OverlayNet'
+            create: 'Create Overlay Network',
+            edit: 'Mofidica Overlay Network',
+            configure: 'Configure Overlay Network'
         },
         fields: {
             name: {
@@ -100,30 +100,30 @@ export const OverlayNetsLanguagePartialDefinition = {
             }
         },
         actions: {
-            configure: 'Configure Overlay Net',
-            edit: 'Create Overlay Net',
-            create: 'Create Overlay Net'
+            configure: 'Configure Overlay Network',
+            edit: 'Create Overlay Network',
+            create: 'Create Overlay Network'
         },
         modals: {
             create: {
-                title: 'Create Overlay Net',
-                message: 'Stai per creare la OverlayNet <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere ?',
+                title: 'Create Overlay Network',
+                message: 'Stai per creare la Overlay Network <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere ?',
                 actions: {
                     confirm: 'Create',
                     cancel: 'Cancel'
                 }
             },
             edit: {
-                title: 'Edit Overlay Net',
-                message: 'Stai per modificare la OverlayNet <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere ?',
+                title: 'Edit Overlay Network',
+                message: 'Stai per modificare la Overlay Network <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere ?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
                 }
             },
             configure: {
-                title: 'Configure Overlay Net',
-                message: 'Stai per configurare la OverlayNet <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere ?',
+                title: 'Configure Overlay Network',
+                message: 'Stai per configurare la Overlay Network <b>{{ overlaynet }}</b>.<br />Sei sicuro di voler procedere ?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
@@ -132,16 +132,16 @@ export const OverlayNetsLanguagePartialDefinition = {
         },
         notifications: {
             create: {
-                title: 'Creation Overlay Net',
-                message: 'L\'OverlayNet <b>{{ fullname }}</b> è stata creato con successo'
+                title: 'Creation Overlay Network',
+                message: 'L\'Overlay Network <b>{{ fullname }}</b> è stata creato con successo'
             },
             edit: {
-                title: 'Edit Overlay Net',
-                message: 'Il OverlayNet <b>{{ fullname }}</b> è stata modificato con successo'
+                title: 'Edit Overlay Network',
+                message: 'Il Overlay Network <b>{{ fullname }}</b> è stata modificato con successo'
             },
             configuration: {
-                title: 'Configuration Overlay Net',
-                message: 'Il OverlayNet <b>{{ fullname }}</b> è stata configurata con successo'
+                title: 'Configuration Overlay Network',
+                message: 'Il Overlay Network <b>{{ fullname }}</b> è stata configurata con successo'
             }
         }
     },
