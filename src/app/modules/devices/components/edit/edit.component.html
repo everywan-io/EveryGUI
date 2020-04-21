@@ -46,14 +46,14 @@
 
                         <div class="col-12 col-md-6 d-flex flex-column">
                             <label for="name">{{ 'devices.edit.fields.name.label' | translate }}</label>
-                            <input type="text" id="name" formControlName="name"
+                            <input type="text" autocomplete="off"  id="name" formControlName="name"
                                 [placeholder]="'devices.edit.fields.name.placeholder' | translate">
                             <small class="error"
                                 invalidControlCheck="name">{{ form.get('name').errors | serializeErrors:'errors.validations' }}</small>
                         </div>
                         <div class="col-12 col-md-6 d-flex  flex-column">
                             <label for="description">{{ 'devices.edit.fields.description.label' | translate }}</label>
-                            <input type="text" id="description" formControlName="description"
+                            <input type="text" autocomplete="off"  id="description" formControlName="description"
                                 [placeholder]="'devices.edit.fields.description.placeholder' | translate">
                             <small class="error"
                                 invalidControlCheck="description">{{ form.get('description').errors | serializeErrors:'errors.validations' }}</small>
@@ -87,7 +87,7 @@
                                     <div class="col-12 col-md-4 d-flex flex-column">
                                         <label
                                             for="ipv4_addrs">{{ 'devicesInterfaces.configure.fields.ipv4_addrs.label' | translate }}</label>
-                                        <input type="text" formControlName="ipv4_addrs"
+                                        <input type="text" autocomplete="off"  formControlName="ipv4_addrs"
                                             [placeholder]="'devicesInterfaces.configure.fields.ipv4_addrs.placeholder' | translate"
                                             #ipv4addrs>
                                         <!--         <small class="error"
@@ -96,7 +96,7 @@
                                     <div class="col-12 col-md-4 d-flex flex-column">
                                         <label
                                             for="ipv6_addrs">{{ 'devicesInterfaces.configure.fields.ipv6_addrs.label' | translate }}</label>
-                                        <input type="text" formControlName="ipv6_addrs"
+                                        <input type="text" autocomplete="off"  formControlName="ipv6_addrs"
                                             [placeholder]="'devicesInterfaces.configure.fields.ipv6_addrs.placeholder' | translate"
                                             #ipv4addrs>
                                         <!--         <small class="error"

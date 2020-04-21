@@ -11,7 +11,7 @@
                 </div>
                 <form class="w-100 d-flex flex-column" [formGroup]="form">
                     <label for="email">{{ 'auth.recover.fields.email.label' | translate }}</label>
-                    <input type="text" id="email" formControlName="email" [placeholder]="'auth.recover.fields.email.placeholder' | translate">
+                    <input type="text" autocomplete="off"  id="email" formControlName="email" [placeholder]="'auth.recover.fields.email.placeholder' | translate">
                     <small class="error" invalidControlCheck="email">
                         {{ form.get('email').errors | serializeErrors:'errors.validations' }}
                     </small>

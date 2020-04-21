@@ -19,7 +19,7 @@
 
 <ng-template #search let-filterKey="key" let-hintText="hint">
     <div class="search input-group">
-        <input type="text"
+        <input type="text" autocomplete="off" 
                class="form-control"
                [placeholder]="hintText"
                (keyup)="filters.subject.next({ key: filterKey, value: $event.target['value'] })">

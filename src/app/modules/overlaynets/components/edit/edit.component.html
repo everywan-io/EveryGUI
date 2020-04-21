@@ -8,12 +8,12 @@
 
                             <div class="col-12 col-md-6 d-flex flex-column">
                                 <label for="name">{{ 'overlaynets.edit.fields.name.label' | translate }}</label>
-                                <input type="text" id="name" formControlName="name" [placeholder]="'overlaynets.edit.fields.name.placeholder' | translate">
+                                <input type="text" autocomplete="off"  id="name" formControlName="name" [placeholder]="'overlaynets.edit.fields.name.placeholder' | translate">
                                 <small class="error" invalidControlCheck="name">{{ form.get('name').errors | serializeErrors:'errors.validations' }}</small>
                             </div>
                             <div class="col-12 col-md-6 d-flex flex-column">
                                 <label for="description">{{ 'overlaynets.edit.fields.description.label' | translate }}</label>
-                                <input type="text" id="description" formControlName="description" [placeholder]="'overlaynets.edit.fields.description.placeholder' | translate">
+                                <input type="text" autocomplete="off"  id="description" formControlName="description" [placeholder]="'overlaynets.edit.fields.description.placeholder' | translate">
                                 <small class="error" invalidControlCheck="description">{{ form.get('description').errors | serializeErrors:'errors.validations' }}</small>
                             </div>
 

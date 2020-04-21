@@ -133,15 +133,15 @@ export const OverlayNetsLanguagePartialDefinition = {
         notifications: {
             create: {
                 title: 'Creation Overlay Network',
-                message: 'L\'Overlay Network <b>{{ fullname }}</b> è stata creato con successo'
+                message: 'L\'Overlay Network è stata creato con successo'
             },
             edit: {
                 title: 'Edit Overlay Network',
-                message: 'Il Overlay Network <b>{{ fullname }}</b> è stata modificato con successo'
+                message: 'L\'Overlay Network è stata modificato con successo'
             },
             configuration: {
                 title: 'Configuration Overlay Network',
-                message: 'Il Overlay Network <b>{{ fullname }}</b> è stata configurata con successo'
+                message: 'L\'Overlay Network è stata configurata con successo'
             }
         }
     },
