@@ -6,6 +6,7 @@ export const DashboardLanguagePartialDefinition = {
             },
             devices: {
                 total: "Registered EveryEdges",
+                connected: "Connected EveryEdges",
                 enabled: "Enabled EveryEdges",
                 configured: "Configured EveryEdges"
             },

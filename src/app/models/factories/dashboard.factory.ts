@@ -21,7 +21,7 @@ export class DashboardFactory {
     }
 
     static createFromDescriptor(descriptor: DashboardDescriptorInterface): Dashboard {
-        const duplicateKeys = ['operators', 'tenants', 'overalys', 'devices'];
+        const duplicateKeys = ['operators', 'tenants', 'overlays', 'devices'];
         const instance: Dashboard = new Dashboard();
 
         duplicateKeys.forEach(key => instance[key] = descriptor[key]);

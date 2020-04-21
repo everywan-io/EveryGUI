@@ -17,7 +17,7 @@ module.exports = {
       "description" : "User related calls"
     } ],
     "paths" : {
-      "/dashboard" : {
+      "/dashboard/" : {
         "get" : {
           "tags" : [ "Dashboard" ],
           "summary" : "Get data of Dashboard",

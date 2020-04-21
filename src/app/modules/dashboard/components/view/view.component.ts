@@ -30,8 +30,8 @@ export class DashboardViewComponent implements OnInit, AfterViewInit {
             }
         ]);
         this.dashboard = this.route.snapshot.data['dashboard'];
-
-
+       
+        console.log(this.dashboard)
     }
 
     ngAfterViewInit() {
