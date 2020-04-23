@@ -34,6 +34,12 @@
                                 </select>
                                 <small class="error" invalidControlCheck="tunnelType">{{ form.get('tunnelType').errors | serializeErrors:'errors.validations' }}</small>
                             </div>
+                            
+                            
+                        </div>
+                        <label >{{ 'overlaynets.edit.fields.localslices.label' | translate }}</label>
+                        <div class="row pt-4">
+                            
                             <div  *ngFor="let interface of interfaces" class="col-6 col-md-6 d-flex flex-column">
                                 <div class="card-item">
                                     <app-dev-int-card [devInterface]='interface' (interfaceChange)="onDeviceInterfaceSelected($event)"></app-dev-int-card>

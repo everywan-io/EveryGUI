@@ -2,7 +2,20 @@
     <div class="card-body">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="{{ interface.name }}" (change)="isChecked($event)">
-            <label class="custom-control-label" for="{{ interface.name }}"><span><i class="mdi mdi-network-router ml-4 ml-xl-5"></i></span> {{ interface.name }} ({{ interface.type }})</label>
+            <label class="custom-control-label" for="{{ interface.name }}"></label>
         </div>
+        <div>
+            <label for="{{ 'name_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.name.label' | translate }}: </label>
+            <span id="{{ 'name_' + interface.name }}" class="text">{{ (interface.name !== null) ? interface.name   : "--"}} ({{interface.type}})</span>
+        </div>
+<!--         <div>
+            <label for="{{ 'type_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.type.label' | translate }}: </label>
+            <span  id="{{ 'type_' + interface.name }}" class="text">{{ (interface.type !== null) ? interface.type  : "--"}}</span>
+        </div> -->
+        <div>
+            <label for="{{ 'ipv4_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.ipv4_addrs.label' | translate }}: </label> 
+            <span id="{{ 'ipv4_' + interface.name }}" class="text">{{ (interface.ipv4Addrs !== null) ? interface.ipv4Addrs  : "--"}}</span>
+        </div>
+        
     </div>
 </div>

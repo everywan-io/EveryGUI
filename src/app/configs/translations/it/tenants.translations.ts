@@ -11,6 +11,9 @@ export const TenantsLanguagePartialDefinition = {
             info: {
                 label: 'Info',
             },
+            configured: {
+                label: 'Configured'
+            },
             domainId: {
                 label: 'Domain Id',
             },

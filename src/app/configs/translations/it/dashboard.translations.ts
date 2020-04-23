@@ -2,7 +2,7 @@ export const DashboardLanguagePartialDefinition = {
     view: {
         panel: {
             operators: {
-                total: "Register users"
+                total: "Registered Users"
             },
             devices: {
                 total: "Registered EveryEdges",

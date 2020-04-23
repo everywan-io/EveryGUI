@@ -91,8 +91,17 @@ export const OverlayNetsLanguagePartialDefinition = {
                 label: 'Tunnel',
                 placeholder: 'Select Tunnel'
             },
-            devices: {
-                label: 'EveryEdge routers'
+            localslices: {
+                label: 'Local slices',
+                name: {
+                    label: 'Name'
+                },
+                ipv4_addrs: {
+                    label: 'IpV4'
+                },
+                type: {
+                    label: 'Type'
+                }
             },
             interfaces: {
                 label: 'Interface',

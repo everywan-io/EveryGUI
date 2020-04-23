@@ -98,7 +98,7 @@ export const DevicesLanguagePartialDefinition = {
     },
     edit: {
         title: {
-            edit: 'Configure device'
+            edit: 'Configure EveryEdge'
         },
         fields: {
             name: {
@@ -155,7 +155,7 @@ export const DevicesLanguagePartialDefinition = {
         },
     },
     details: {
-        title: 'Details device',
+        title: 'EveryEdge Details',
         fields: {
             deviceId: 'Device Id',
             name: 'Name',
