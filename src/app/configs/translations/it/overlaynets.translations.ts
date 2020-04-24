@@ -97,7 +97,7 @@ export const OverlayNetsLanguagePartialDefinition = {
                     label: 'Name'
                 },
                 ipv4_addrs: {
-                    label: 'IpV4'
+                    label: 'IPv4'
                 },
                 type: {
                     label: 'Type'
