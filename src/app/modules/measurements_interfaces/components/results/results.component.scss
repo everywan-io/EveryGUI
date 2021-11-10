@@ -1,0 +1,39 @@
+@import "index";
+
+$columns-x-padding: 25px;
+
+#measurement-results {
+    .text {
+        cursor: default;
+        margin-left: 10px;
+        //letter-spacing: 0.5px;
+        //
+        font-family: Brown-Regular, sans-serif;
+        //font-size: 13px;
+        font-weight: 500;
+        color: #5a5757;
+    }
+}
+
+.title{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.paragraph-distance{
+    margin-bottom: 30px;
+}
+
+.container-results{
+    display: flex;
+    width: 600px;
+}
+
+.sinistra{
+    width: 200px;
+}
+
+.destra{
+    width: 400px;
+}

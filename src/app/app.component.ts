@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
-import {currentBrowserLanguage} from '@everywan/modules/translations/translation.config';
-import {NavigationEnd, NavigationStart, Router} from '@angular/router';
-import {NgProgress} from '@ngx-progressbar/core';
-import {TitleService} from '@services/title.service';
+import { currentBrowserLanguage } from '@everywan/modules/translations/translation.config';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NgProgress } from '@ngx-progressbar/core';
+import { TitleService } from '@services/title.service';
 
 const ProgressRoutingMap = {
     NavigationStart: 0.1,
@@ -23,9 +23,9 @@ const ProgressRoutingMap = {
 })
 export class AppComponent {
     constructor(private translator: TranslateService,
-                private title: TitleService,
-                private router: Router,
-                private progress: NgProgress) {
+        private title: TitleService,
+        private router: Router,
+        private progress: NgProgress) {
 
         this.translator.setDefaultLang(currentBrowserLanguage());
 

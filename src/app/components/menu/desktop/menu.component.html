@@ -15,7 +15,7 @@
             <i class="mdi mdi-view-dashboard-outline ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.dashboard' | translate }}</span>
         </div>
-        
+
         <div class="menu-item no-outline" routerLink="/devices" [class.active]="isLinkActive('/devices')">
             <i class="mdi mdi-router-network ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.devices' | translate }}</span>
@@ -24,16 +24,22 @@
             <i class="mdi mdi-hexagon-slice-2 ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.overlayNets' | translate }}</span>
         </div>
-        <div class="menu-item no-outline" routerLink="/tenants/details" [class.active]="isLinkActive('/tenants/details')">
+        <div class="menu-item no-outline" routerLink="/measurementsessions"
+            [class.active]="isLinkActive('/measurementsessions')">
+            <i class="mdi mdi-ruler-square-compass ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.measurementSessions' | translate }}</span>
+        </div>
+        <div class="menu-item no-outline" routerLink="/tenants/details"
+            [class.active]="isLinkActive('/tenants/details')">
             <i class="mdi mdi-details ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.tenantDetails' | translate }}</span>
         </div>
         <div *ngIf="(operator | async).role == 'admin'" class="menu-item no-outline" routerLink="/operators"
-             [class.active]="isLinkActive('/operators')">
+            [class.active]="isLinkActive('/operators')">
             <i class="mdi mdi-account-multiple-outline ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.operators' | translate }}</span>
         </div>
-        
+
         <div class="menu-item no-outline" routerLink="/auth/signout" routerLinkActive="active">
             <i class="mdi mdi-exit-to-app ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.signout' | translate }}</span>

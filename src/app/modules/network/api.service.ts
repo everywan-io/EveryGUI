@@ -1,10 +1,10 @@
 import * as Definitions from '@configs/network/api.definitions';
 
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
-import {Observable, throwError} from 'rxjs';
-import {catchError, take} from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 
 interface ApiGroup {
     [key: string]: any;
@@ -18,10 +18,11 @@ export class ApiService {
 
     public Authentication: any;
     public Operators: any;
-    public Devices: any; 
-    public OverlayNets: any; 
-    public Dashboard: any; 
-    public Tenants: any; 
+    public Devices: any;
+    public OverlayNets: any;
+    public Measurement: any
+    public Dashboard: any;
+    public Tenants: any;
 
     constructor(private http: HttpClient) {
         this.url = `${Definitions.servers[0].url}`;
@@ -30,9 +31,10 @@ export class ApiService {
         this.Operators = this.constructApisForGroup('Operators');
         this.Devices = this.constructApisForGroup('Devices');
         this.OverlayNets = this.constructApisForGroup('Overlays');
+        this.Measurement = this.constructApisForGroup('Measurements');
         this.Dashboard = this.constructApisForGroup('Dashboard');
         this.Tenants = this.constructApisForGroup('Tenants');
-        
+
     }
 
     private constructApisForGroup(group: string): ApiGroup {

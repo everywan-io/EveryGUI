@@ -62,6 +62,27 @@ export interface DeviceDescriptorInterface {
     tunnel_mode: string;
 }
 
+export interface MeasurementDescriptorInterface {
+    sessionId: string;
+    sessionDescription: string;
+    senderName: string;
+    reflectorName: string;
+    status: string;
+    delayDirectPath: number;
+    delayReturnPath: number;
+    authenticationMode: string;
+    keyChain: string;
+    timestampFormat: string;
+    delayMeasurementMode: string;
+    sessionReflectorMode: string;
+    senderDeviceId: string;
+    senderStampIp: string;
+    reflectorDeviceId: string;
+    reflectorStampIp: string;
+    sidlist: string;
+    returnSidlist: string;
+}
+
 export enum InterfaceType {
     LAN = 'lan',
     WAN = 'wan',
@@ -121,5 +142,5 @@ export interface TenantDescriptorInterface {
 
 
 export interface DashboardDescriptorInterface {
-    
+
 }

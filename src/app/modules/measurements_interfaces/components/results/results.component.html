@@ -1,0 +1,40 @@
+<div class="container-fluid">
+
+    <div id="measurement-results">
+        <div class='paragraph-distance'>
+            <div class="title"> Gruppo DIRECT PATH </div>
+
+            <div class="container-results">
+                <label class="sinistra" for="sidlist">{{ 'measurements.results.fields.sidlist' | translate
+                    }}:</label>
+                <span class="destra" class="text">{{ (measurement.sidlist!== null) ? measurement.sidlist:
+                    "--"}}</span>
+            </div>
+            <div class="container-results">
+                <label class="sinistra" for="delayDirectPath">{{ 'measurements.results.fields.delayDirectPath' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.delayDirectPath !== null) ?
+                    measurement.delayDirectPath :
+                    "--"}}</span>
+            </div>
+        </div>
+
+        <div class='paragraph-distance'>
+            <div class="title"> Gruppo RETURN PATH </div>
+
+            <div class="container-results">
+                <label class="sinistra" for="returnSidlist">{{ 'measurements.results.fields.returnSidlist' | translate
+                    }}:</label>
+                <span class="destra" class="text">{{ (measurement.returnSidlist !== null) ? measurement.returnSidlist :
+                    "--"}}</span>
+            </div>
+            <div class="container-results">
+                <label class="sinistra" for="delayReturnPath">{{ 'measurements.results.fields.delayReturnPath' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.delayReturnPath !== null) ?
+                    measurement.delayReturnPath :
+                    "--"}}</span>
+            </div>
+        </div>
+    </div>
+</div>

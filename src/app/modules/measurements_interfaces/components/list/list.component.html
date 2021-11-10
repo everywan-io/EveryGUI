@@ -1,0 +1,153 @@
+<div class="container-fluid">
+    <div id="filters" class="row mx-0">
+        <div class="col-12 px-4">
+            <app-devices-filters (filtersChange)="onFiltersChange($event)"></app-devices-filters>
+        </div>
+    </div>
+    <div id="measurements" class="row">
+        <div class="col-12 px-0">
+            <table class="w-100 mw-100" [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300"
+                [infiniteScrollDisabled]="paginator.pagination.disabled" (scrolled)="onLoadMore()" infiniteScroll>
+                <thead>
+                    <tr *hideItBootstrap="['xs', 'sm']">
+                        <td>{{ 'measurements.list.headers.sessionId' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.sessionDescription' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.senderName' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.reflectorName' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.status' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.delayDirectPath' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.delayReturnPath' | translate }}</td>
+                        <td>{{ 'measurements.list.headers.actions' | translate }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *hideItBootstrap="['xs', 'sm']">
+                        <tr *ngFor="let measurement of instances">
+                            <td>
+                                <span id="sessione" class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ measurement.sessionId }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ measurement.sessionDescription }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text upper">{{ measurement.senderName }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ measurement.reflectorName }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ measurement.status }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ measurement.delayDirectPath }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="role d-inline-flex align-items-center">
+                                    <span class="text">{{ measurement.delayReturnPath }}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <div ngbDropdown>
+                                    <button class="action-item" id="dropdown" ngbDropdownToggle>
+                                        {{ 'measurements.list.headers.actions' | translate }}
+                                    </button>
+
+                                    <div ngbDropdownMenu aria-labelledby="dropdown">
+                                        <button ngbDropdownItem
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'details']">
+                                            {{ 'measurements.list.actions.details.short' | translate }}
+                                        </button>
+                                        <button ngbDropdownItem
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'results']">
+                                            {{ 'measurements.list.actions.results.short' | translate }}
+                                        </button>
+                                        <button ngbDropdownItem
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'run_stop']">
+                                            {{ 'measurements.list.actions.run_stop.short' | translate }}
+                                        </button>
+                                        <button ngbDropdownItem
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'delete']">
+                                            {{ 'measurements.list.actions.delete.short' | translate }}
+                                        </button>
+                                        <button ngbDropdownItem
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'edit']">
+                                            {{ 'measurements.list.actions.edit.short' | translate }}
+                                        </button>
+                                        <!--<button *ngIf="measurement_interface.enabled == true" ngbDropdownItem
+                                            (click)="onDisableDevice(measurement.sessionId)">
+                                            {{ 'measurements.list.actions.disable.short' | translate }}
+                                        </button>
+                                        <button *ngIf="measurement_interface.enabled == false" ngbDropdownItem
+                                            (click)="onEnableDevice(measurement.sessionId)">
+                                            {{ 'measurements.list.actions.enable.short' | translate }}
+                                        </button>-->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                    <!--   <ng-container *showItBootstrap="['xs', 'sm']">
+                        <tr *ngFor="let measurement_interface of instances">
+                            <td class="d-flex flex-column">
+                                <div class="d-flex">
+                                    <div class="d-flex flex-column ml-3 overflow-hidden">
+                                        <span class="text">{{ measurement_interface.id }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="role d-inline-flex align-items-center">
+
+                                        <span class="dot"></span>
+                                        <span class="text">{{ 'measurement_interface.types.' + measurement_interface.type | translate}}</span>
+                                    </span>
+                                </div>
+
+                                <table>
+                                    <tr>
+                                        <td class="px-0">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                            <span class="d-inline-flex align-items-center">
+                                            <app-button class="mt-0 pl-0"
+                                                        [title]="'devices.list.actions.edit.short' | translate"
+                                                        [type]="'clear'"
+                                                        [routerLink]="['/devices', measurement_interface.id, 'edit']" >
+                                            </app-button>
+                                        </span>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </ng-container>
+                     -->
+                </tbody>
+                <tfoot>
+                    <td colspan="3">
+                        <div class="row" *ngIf="paginator.loading">
+                            <div class="col-12 pt-5 d-flex justify-content-center">
+                                <div class="spinner-border" role="status"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

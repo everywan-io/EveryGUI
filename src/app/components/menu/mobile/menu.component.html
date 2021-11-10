@@ -21,11 +21,15 @@
             <i class="mdi mdi-hexagon-slice-2 ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.overlaynets' | translate }}</span>
         </div>
+        <div class="menu-item no-outline" routerLink="/measurementsessions">
+            <i class="mdi mdi-ruler-square-compass ml-4 ml-xl-5"></i>
+            <span class="title">{{ 'layout.menu.measurementSessions' | translate }}</span>
+        </div>
         <div class="menu-item no-outline" routerLink="/tenants/details">
-            <i class="mdi mdi-cellphone-wireless ml-4 ml-xl-5" ></i>
+            <i class="mdi mdi-cellphone-wireless ml-4 ml-xl-5"></i>
             <span class="title">{{ 'layout.menu.tenantDetails' | translate }}</span>
         </div>
-        
+
         <div *ngIf="(operator | async).role == 'admin'" class="menu-item no-outline" routerLink="/operators">
             <i class="mdi mdi-hand-okay ml-4 ml-xl-5"></i>
             <span class="title">

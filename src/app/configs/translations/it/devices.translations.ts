@@ -119,10 +119,10 @@ export const DevicesLanguagePartialDefinition = {
             registration_timestamp: {
                 label: 'Registered at'
             },
-            mgmtip:  {
+            mgmtip: {
                 label: 'Mgmt IP'
             },
-            status:  {
+            status: {
                 label: 'Status'
             }
         },

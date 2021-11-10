@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import {OverlayNet} from '@models/overlaynets.model';
-import {ApiService} from '@modules/network/api.service';
-import {OverlayNetsFactory} from '@models/factories/overlaynets.factory';
-import {OverlayNetDescriptorInterface} from '@configs/network/api.descriptors';
+import { OverlayNet } from '@models/overlaynets.model';
+import { ApiService } from '@modules/network/api.service';
+import { OverlayNetsFactory } from '@models/factories/overlaynets.factory';
+import { OverlayNetDescriptorInterface } from '@configs/network/api.descriptors';
 
 
 @Injectable()
@@ -35,7 +35,7 @@ export class OverlayNetsService {
         return this.API.OverlayNets
             .fetch(payload)
             .pipe(
-                 map((overlaynets: OverlayNetDescriptorInterface[]) => OverlayNetsFactory.create(overlaynets) as OverlayNet[])
+                map((overlaynets: OverlayNetDescriptorInterface[]) => OverlayNetsFactory.create(overlaynets) as OverlayNet[])
             );
     }
 

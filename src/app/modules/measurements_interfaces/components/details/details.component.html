@@ -1,0 +1,158 @@
+<div class="container-fluid">
+
+    <div id="measurement-details">
+        <div class='paragraph-distance'>
+            <div class="titleDetails"> Summary </div>
+
+            <div class="container-details">
+                <label class="sinistra" for="sessionId">{{ 'measurements.details.fields.sessionId' |
+                    translate
+                    }}:</label>
+                <span class="destra" id="sessione" class="text">{{ (measurement.sessionId !== null) ?
+                    measurement.sessionId :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="status">{{ 'measurements.details.fields.status' | translate }}:</label>
+                <span class="destra" id="statusid">{{ (measurement.status !== null) ?
+                    measurement.status :
+                    "--"}}</span>
+            </div>
+        </div>
+
+        <div class='paragraph-distance'>
+            <div class="titleDetails"> STAMP Parameters </div>
+
+            <div class="container-details">
+                <label class="sinistra" for="interval">{{ 'measurements.details.fields.interval' | translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.interval !== null) ? measurement.interval :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="authenticationMode">{{ 'measurements.details.fields.authenticationMode' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.authenticationMode !== null) ?
+                    measurement.authenticationMode :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="keyChain">{{ 'measurements.details.fields.keyChain' | translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.keyChain !== null) ? measurement.keyChain :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="timestampFormat">{{ 'measurements.details.fields.timestampFormat' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.timestampFormat !== null) ?
+                    measurement.timestampFormat :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="delayMeasurementMode">{{ 'measurements.details.fields.delayMeasurementMode'
+                    |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.delayMeasurementMode !== null) ?
+                    measurement.delayMeasurementMode :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="sessionReflectorMode">{{ 'measurements.details.fields.sessionReflectorMode'
+                    |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.sessionReflectorMode !== null) ?
+                    measurement.sessionReflectorMode :
+                    "--"}}</span>
+            </div>
+        </div>
+
+        <div class='paragraph-distance'>
+            <div class="titleDetails"> Session Sender </div>
+
+            <div class="container-details">
+                <label class="sinistra" for="senderDeviceId">{{ 'measurements.details.fields.senderDeviceId' | translate
+                    }}:</label>
+                <span class="destra" class="text">{{ (measurement.senderDeviceId !== null) ? measurement.senderDeviceId
+                    :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="senderName">{{ 'measurements.details.fields.senderName' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.senderName !== null) ?
+                    measurement.senderName :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="senderStampIp">{{ 'measurements.details.fields.senderStampIp' | translate
+                    }}:</label>
+                <span class="destra" class="text">{{ (measurement.senderStampIp !== null) ? measurement.senderStampIp :
+                    "--"}}</span>
+            </div>
+        </div>
+
+        <div class='paragraph-distance'>
+            <div class="titleDetails"> Session Reflector </div>
+            <div class="container-details">
+                <label class="sinistra" for="reflectorDeviceId">{{ 'measurements.details.fields.reflectorDeviceId' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.reflectorDeviceId !== null) ?
+                    measurement.reflectorDeviceId :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="reflectorName">{{ 'measurements.details.fields.reflectorName'
+                    |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.reflectorName !== null) ?
+                    measurement.reflectorName :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="reflectorStampIp">{{ 'measurements.details.fields.reflectorStampIp'
+                    |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.reflectorStampIp !== null) ?
+                    measurement.reflectorStampIp :
+                    "--"}}</span>
+            </div>
+        </div>
+
+        <div class='paragraph-distance'>
+            <div class="titleDetails"> Direct Path </div>
+            <div class="container-details">
+                <label class="sinistra" for="sidlist">{{ 'measurements.details.fields.sidlist' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.sidlist !== null) ?
+                    measurement.sidlist :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="delayDirectPath">{{ 'measurements.details.fields.delayDirectPath'
+                    |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.delayDirectPath !== null) ?
+                    measurement.delayDirectPath :
+                    "--"}}</span>
+            </div>
+        </div>
+
+        <div class='paragraph-distance'>
+            <div class="titleDetails"> Return Path </div>
+            <div class="container-details">
+                <label class="sinistra" for="returnSidlist">{{ 'measurements.details.fields.returnSidlist' |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.returnSidlist !== null) ?
+                    measurement.returnSidlist :
+                    "--"}}</span>
+            </div>
+            <div class="container-details">
+                <label class="sinistra" for="delayReturnPath">{{ 'measurements.details.fields.delayReturnPath'
+                    |
+                    translate }}:</label>
+                <span class="destra" class="text">{{ (measurement.delayReturnPath !== null) ?
+                    measurement.delayReturnPath :
+                    "--"}}</span>
+            </div>
+        </div>
+    </div>
+</div>

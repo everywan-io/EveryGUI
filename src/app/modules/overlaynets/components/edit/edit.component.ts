@@ -55,14 +55,14 @@ export class EditComponent implements OnInit {
 
 
     constructor(private title: TitleService,
-                private breadcrumb: BreadcrumbService,
-                private route: ActivatedRoute,
-                private overlaynetService: OverlayNetsService,
-                private modal: NgbModal,
-                private translator: TranslateService,
-                private router: Router,
-                private notifications: NotificationsService,
-                private progress: NgProgress) {
+        private breadcrumb: BreadcrumbService,
+        private route: ActivatedRoute,
+        private overlaynetService: OverlayNetsService,
+        private modal: NgbModal,
+        private translator: TranslateService,
+        private router: Router,
+        private notifications: NotificationsService,
+        private progress: NgProgress) {
 
         this.button = {
             state: ButtonStates.DISABLED,
@@ -99,11 +99,11 @@ export class EditComponent implements OnInit {
                 label: 'Home'
             },
             {
-                url: '/overlays',
-                label: 'Overalay Networks'
+                url: '/overlaynets',
+                label: 'Overlay Networks'
             },
             {
-                label:  this.mode === 'create' ? 'Create'  : 'Configure'
+                label: this.mode === 'create' ? 'Create' : 'Configure'
             }
         ]);
     }

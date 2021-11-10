@@ -1,0 +1,69 @@
+<form class="w-100" [formGroup]="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="measurement-edit" class="form-group ml-2">
+                    <div class="row pt-4">
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="sessionId">{{ 'measurements.details.fields.sessionId' | translate
+                                }}</label>
+                            <span class="text">{{ (measurement.sessionId !== null) ? measurement.sessionId :
+                                "--"}}</span>
+                        </div>
+
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="sessionDescription">{{
+                                'measurements.details.fields.sessionDescription' | translate }}</label>
+                            <span class="text">{{ (measurement.sessionDescription !== null) ?
+                                measurement.sessionDescription : "--"}}</span>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="senderName">{{ 'measurements.details.fields.senderName' | translate
+                                }}</label>
+                            <span *ngIf="measurement.senderName; else notConnectedBlock " class="text upper">{{
+                                'commons.yes' | translate }}</span>
+                            <ng-template #notConnectedBlock><span class="text upper">{{ 'commons.no' | translate
+                                    }}</span></ng-template>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="reflectorName">{{ 'measurements.details.fields.reflectorName' |
+                                translate
+                                }}</label>
+                            <span *ngIf="measurement.reflectorName; else notEnabledBlock " class="text upper">{{
+                                'commons.yes'
+                                | translate }}</span>
+                            <ng-template #notEnabledBlock><span class="text upper">{{ 'commons.no' | translate }}</span>
+                            </ng-template>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="status">{{ 'measurements.details.fields.status' | translate
+                                }}</label>
+                            <span *ngIf="measurement.status; else notConfiguredBlock " class="text">{{ 'commons.yes'
+                                | translate }}</span>
+                            <ng-template #notConfiguredBlock><span class="text">{{ 'commons.no' | translate }}</span>
+                            </ng-template>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="delayDirectPath">{{ 'measurements.details.fields.delayDirectPath' |
+                                translate
+                                }}</label>
+                            <span class="text">{{ (measurement.delayDirectPath !== null) ? measurement.delayDirectPath :
+                                "--"}}</span>
+                        </div>
+
+                        <div class="col-12 col-md-6 d-flex flex-row ">
+                            <label for="delayReturnPath">{{ 'measurements.details.fields.delayReturnPath' |
+                                translate
+                                }}</label>
+                            <span class="text">{{ (measurement.delayReturnPath !== null) ? measurement.delayReturnPath :
+                                "--"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

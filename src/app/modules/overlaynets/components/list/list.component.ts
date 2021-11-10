@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {TitleService} from '@services/title.service';
-import {OverlayNet, OverlayNetType} from '@models/overlaynets.model';
-import {PaginatorService} from '@modules/shared/services/paginator.service';
-import {OverlayNetsService} from '@modules/overlaynets/overlaynets.service';
-import {ResponsiveState} from 'ngx-responsive';
+import { TitleService } from '@services/title.service';
+import { OverlayNet, OverlayNetType } from '@models/overlaynets.model';
+import { PaginatorService } from '@modules/shared/services/paginator.service';
+import { OverlayNetsService } from '@modules/overlaynets/overlaynets.service';
+import { ResponsiveState } from 'ngx-responsive';
 import { ModalConfirmComponent } from '@modules/shared/components/modals/confirm/confirm.component';
 import { NgbDropdownConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,23 +27,23 @@ export class ListComponent implements OnInit {
     instances: OverlayNet[];
 
     constructor(private title: TitleService,
-                private breadcrumb: BreadcrumbService,
-                private overlaynetService: OverlayNetsService,
-                private overlaynet: ResponsiveState,
-                public paginator: PaginatorService,
-                private modal: NgbModal,
-                private translator: TranslateService,
-                private router: Router,
-                private notifications: NotificationsService,
-                private progress: NgProgress,
-                private dropDownConfig: NgbDropdownConfig) {
+        private breadcrumb: BreadcrumbService,
+        private overlaynetService: OverlayNetsService,
+        private overlaynet: ResponsiveState,
+        public paginator: PaginatorService,
+        private modal: NgbModal,
+        private translator: TranslateService,
+        private router: Router,
+        private notifications: NotificationsService,
+        private progress: NgProgress,
+        private dropDownConfig: NgbDropdownConfig) {
 
         this.instances = [];
         this.dropDownConfig.placement = 'bottom-right';
     }
 
     ngOnInit() {
-        this.paginator.createStream(this.overlaynetService.fetch.bind(this.overlaynetService, {do: 'o'})).subscribe(
+        this.paginator.createStream(this.overlaynetService.fetch.bind(this.overlaynetService, { do: 'o' })).subscribe(
             (overlaynets: OverlayNet[]) => this.handleSubscriptionResponse(overlaynets),
             (error: any) => this.handleSubscriptionError(error)
         );
@@ -57,7 +57,7 @@ export class ListComponent implements OnInit {
                 label: 'Home'
             },
             {
-                label: 'Overalay Networks'
+                label: 'Overlay Networks'
             }
         ]);
     }
@@ -80,7 +80,7 @@ export class ListComponent implements OnInit {
         this.paginator.nextPage();
     }
 
-    
+
     onOverlayNetDelete(id: string) {
         let deleteIsInProgress = false;
         const overlaynet = this.instances.find((instance: OverlayNet) => instance.id === id);
@@ -107,7 +107,7 @@ export class ListComponent implements OnInit {
                         .subscribe(() => {
                             modalConfirmReference.close(true);
 
-                            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+                            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
                                 this.router.navigate(['/overlaynets']));
                             this.notifications.success(
                                 this.translator.instant('overlaynets.list.notifications.delete.title'),
@@ -116,7 +116,7 @@ export class ListComponent implements OnInit {
                         }, (error: any) => {
                             modalConfirmReference.dismiss();
 
-                            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+                            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
                                 this.router.navigate(['/overlaynets']));
                             this.progress.ref().complete();
                             this.notifications.error(
@@ -127,6 +127,6 @@ export class ListComponent implements OnInit {
                     break;
             }
         });
-    } 
+    }
 
 }
