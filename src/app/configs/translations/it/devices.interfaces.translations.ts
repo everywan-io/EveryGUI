@@ -1,7 +1,7 @@
 export const DevicesIterfacesLanguagePartialDefinition = {
     list: {
-        title: 'Iterfaces',
-        
+        title: 'Interfaces',
+
         headers: {
             actions: 'Actions',
             name: 'Name',
@@ -17,7 +17,7 @@ export const DevicesIterfacesLanguagePartialDefinition = {
         },
         actions: {
             filter: 'Filter',
-            
+
             edit: {
                 long: 'Configure device',
                 short: 'Configure'
@@ -101,7 +101,7 @@ export const DevicesIterfacesLanguagePartialDefinition = {
                 label: 'IPv6 Subnets',
                 placeholder: 'IPv6 Subnets comma separated'
             }
-            
+
         }
     }
 };

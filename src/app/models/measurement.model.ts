@@ -1,3 +1,19 @@
+export class Parameters {
+    id: number;
+    timestamp: number;
+    value: number;
+}
+
+export class Delay {
+    delays: Parameters;
+    averageDelay: number;
+}
+
+export class Results {
+    delayDirectPath: Delay;
+    delayReturnPath: Delay;
+}
+
 export class Measurement {
     sessionId: string;
     sessionDescription: string;
@@ -18,6 +34,7 @@ export class Measurement {
     reflectorStampIp: string;
     sidlist: string;
     returnSidlist: string;
+    results: Results;
 
     defineExtraProperties() {
 

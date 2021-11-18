@@ -70,10 +70,11 @@
                                             {{ 'measurements.list.actions.details.short' | translate }}
                                         </button>
                                         <button ngbDropdownItem
-                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'results']">
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'results']"
+                                            [queryParams]="{type: 'delay', direction: 'both'}">
                                             {{ 'measurements.list.actions.results.short' | translate }}
                                         </button>
-                                        <button ngbDropdownItem
+                                        <!--<button ngbDropdownItem
                                             [routerLink]="['/measurementsessions', measurement.sessionId, 'run_stop']">
                                             {{ 'measurements.list.actions.run_stop.short' | translate }}
                                         </button>
@@ -85,7 +86,7 @@
                                             [routerLink]="['/measurementsessions', measurement.sessionId, 'edit']">
                                             {{ 'measurements.list.actions.edit.short' | translate }}
                                         </button>
-                                        <!--<button *ngIf="measurement_interface.enabled == true" ngbDropdownItem
+                                        <button *ngIf="measurement_interface.enabled == true" ngbDropdownItem
                                             (click)="onDisableDevice(measurement.sessionId)">
                                             {{ 'measurements.list.actions.disable.short' | translate }}
                                         </button>

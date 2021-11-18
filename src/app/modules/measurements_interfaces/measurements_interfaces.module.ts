@@ -13,7 +13,9 @@ import { DetailsComponent } from '@modules/measurements_interfaces/components/de
 import { ResultsComponent } from '@modules/measurements_interfaces/components/results/results.component';
 import { MeasurementsRoutes } from '@modules/measurements_interfaces/measurements_interfaces.routes';
 import { MeasurementsService } from '@modules/measurements_interfaces/measurements_interfaces.service';
-import { MeasurementResolver } from '@modules/measurements_interfaces/resolvers/measurements_interfaces.resolver';
+import { MeasurementResolver } from './resolvers/measurements_interfaces.resolver';
+import { DetailsResolver } from './resolvers/details.resolver';
+import { ResultsResolver } from './resolvers/results.resolver';
 import { FiltersComponent } from '@modules/measurements_interfaces/components/list/filters/filters.component';
 
 import { FormsModule } from '@angular/forms';
@@ -30,6 +32,8 @@ import { FormsModule } from '@angular/forms';
     ],
     providers: [
         MeasurementResolver,
+        ResultsResolver,
+        DetailsResolver,
         MeasurementsService
     ],
     declarations: [

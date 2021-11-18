@@ -40,7 +40,8 @@ export class MeasurementsFactory {
             reflectorDeviceId: 'reflectorDeviceId',
             reflectorStampIp: 'reflectorStampIp',
             sidlist: 'sidlist',
-            returnSidlist: 'returnSidlist'
+            returnSidlist: 'returnSidlist',
+            results: 'results'
         };
 
         const instance: Measurement = new Measurement();

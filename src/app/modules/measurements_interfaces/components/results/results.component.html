@@ -1,5 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 <div class="container-fluid">
-
     <div id="measurement-results">
         <div class='paragraph-distance'>
             <div class="title"> Gruppo DIRECT PATH </div>
@@ -7,16 +7,62 @@
             <div class="container-results">
                 <label class="sinistra" for="sidlist">{{ 'measurements.results.fields.sidlist' | translate
                     }}:</label>
-                <span class="destra" class="text">{{ (measurement.sidlist!== null) ? measurement.sidlist:
+                <span class="destra" class="text">{{ (measurement.sidlist!== null) ?
+                    measurement.sidlist:
                     "--"}}</span>
+            </div>
+
+            <div class="container-results">
+                <label class="sinistra"> Valore Massimo:</label>
+                <div class="destra" class="text" id="directDelayMaxValue"></div>
             </div>
             <div class="container-results">
-                <label class="sinistra" for="delayDirectPath">{{ 'measurements.results.fields.delayDirectPath' |
+                <label class="sinistra"> Valore Minimo:</label>
+                <div class="destra" class="text" id="directDelayMinValue"></div>
+            </div>
+
+            <div class="container-results">
+                <label class="sinistra" for="averageDelay">{{
+                    'measurements.results.fields.delayDirectPath.averageDelay' |
                     translate }}:</label>
-                <span class="destra" class="text">{{ (measurement.delayDirectPath !== null) ?
-                    measurement.delayDirectPath :
+                <span class="destra" class="text">{{ (measurement.results.delayDirectPath.averageDelay !== null) ?
+                    measurement.results.delayDirectPath.averageDelay :
                     "--"}}</span>
             </div>
+
+            <table>
+                <tr>
+                    <th class="titolo-tabella">{{
+                        'measurements.results.fields.delayDirectPath.delays.id' |
+                        translate }}</th>
+                    <th class="titolo-tabella">{{
+                        'measurements.results.fields.delayDirectPath.delays.timestamp' |
+                        translate }}</th>
+                    <th class="titolo-tabella">{{
+                        'measurements.results.fields.delayDirectPath.delays.value' |
+                        translate }}</th>
+                </tr>
+
+                <tr *ngFor="let delay of measurement.results.delayDirectPath.delays">
+                    <td class="text">{{
+                        (delay.id !== null) ?
+                        delay.id :
+                        "--"}}</td>
+                    <td class="text">{{
+                        (delay.timestamp !== null) ?
+                        delay.timestamp :
+                        "--"}}</td>
+                    <td class="text">{{
+                        (delay.value !== null) ?
+                        delay.value :
+                        "--"}}</td>
+                </tr>
+            </table>
+
+            <div class="grafico">
+                <canvas id="myCanvasDirect"></canvas>
+            </div>
+
         </div>
 
         <div class='paragraph-distance'>
@@ -28,13 +74,61 @@
                 <span class="destra" class="text">{{ (measurement.returnSidlist !== null) ? measurement.returnSidlist :
                     "--"}}</span>
             </div>
+
             <div class="container-results">
-                <label class="sinistra" for="delayReturnPath">{{ 'measurements.results.fields.delayReturnPath' |
+                <label class="sinistra"> Valore Massimo:</label>
+                <div class="destra" class="text" id="returnDelayMaxValue"></div>
+            </div>
+            <div class="container-results">
+                <label class="sinistra"> Valore Minimo:</label>
+                <div class="destra" class="text" id="returnDelayMinValue"></div>
+            </div>
+
+            <div class="container-results">
+                <label class="sinistra" for="delayReturnPath">{{
+                    'measurements.results.fields.delayReturnPath.averageDelay' |
                     translate }}:</label>
-                <span class="destra" class="text">{{ (measurement.delayReturnPath !== null) ?
-                    measurement.delayReturnPath :
+                <span class="destra" class="text">{{ (measurement.results.delayReturnPath.averageDelay !== null) ?
+                    measurement.results.delayReturnPath.averageDelay :
                     "--"}}</span>
             </div>
+
+            <table>
+                <tr>
+                    <th for="id">{{
+                        'measurements.results.fields.delayReturnPath.delays.id' |
+                        translate }}</th>
+                    <th for="timestamp">{{
+                        'measurements.results.fields.delayReturnPath.delays.timestamp' |
+                        translate }}</th>
+                    <th for="value">{{
+                        'measurements.results.fields.delayReturnPath.delays.value' |
+                        translate }}</th>
+                </tr>
+
+                <tr *ngFor="let delay of measurement.results.delayReturnPath.delays">
+                    <td class="text">{{
+                        (delay.id !== null) ?
+                        delay.id :
+                        "--"}}</td>
+                    <td class="text">{{
+                        (delay.timestamp !== null) ?
+                        delay.timestamp :
+                        "--"}}</td>
+                    <td class="text">{{
+                        (delay.value !== null) ?
+                        delay.value :
+                        "--"}}</td>
+                </tr>
+            </table>
+
+            <div class="grafico">
+                <canvas id="myCanvasReturn"></canvas>
+            </div>
+
         </div>
+
+        <button id="bottone">DOWNLOAD TABLES</button>
+
     </div>
 </div>

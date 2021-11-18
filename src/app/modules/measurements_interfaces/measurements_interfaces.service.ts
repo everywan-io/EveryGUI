@@ -54,4 +54,20 @@ export class MeasurementsService {
                 map((measurement: MeasurementDescriptorInterface[]) => MeasurementsFactory.create(measurement) as Measurement[])
             );
     }
+
+    getResults(identifier: string): Observable<Measurement> {
+        return this.API.Measurement
+            .getResults({ sessionId: identifier })
+            .pipe(
+                map((measurement: MeasurementDescriptorInterface) => MeasurementsFactory.create(measurement) as Measurement)
+            );
+    }
+
+    getDetails(identifier: string): Observable<Measurement> {
+        return this.API.Measurement
+            .getDetails({ sessionId: identifier })
+            .pipe(
+                map((measurement: MeasurementDescriptorInterface) => MeasurementsFactory.create(measurement) as Measurement)
+            );
+    }
 }

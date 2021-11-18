@@ -62,6 +62,22 @@ export interface DeviceDescriptorInterface {
     tunnel_mode: string;
 }
 
+export interface MeasurementDescriptorDelay {
+    id: number;
+    timestamp: number;
+    value: number;
+}
+
+export interface MeasurementDescriptorResultsDelay {
+    delays: MeasurementDescriptorDelay;
+    averageDelay: number;
+}
+
+export interface MeasurementDescriptorResults {
+    delayDirectPath: MeasurementDescriptorResultsDelay;
+    delayReturnPath: MeasurementDescriptorResultsDelay;
+}
+
 export interface MeasurementDescriptorInterface {
     sessionId: string;
     sessionDescription: string;
@@ -81,6 +97,7 @@ export interface MeasurementDescriptorInterface {
     reflectorStampIp: string;
     sidlist: string;
     returnSidlist: string;
+    results: MeasurementDescriptorResults;
 }
 
 export enum InterfaceType {

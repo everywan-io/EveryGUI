@@ -578,7 +578,7 @@ module.exports = {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Measurements"
+                    "$ref": "#/components/schemas/Measurement"
                   }
                 }
               }
@@ -612,7 +612,142 @@ module.exports = {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Measurements"
+                  "$ref": "#/components/schemas/Measurement"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      },
+      "post": {
+        "tags": ["Measurements"],
+        "summary": "Configure sessions",
+        "operationId": "Measurements.configure",
+        "parameters": [{
+          "name": "sessionId",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MeasurementConfigureRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "The request is successfull",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_204"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      }
+    },
+
+    "/measurement_sessions/{sessionId}/details": {
+      "get": {
+        "tags": ["Measurements"],
+        "summary": "Get Sessions",
+        "operationId": "Measurements.getDetails",
+        "parameters": [{
+          "name": "sessionId",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns a Measurement Sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Measurement"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      },
+      "post": {
+        "tags": ["Measurements"],
+        "summary": "Configure sessions",
+        "operationId": "Measurements.configure",
+        "parameters": [{
+          "name": "sessionId",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MeasurementConfigureRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "The request is successfull",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_204"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      }
+    },
+    "/measurement_sessions/{sessionId}/results": {
+      "get": {
+        "tags": ["Measurements"],
+        "summary": "Get Sessions",
+        "operationId": "Measurements.getResults",
+        "parameters": [{
+          "name": "sessionId",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns a Measurement Sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Measurement"
                 }
               }
             }
@@ -1156,6 +1291,57 @@ module.exports = {
           "delayReturnPath": {
             "type": "number"
           },
+          "results": {
+            "type": "object",
+            "properties": {
+              "delayDirectPath": {
+                "type": "object",
+                "properties": {
+                  "delays": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "timestamp": {
+                        "type": "number"
+                      },
+                      "value": {
+                        "type": "number"
+                      },
+                    }
+                  },
+                  "averageDelay": {
+                    "type": "number"
+                  }
+                }
+              },
+              "delayReturnPath": {
+                "type": "object",
+                "properties": {
+                  "delays": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "timestamp": {
+                        "type": "number"
+                      },
+                      "value": {
+                        "type": "number"
+                      },
+                    }
+                  },
+                  "averageDelay": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "Device": {

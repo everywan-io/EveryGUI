@@ -230,67 +230,25 @@ export const MeasurementsLanguagePartialDefinition = {
         title: 'Measurement Sessions Results',
         fields: {
             sessionId: 'Session ID',
-            status: 'Status',
-            interval: 'Interval (in seconds)',
-            authenticationMode: 'Authentication Mode',
-            keyChain: 'Key Chain',
-            timestampFormat: 'Timestamp Format',
-            delayMeasurementMode: 'Delay Measurement Mode',
-            sessionReflectorMode: 'Session Reflector Mode',
-            senderDeviceId: 'Device ID',
-            senderName: 'Device Name',
-            senderStampIp: 'STAMP IP',
-            reflectorDeviceId: 'Device ID',
-            reflectorName: 'Device Name',
-            reflectorStampIp: 'STAMP IP',
             sidlist: 'Segment List',
             returnSidlist: 'Segment List',
-            delayDirectPath: 'Mean Delay (ms)',
-            delayReturnPath: 'Mean Delay (ms)'
-        },
-        actions: {
-            edit: 'Edit Measurement Sessions'
-        },
-        notifications: {
-            delete: {
-                title: 'Remove session',
-                message: 'Session eliminata correttamente'
+            delayDirectPath: {
+                delays: {
+                    id: "ID ritardo",
+                    timestamp: "Timestamp",
+                    value: "Valore di ritardo"
+                },
+                averageDelay: "Media dei ritardi"
             },
-            enable: {
-                title: 'Enable session',
-                message: 'Session successful enbled'
-            },
-            disable: {
-                title: 'Disable session',
-                message: 'Session successful disabled'
-            },
-        },
-        modals: {
-            edit: {
-                title: 'Configure session',
-                message: 'Stai per configurare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
-                actions: {
-                    confirm: 'Configure',
-                    cancel: 'Cancel'
-                }
-            },
-            enable: {
-                title: 'Enable session',
-                message: 'Stai per abilitare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
-                actions: {
-                    confirm: 'Confirm',
-                    cancel: 'Cancel'
-                }
-            },
-            disable: {
-                title: 'Disable session',
-                message: 'Stai per disabilitare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
-                actions: {
-                    confirm: 'Confirm',
-                    cancel: 'Cancel'
-                }
+            delayReturnPath: {
+                delays: {
+                    id: "ID ritardo",
+                    timestamp: "Timestamp",
+                    value: "Valore di ritardo"
+                },
+                averageDelay: "Media dei ritardi"
             }
-        },
+        }
     },
     types: {
         undefined: 'Undefined',
