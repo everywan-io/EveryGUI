@@ -121,7 +121,7 @@ export class ListComponent implements OnInit, OnDestroy {
                         .subscribe((measurement: Measurement) => {
                             modalConfirmReference.close(true);
 
-                            this.router.navigate(['/measurementsessions']);
+                            this.router.navigate(['/measurementsessions'], { queryParams: { sessionId: sessionId, command: "start" } });
                             this.notifications.success(
                                 this.translator.instant('measurements.list.notifications.run.title'),
                                 this.translator.instant('measurements.list.notifications.run.message')
@@ -167,7 +167,7 @@ export class ListComponent implements OnInit, OnDestroy {
                         .subscribe((measurement: Measurement) => {
                             modalConfirmReference.close(true);
 
-                            this.router.navigate(['/measurementsessions']);
+                            this.router.navigate(['/measurementsessions'], { queryParams: { sessionId: sessionId, command: "stop" } });
                             this.notifications.success(
                                 this.translator.instant('measurements.list.notifications.stop.title'),
                                 this.translator.instant('measurements.list.notifications.stop.message')
