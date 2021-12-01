@@ -58,6 +58,17 @@ export class DetailsComponent implements OnInit {
             }
         ]);
 
+        var status = this.measurement.status;
+
+        function controlloIlluminazione() {
+            if (status != 'Running' && status != 'running') {
+                var elemento = document.getElementById("statusid");
+                elemento.id = ("statusidstopped");
+            }
+        }
+
+        controlloIlluminazione();
+
         //sezione dedicata all'illuminazione ad intermittenza di 'running'
         /*var counter = 1
         var elementiHeaders = document.getElementsByClassName("router-link-active");

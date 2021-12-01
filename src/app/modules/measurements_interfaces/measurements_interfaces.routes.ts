@@ -3,25 +3,31 @@ import { EditComponent } from '@modules/measurements_interfaces/components/edit/
 import { DetailsComponent } from '@modules/measurements_interfaces/components/details/details.component';
 import { MeasurementResolver } from './resolvers/measurements_interfaces.resolver';
 import { ResultsResolver } from './resolvers/results.resolver';
-import { DetailsResolver } from './resolvers/details.resolver';
 import { ListComponent } from '@modules/measurements_interfaces/components/list/list.component';
 import { ResultsComponent } from '@modules/measurements_interfaces/components/results/results.component';
+import { DeviceMeasurementAvailableResolver } from './resolvers/devices.resolver';
+import { resolve } from 'url';
+import { OverlayMeasurementAvailableResolver } from './resolvers/overlays.resolver';
 
 export const MeasurementsRoutes: Routes = [{
     path: '',
     pathMatch: 'full',
     component: ListComponent
 }, {
-    path: ':sessionId',
-    component: ListComponent,
+    path: 'create',
+    component: EditComponent,
+    data: {
+        mode: 'create'
+    },
     resolve: {
-        measurement: MeasurementResolver
+        device: DeviceMeasurementAvailableResolver,
+        overlaynets: OverlayMeasurementAvailableResolver
     }
 }, {
-    path: ':sessionId/details',
+    path: ':sessionId',
     component: DetailsComponent,
     resolve: {
-        measurement: DetailsResolver
+        measurement: MeasurementResolver
     }
 }, {
     path: ':sessionId/results',

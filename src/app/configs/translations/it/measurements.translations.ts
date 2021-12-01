@@ -14,6 +14,9 @@ export const MeasurementsLanguagePartialDefinition = {
                 status: {
                     placeholder: 'All status'
                 }
+            },
+            action: {
+                create: 'Create Measurement Sessions'
             }
         },
         headers: {
@@ -28,18 +31,6 @@ export const MeasurementsLanguagePartialDefinition = {
         },
         actions: {
             filter: 'Filter',
-            enable: {
-                long: 'Enable session',
-                short: 'Enable'
-            },
-            disable: {
-                long: 'Disable session',
-                short: 'Disable'
-            },
-            edit: {
-                long: 'Configure session',
-                short: 'Configure'
-            },
             details: {
                 long: 'Show details',
                 short: 'Details'
@@ -48,35 +39,43 @@ export const MeasurementsLanguagePartialDefinition = {
                 long: 'Show results',
                 short: 'Results'
             },
-            run_stop: {
-                long: 'Run session/Stop session',
-                short: 'Run/Stop'
+            create: {
+                long: 'Create Measurement Sessions',
+                short: 'Create'
+            },
+            runSession: {
+                long: 'Run Session',
+                short: 'Run'
+            },
+            stopSession: {
+                long: 'Stop Session',
+                short: 'Stop'
             },
             delete: {
-                long: 'Remove session',
+                long: 'Delete Session',
                 short: 'Delete'
             }
         },
         modals: {
             delete: {
-                title: 'Remove session',
-                message: 'Stai per eliminare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
-                actions: {
-                    confirm: 'Remove',
-                    cancel: 'Cancel'
-                }
-            },
-            enable: {
-                title: 'Enable session',
-                message: 'Stai per abilitare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
+                title: 'Delete session',
+                message: 'Stai per eliminare la sessione <b>{{ measurement }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
                 }
             },
-            disable: {
-                title: 'Disable session',
-                message: 'Stai per disabilitare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
+            run: {
+                title: 'Current status is STOPPED',
+                message: 'Stai per cambiare lo stato alla sessione <b>{{ measurement }}</b> in <b> RUNNING</b>.<br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                }
+            },
+            stop: {
+                title: 'Current status is RUNNING',
+                message: 'Stai per cambiare lo stato alla sessione <b>{{ measurement }}</b> in <b> STOPPED</b>.<br />Sei sicuro di voler procedere?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
@@ -85,16 +84,16 @@ export const MeasurementsLanguagePartialDefinition = {
         },
         notifications: {
             delete: {
-                title: 'Remove session',
-                message: 'Session eliminato correttamente'
+                title: 'Session <b>{{measurement}}</b> removed',
+                message: 'Sessione eliminata correttamente'
             },
-            enable: {
-                title: 'Enable session',
-                message: 'Session successful enbled'
+            run: {
+                title: 'Actually status is <b>Running</b>',
+                message: 'Session\'s status successfully changed to <b>Running<b>'
             },
-            disable: {
-                title: 'Disable session',
-                message: 'Session successful disabled'
+            stop: {
+                title: 'Actually status is <b>Stopped</b>',
+                message: 'Session\'s status successfully changed to <b>Stopped<b>'
             },
             edit: {
                 title: 'Edit Measurement Sessions',
@@ -104,47 +103,75 @@ export const MeasurementsLanguagePartialDefinition = {
     },
     edit: {
         title: {
-            edit: 'Configure Measurement Sessions'
+            create: 'Configure Measurement Sessions'
         },
         fields: {
-            sessionId: {
-                label: 'Session Id',
-                placeholder: 'Insert a session id'
+            interval: {
+                label: 'Interval (in seconds)',
+                placeholder: 'insert an interval'
             },
-            sessionDescription: {
-                label: 'Session Description',
-                placeholder: ''
+            authenticationMode: {
+                label: 'Authentication Mode',
+                placeholder: 'Select mode'
             },
-            senderName: {
-                label: 'Sender Name',
-                placeholder: 'Insert a sender name'
+            keyChain: {
+                label: 'Key Chain (only for Authentication Mode)',
+                placeholder: 'insert key chain'
             },
-            reflectorName: {
-                label: 'Reflector Name'
+            timestampFormat: {
+                label: 'Timestamp Format',
+                placeholder: 'Select timestamp'
             },
-            status: {
-                label: 'Status'
+            delayMeasurementMode: {
+                label: 'Delay Measurement Mode',
+                placeholder: 'Select mode'
             },
-            delayDirectPath: {
-                label: 'Delay Direct Path'
+            sessionReflectorMode: {
+                label: 'Session Reflector Mode',
+                placeholder: 'Select mode'
             },
-            delayReturnPath: {
-                label: 'Delay Return P dettagliath'
+            sessionSender: {
+                label: 'Session Sender',
+                placeholder: 'Select device'
+            },
+            sessionReflector: {
+                label: 'Session Reflector',
+                placeholder: 'Select device'
+            },
+            sidlist: {
+                label: 'Direct Path Segment List',
+                placeholder: 'insert sidlist'
+            },
+            returnSidlist: {
+                label: 'Return Path Segment List',
+                placeholder: 'insert return sidlist'
+            },
+            duration: {
+                label: 'Session\'s Duration (in seconds)',
+                placeholder: 'insert duration'
+            },
+            runOptions: {
+                label: 'Run After Creation',
+                placeholder: 'select an option'
+            },
+            overlaySession: {
+                label: 'Associated Overlay',
+                placeholder: 'select overlay'
             }
         },
         actions: {
-            edit: 'Save configuration'
+            create: 'Create Measurement Sessions'
         },
         notifications: {
-            edit: {
-                title: 'Edit Measurements Sessions',
-                message: 'La session <b>{{ fullname }}</b> è stata modificata con successo'
+            create: {
+                title: 'Edit Measurement Sessions',
+                message: 'La sessione è stata creata con successo'
             }
         },
         modals: {
-            edit: {
+            create: {
                 title: 'Configure session',
-                message: 'Stai per configurare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
+                message: 'Stai per configurare la sessione.<br />Sei sicuro di voler procedere?',
                 actions: {
                     confirm: 'Configure',
                     cancel: 'Cancel'
@@ -152,7 +179,7 @@ export const MeasurementsLanguagePartialDefinition = {
             },
             approve: {
                 title: 'Enable session',
-                message: 'Stai per approvare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
+                message: 'Stai per approvare la sessione.<br />Sei sicuro di voler procedere?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
@@ -180,7 +207,9 @@ export const MeasurementsLanguagePartialDefinition = {
             sidlist: 'Segment List',
             returnSidlist: 'Segment List',
             delayDirectPath: 'Mean Delay (ms)',
-            delayReturnPath: 'Mean Delay (ms)'
+            delayReturnPath: 'Mean Delay (ms)',
+            overlayId: 'Overlay ID',
+            overlayName: 'Overlay Name'
         },
         actions: {
             edit: 'Edit Measurement Sessions'
@@ -188,7 +217,7 @@ export const MeasurementsLanguagePartialDefinition = {
         notifications: {
             delete: {
                 title: 'Remove session',
-                message: 'Session eliminata correttamente'
+                message: 'Sessione eliminata correttamente'
             },
             enable: {
                 title: 'Enable session',
@@ -197,34 +226,8 @@ export const MeasurementsLanguagePartialDefinition = {
             disable: {
                 title: 'Disable session',
                 message: 'Session successful disabled'
-            },
-        },
-        modals: {
-            edit: {
-                title: 'Configure session',
-                message: 'Stai per configurare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
-                actions: {
-                    confirm: 'Configure',
-                    cancel: 'Cancel'
-                }
-            },
-            enable: {
-                title: 'Enable session',
-                message: 'Stai per abilitare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
-                actions: {
-                    confirm: 'Confirm',
-                    cancel: 'Cancel'
-                }
-            },
-            disable: {
-                title: 'Disable session',
-                message: 'Stai per disabilitare la session <b>{{ session }}</b>.<br />Sei sicuro di voler procedere?',
-                actions: {
-                    confirm: 'Confirm',
-                    cancel: 'Cancel'
-                }
             }
-        },
+        }
     },
     results: {
         title: 'Measurement Sessions Results',

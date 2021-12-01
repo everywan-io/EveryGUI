@@ -588,6 +588,29 @@ module.exports = {
         "security": [{
           "bearerAuthentication": []
         }]
+      },
+      "post": {
+        "tags": ["Measurements"],
+        "summary": "Create Measurement Sessions",
+        "operationId": "Measurements.create",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MeasurementConfigureRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "The request is successfull",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_204"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
       }
     },
     "/measurement_sessions/{sessionId}": {
@@ -622,10 +645,11 @@ module.exports = {
           "bearerAuthentication": []
         }]
       },
-      "post": {
+      "put": {
         "tags": ["Measurements"],
-        "summary": "Configure sessions",
-        "operationId": "Measurements.configure",
+        "summary": "Update the Measurement Session's status",
+        "description": "Return the Measurement Session's status",
+        "operationId": "Measurements.putRunStop",
         "parameters": [{
           "name": "sessionId",
           "in": "path",
@@ -636,13 +660,23 @@ module.exports = {
           "schema": {
             "type": "string"
           }
+        }, {
+          "in": "query",
+          "name": "command",
+          "description": "The command to RUN or STOP a session",
+          "required": false,
+          "style": "form",
+          "explode": true,
+          "schema": {
+            "type": "string"
+          }
         }],
         "requestBody": {
-          "$ref": "#/components/requestBodies/MeasurementConfigureRequestBody"
+          "$ref": "#/components/requestBodies/MeasurementRequestBody"
         },
         "responses": {
           "200": {
-            "description": "The request is successfull",
+            "description": "Status changed",
             "content": {
               "application/json": {
                 "schema": {
@@ -653,47 +687,13 @@ module.exports = {
           }
         },
         "security": [{
-          "bearerAuthentication": []
-        }]
-      }
-    },
-
-    "/measurement_sessions/{sessionId}/details": {
-      "get": {
-        "tags": ["Measurements"],
-        "summary": "Get Sessions",
-        "operationId": "Measurements.getDetails",
-        "parameters": [{
-          "name": "sessionId",
-          "in": "path",
-          "description": "Resource id identifier",
-          "required": true,
-          "style": "simple",
-          "explode": false,
-          "schema": {
-            "type": "string"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "Returns a Measurement Sessions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Measurement"
-                }
-              }
-            }
-          }
-        },
-        "security": [{
-          "bearerAuthentication": []
+          "BearerAuthentication": []
         }]
       },
-      "post": {
+      "delete": {
         "tags": ["Measurements"],
-        "summary": "Configure sessions",
-        "operationId": "Measurements.configure",
+        "summary": "Delete Measurement",
+        "operationId": "Measurements.deleteMeasurement",
         "parameters": [{
           "name": "sessionId",
           "in": "path",
@@ -705,11 +705,8 @@ module.exports = {
             "type": "string"
           }
         }],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/MeasurementConfigureRequestBody"
-        },
         "responses": {
-          "200": {
+          "201": {
             "description": "The request is successfull",
             "content": {
               "application/json": {
@@ -756,42 +753,9 @@ module.exports = {
         "security": [{
           "bearerAuthentication": []
         }]
-      },
-      "post": {
-        "tags": ["Measurements"],
-        "summary": "Configure sessions",
-        "operationId": "Measurements.configure",
-        "parameters": [{
-          "name": "sessionId",
-          "in": "path",
-          "description": "Resource id identifier",
-          "required": true,
-          "style": "simple",
-          "explode": false,
-          "schema": {
-            "type": "string"
-          }
-        }],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/MeasurementConfigureRequestBody"
-        },
-        "responses": {
-          "200": {
-            "description": "The request is successfull",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/inline_response_204"
-                }
-              }
-            }
-          }
-        },
-        "security": [{
-          "bearerAuthentication": []
-        }]
       }
     },
+
     "/overlay_nets/": {
       "get": {
         "tags": ["Overlay Networks"],
@@ -1297,46 +1261,50 @@ module.exports = {
               "delayDirectPath": {
                 "type": "object",
                 "properties": {
-                  "delays": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "number"
-                      },
-                      "timestamp": {
-                        "type": "number"
-                      },
-                      "value": {
-                        "type": "number"
-                      },
+                  "delays": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "timestamp": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        },
+                      }
+                    },
+                    "averageDelay": {
+                      "type": "number"
                     }
-                  },
-                  "averageDelay": {
-                    "type": "number"
                   }
                 }
               },
               "delayReturnPath": {
                 "type": "object",
                 "properties": {
-                  "delays": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "number"
-                      },
-                      "timestamp": {
-                        "type": "number"
-                      },
-                      "value": {
-                        "type": "number"
-                      },
+                  "delays": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "timestamp": {
+                          "type": "number"
+                        },
+                        "value": {
+                          "type": "number"
+                        },
+                      }
+                    },
+                    "averageDelay": {
+                      "type": "number"
                     }
-                  },
-                  "averageDelay": {
-                    "type": "number"
                   }
                 }
               }
@@ -1744,6 +1712,19 @@ module.exports = {
           "type": "string"
         }
       },
+
+      "MeasurementIdPathParameter": {
+        "name": "sessionId",
+        "in": "path",
+        "description": "Resource id identifier",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+
       "OperatorSearchQueryParameters": {
         "name": "Operator search query parameters",
         "in": "query",
@@ -1914,6 +1895,9 @@ module.exports = {
                 "name": {
                   "type": "string"
                 },
+                "id": {
+                  "type": "string"
+                },
                 "type": {
                   "type": "string",
                   "enum": ["IPv4Overlay", "IPv6Overlay"]
@@ -1995,6 +1979,9 @@ module.exports = {
                 "name": {
                   "type": "string"
                 },
+                "id": {
+                  "type": "number"
+                },
                 "description": {
                   "type": "string"
                 },
@@ -2017,7 +2004,7 @@ module.exports = {
         "content": {
           "application/json": {
             "schema": {
-              "required": ["tenantid"],
+              "required": ["sessionId"],
               "type": "object",
               "properties": {
                 "sessionId": {
@@ -2028,12 +2015,6 @@ module.exports = {
                 },
                 "tenantid": {
                   "type": "string"
-                },
-                "interfaces": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ConfigurationInterface"
-                  }
                 }
               }
             }

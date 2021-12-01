@@ -41,7 +41,9 @@ export class MeasurementsFactory {
             reflectorStampIp: 'reflectorStampIp',
             sidlist: 'sidlist',
             returnSidlist: 'returnSidlist',
-            results: 'results'
+            results: 'results',
+            overlayId: 'overlayId',
+            overlayName: 'overlayName'
         };
 
         const instance: Measurement = new Measurement();

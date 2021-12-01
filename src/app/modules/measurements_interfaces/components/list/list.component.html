@@ -66,7 +66,7 @@
 
                                     <div ngbDropdownMenu aria-labelledby="dropdown">
                                         <button ngbDropdownItem
-                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'details']">
+                                            [routerLink]="['/measurementsessions', measurement.sessionId]">
                                             {{ 'measurements.list.actions.details.short' | translate }}
                                         </button>
                                         <button ngbDropdownItem
@@ -74,25 +74,20 @@
                                             [queryParams]="{type: 'delay', direction: 'both'}">
                                             {{ 'measurements.list.actions.results.short' | translate }}
                                         </button>
-                                        <!--<button ngbDropdownItem
-                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'run_stop']">
-                                            {{ 'measurements.list.actions.run_stop.short' | translate }}
+                                        <button *ngIf="measurement.status == 'Running'" ngbDropdownItem
+                                            (click)="onStopMeasurement(measurement.sessionId)">
+                                            {{ 'measurements.list.actions.stopSession.short' | translate}}
                                         </button>
-                                        <button ngbDropdownItem
-                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'delete']">
+                                        <button *ngIf="measurement.status == 'Stopped'" ngbDropdownItem
+                                            (click)="onRunMeasurement(measurement.sessionId)">
+                                            {{ 'measurements.list.actions.runSession.short' | translate}}
+                                        </button>
+                                        <button ngbDropdownItem (click)="onMeasurementDelete(measurement.sessionId)">
                                             {{ 'measurements.list.actions.delete.short' | translate }}
                                         </button>
-                                        <button ngbDropdownItem
-                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'edit']">
-                                            {{ 'measurements.list.actions.edit.short' | translate }}
-                                        </button>
-                                        <button *ngIf="measurement_interface.enabled == true" ngbDropdownItem
-                                            (click)="onDisableDevice(measurement.sessionId)">
-                                            {{ 'measurements.list.actions.disable.short' | translate }}
-                                        </button>
-                                        <button *ngIf="measurement_interface.enabled == false" ngbDropdownItem
-                                            (click)="onEnableDevice(measurement.sessionId)">
-                                            {{ 'measurements.list.actions.enable.short' | translate }}
+                                        <!--<button ngbDropdownItem
+                                            [routerLink]="['/measurementsessions', measurement.sessionId, 'delete']">
+                                            {{ 'measurements.list.actions.delete.short' | translate }}
                                         </button>-->
                                     </div>
                                 </div>

@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import {Device} from '@models/devices.model';
-import {ApiService} from '@modules/network/api.service';
-import {DevicesFactory} from '@models/factories/devices.factory';
-import {DeviceDescriptorInterface, InterfaceDescriptorInterface} from '@configs/network/api.descriptors';
+import { Device } from '@models/devices.model';
+import { ApiService } from '@modules/network/api.service';
+import { DevicesFactory } from '@models/factories/devices.factory';
+import { DeviceDescriptorInterface, InterfaceDescriptorInterface } from '@configs/network/api.descriptors';
 import { Interface } from '@everywan/models/interfaces.model';
 import { InterfacesFactory } from '@everywan/models/factories/interfaces.factory';
 
@@ -53,7 +53,7 @@ export class DevicesService {
         return this.API.Devices
             .fetch(payload)
             .pipe(
-                 map((devices: DeviceDescriptorInterface[]) => DevicesFactory.create(devices) as Device[])
+                map((devices: DeviceDescriptorInterface[]) => DevicesFactory.create(devices) as Device[])
             );
     }
 
@@ -61,7 +61,7 @@ export class DevicesService {
         return this.API.Devices
             .fetchInterfaces(payload)
             .pipe(
-                 map((interfaces: InterfaceDescriptorInterface[]) => InterfacesFactory.create(interfaces) as Interface[])
+                map((interfaces: InterfaceDescriptorInterface[]) => InterfacesFactory.create(interfaces) as Interface[])
             );
     }
 }

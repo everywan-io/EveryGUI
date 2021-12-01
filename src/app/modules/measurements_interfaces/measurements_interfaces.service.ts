@@ -15,17 +15,17 @@ export class MeasurementsService {
 
     }
 
-    enable(identifier: string): Observable<Measurement> {
+    create(payload: any): Observable<Measurement> {
         return this.API.Measurement
-            .enable({ sessionId: identifier })
+            .create(payload)
             .pipe(
                 map((measurement: MeasurementDescriptorInterface) => MeasurementsFactory.create(measurement) as Measurement)
             );
     }
 
-    disable(identifier: string): Observable<Measurement> {
+    putRunStop(identifier: string): Observable<Measurement> {
         return this.API.Measurement
-            .disable({ sessionId: identifier })
+            .putRunStop({ sessionId: identifier })
             .pipe(
                 map((measurement: MeasurementDescriptorInterface) => MeasurementsFactory.create(measurement) as Measurement)
             );
@@ -63,11 +63,8 @@ export class MeasurementsService {
             );
     }
 
-    getDetails(identifier: string): Observable<Measurement> {
-        return this.API.Measurement
-            .getDetails({ sessionId: identifier })
-            .pipe(
-                map((measurement: MeasurementDescriptorInterface) => MeasurementsFactory.create(measurement) as Measurement)
-            );
+    deleteMeasurement(sessionId: string) {
+        return this.API.Measurement.deleteMeasurement({ sessionId: sessionId });
     }
+
 }

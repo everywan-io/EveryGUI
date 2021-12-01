@@ -2,8 +2,6 @@ export enum DeviceType {
     ROUTER = 'router',
 }
 
-
-
 export enum NatType {
     OPEN = 'Open',
     FULL_CONE_NAT = 'Full-cone NAT',
@@ -32,6 +30,6 @@ export class Device {
     tunnelMode: string;
 
     defineExtraProperties() {
-        
+
     }
 }

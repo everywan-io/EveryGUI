@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { TitleService } from '@services/title.service';
 import { Measurement } from '@models/measurement.model';
@@ -8,7 +8,7 @@ import { ResponsiveState } from 'ngx-responsive';
 import { ModalConfirmComponent } from '@modules/shared/components/modals/confirm/confirm.component';
 import { NgbDropdownConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { NotificationsService } from '@modules/notifications/notifications.service';
 import { NgProgress } from '@ngx-progressbar/core';
@@ -22,12 +22,14 @@ import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
         PaginatorService
     ]
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     lastFilters;
     instances: Measurement[];
+    arrayMeasurement: Measurement[];
 
     constructor(private title: TitleService,
+        private route: ActivatedRoute,
         private breadcrumb: BreadcrumbService,
         private measurementService: MeasurementsService,
         private measurement: ResponsiveState,
@@ -68,10 +70,15 @@ export class ListComponent implements OnInit {
 
     }
 
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
     handleSubscriptionResponse(measurements: Measurement[], reset: boolean = this.paginator.pagination.offset === 0) {
         reset ?
             this.instances = measurements :
             this.instances.push(...measurements);
+        //ottieniMisure(this.instances);
     }
 
     handleSubscriptionError(error: any) {
@@ -87,45 +94,45 @@ export class ListComponent implements OnInit {
         this.paginator.nextPage();
     }
 
-    onEnableMeasurement(id: string) {
-        let enableIsInProgress = false;
-        const measurement = this.instances.find((instance: Measurement) => instance.sessionId === id);
+    onRunMeasurement(sessionId: string) {
+        let runIsInProgress = false;
+        const measurement = this.instances.find((instance: Measurement) => instance.sessionId === sessionId);
         const modalConfirmReference = this.modal.open(ModalConfirmComponent, { centered: true });
 
-        modalConfirmReference.componentInstance.title = this.translator.instant('measurements.list.modals.enable.title');
-        modalConfirmReference.componentInstance.message = this.translator.instant('measurements.list.modals.enable.message', { measurement: measurement.sessionId });
-        modalConfirmReference.componentInstance.buttons.dismiss = this.translator.instant('measurements.list.modals.enable.actions.cancel');
-        modalConfirmReference.componentInstance.buttons.confirm = this.translator.instant('measurements.list.modals.enable.actions.confirm');
+        modalConfirmReference.componentInstance.title = this.translator.instant('measurements.list.modals.run.title');
+        modalConfirmReference.componentInstance.message = this.translator.instant('measurements.list.modals.run.message', { measurement: measurement.sessionId });
+        modalConfirmReference.componentInstance.buttons.dismiss = this.translator.instant('measurements.list.modals.run.actions.cancel');
+        modalConfirmReference.componentInstance.buttons.confirm = this.translator.instant('measurements.list.modals.run.actions.confirm');
         modalConfirmReference.componentInstance.action.subscribe((action: string) => {
             switch (action) {
                 case 'dismiss':
                     modalConfirmReference.dismiss();
                     break;
                 case 'confirm': measurement
-                    if (enableIsInProgress) {
+                    if (runIsInProgress) {
                         return;
                     }
 
-                    enableIsInProgress = true;
+                    runIsInProgress = true;
 
-                    this.measurementService
-                        .enable(id)
-                        .subscribe(() => {
+                    modalConfirmReference.componentInstance.startLoading();
+
+                    this.measurementService.putRunStop(sessionId)
+                        .subscribe((measurement: Measurement) => {
                             modalConfirmReference.close(true);
 
                             this.router.navigate(['/measurementsessions']);
                             this.notifications.success(
-                                this.translator.instant('measurements.list.notifications.enable.title'),
-                                this.translator.instant('measurements.list.notifications.enable.message')
+                                this.translator.instant('measurements.list.notifications.run.title'),
+                                this.translator.instant('measurements.list.notifications.run.message')
                             );
                         }, (error: any) => {
-                            modalConfirmReference.dismiss();
+                            modalConfirmReference.close(true);
 
-                            this.router.navigate(['/measurementsessions']);
                             this.progress.ref().complete();
                             this.notifications.error(
-                                this.translator.instant('measurements.list.notifications.enable.title'),
-                                error.message
+                                this.translator.instant('measurements.list.notifications.stop.title'),
+                                error.error.error
                             );
                         });
                     break;
@@ -133,52 +140,112 @@ export class ListComponent implements OnInit {
         });
     }
 
-    onDisableMeasurement(id: string) {
-        let disableIsInProgress = false;
-        const measurement = this.instances.find((instance: Measurement) => instance.sessionId === id);
+    onStopMeasurement(sessionId: string) {
+        let stopIsInProgress = false;
+        const measurement = this.instances.find((instance: Measurement) => instance.sessionId === sessionId);
         const modalConfirmReference = this.modal.open(ModalConfirmComponent, { centered: true });
 
-        modalConfirmReference.componentInstance.title = this.translator.instant('measurements.list.modals.disable.title');
-        modalConfirmReference.componentInstance.message = this.translator.instant('measurements.list.modals.disable.message', { measurement: measurement.sessionId });
-        modalConfirmReference.componentInstance.buttons.dismiss = this.translator.instant('measurements.list.modals.disable.actions.cancel');
-        modalConfirmReference.componentInstance.buttons.confirm = this.translator.instant('measurements.list.modals.disable.actions.confirm');
+        modalConfirmReference.componentInstance.title = this.translator.instant('measurements.list.modals.stop.title');
+        modalConfirmReference.componentInstance.message = this.translator.instant('measurements.list.modals.stop.message', { measurement: measurement.sessionId });
+        modalConfirmReference.componentInstance.buttons.dismiss = this.translator.instant('measurements.list.modals.stop.actions.cancel');
+        modalConfirmReference.componentInstance.buttons.confirm = this.translator.instant('measurements.list.modals.stop.actions.confirm');
+        modalConfirmReference.componentInstance.action.subscribe((action: string) => {
+            switch (action) {
+                case 'dismiss':
+                    modalConfirmReference.dismiss();
+                    break;
+                case 'confirm': measurement
+                    if (stopIsInProgress) {
+                        return;
+                    }
+
+                    stopIsInProgress = true;
+
+                    modalConfirmReference.componentInstance.startLoading();
+
+                    this.measurementService.putRunStop(sessionId)
+                        .subscribe((measurement: Measurement) => {
+                            modalConfirmReference.close(true);
+
+                            this.router.navigate(['/measurementsessions']);
+                            this.notifications.success(
+                                this.translator.instant('measurements.list.notifications.stop.title'),
+                                this.translator.instant('measurements.list.notifications.stop.message')
+                            );
+                        }, (error: any) => {
+                            modalConfirmReference.close(true);
+
+                            this.progress.ref().complete();
+                            this.notifications.error(
+                                this.translator.instant('measurements.list.notifications.run.title'),
+                                error.error.error
+                            );
+                        });
+                    break;
+            }
+        });
+    }
+
+    onMeasurementDelete(sessionId: string) {
+        let deleteIsInProgress = false;
+        const measurement = this.instances.find((instance: Measurement) => instance.sessionId === sessionId);
+        const modalConfirmReference = this.modal.open(ModalConfirmComponent, { centered: true });
+
+        modalConfirmReference.componentInstance.title = this.translator.instant('measurements.list.modals.delete.title');
+        modalConfirmReference.componentInstance.message = this.translator.instant('measurements.list.modals.delete.message', { measurement: measurement.sessionId });
+        modalConfirmReference.componentInstance.buttons.dismiss = this.translator.instant('measurements.list.modals.delete.actions.cancel');
+        modalConfirmReference.componentInstance.buttons.confirm = this.translator.instant('measurements.list.modals.delete.actions.confirm');
         modalConfirmReference.componentInstance.action.subscribe((action: string) => {
             switch (action) {
                 case 'dismiss':
                     modalConfirmReference.dismiss();
                     break;
                 case 'confirm':
-                    if (disableIsInProgress) {
+                    if (deleteIsInProgress) {
                         return;
                     }
 
-                    disableIsInProgress = true;
+                    deleteIsInProgress = true;
 
-                    this.measurementService
-                        .disable(id)
+                    this.measurementService.deleteMeasurement(sessionId)
                         .subscribe(() => {
                             modalConfirmReference.close(true);
 
-                            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-                                this.router.navigate(['/measurementsessions']));
+                            this.router.navigate(['/measurementsessions']);
                             this.notifications.success(
-                                this.translator.instant('measurements.list.notifications.disable.title'),
-                                this.translator.instant('measurements.list.notifications.disable.message')
+                                this.translator.instant('measurements.list.notifications.delete.title', { measurement: measurement.sessionId }),
+                                this.translator.instant('measurements.list.notifications.delete.message')
                             );
                         }, (error: any) => {
                             modalConfirmReference.dismiss();
 
-                            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-                                this.router.navigate(['/measurementsessions']));
+                            this.router.navigate(['/measurementsessions']);
                             this.progress.ref().complete();
                             this.notifications.error(
-                                this.translator.instant('measurements.list.notifications.disable.title'),
-                                error.message
+                                this.translator.instant('measurements.list.notifications.delete.title'),
+                                error.error.error
                             );
                         });
                     break;
             }
         });
     }
-
 }
+
+/*function ottieniMisure(instances) {
+    var array = instances;
+    setTimeout(function () {
+        var run_stop = document.getElementsByClassName("run_stop_session");
+        for (let i in array) {
+            if (array[i].status == 'Running') {
+                run_stop[parseInt(i)].innerHTML = 'Stop';
+            } else {
+                run_stop[parseInt(i)].innerHTML = 'Run';
+            }
+        }
+    }, 1000);
+}*/
+
+
+
+

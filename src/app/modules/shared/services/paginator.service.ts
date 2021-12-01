@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Observable, Subject} from 'rxjs';
-import {distinctUntilChanged, finalize, mergeMap, switchMap, tap} from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, finalize, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 export interface FiltersInterface { [key: string]: any; }
 export interface SubjectsInterface { filters: Subject<any>; pagination: Subject<any>; }
@@ -53,8 +53,8 @@ export class PaginatorService {
     setFilters(filters: FiltersInterface): void {
         this.filters = {};
 
-        Object.keys(filters).forEach((key: string | number ) => {
-            if (filters[key] != null && ((typeof filters[key] === 'string' && filters[key].length > 0) || (typeof filters[key] === 'number') || (typeof filters[key] === 'boolean') )) {
+        Object.keys(filters).forEach((key: string | number) => {
+            if (filters[key] != null && ((typeof filters[key] === 'string' && filters[key].length > 0) || (typeof filters[key] === 'number') || (typeof filters[key] === 'boolean'))) {
                 this.filters[key] = filters[key];
             }
         });

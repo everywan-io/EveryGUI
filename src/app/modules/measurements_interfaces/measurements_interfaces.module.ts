@@ -14,11 +14,14 @@ import { ResultsComponent } from '@modules/measurements_interfaces/components/re
 import { MeasurementsRoutes } from '@modules/measurements_interfaces/measurements_interfaces.routes';
 import { MeasurementsService } from '@modules/measurements_interfaces/measurements_interfaces.service';
 import { MeasurementResolver } from './resolvers/measurements_interfaces.resolver';
-import { DetailsResolver } from './resolvers/details.resolver';
 import { ResultsResolver } from './resolvers/results.resolver';
 import { FiltersComponent } from '@modules/measurements_interfaces/components/list/filters/filters.component';
 
 import { FormsModule } from '@angular/forms';
+import { DeviceMeasurementAvailableResolver } from './resolvers/devices.resolver';
+import { DevicesService } from '../devices/devices.service';
+import { OverlayMeasurementAvailableResolver } from './resolvers/overlays.resolver';
+import { OverlayNetsService } from '../overlaynets/overlaynets.service';
 
 @NgModule({
     imports: [
@@ -33,8 +36,11 @@ import { FormsModule } from '@angular/forms';
     providers: [
         MeasurementResolver,
         ResultsResolver,
-        DetailsResolver,
-        MeasurementsService
+        DeviceMeasurementAvailableResolver,
+        OverlayMeasurementAvailableResolver,
+        MeasurementsService,
+        DevicesService,
+        OverlayNetsService
     ],
     declarations: [
         ListComponent,

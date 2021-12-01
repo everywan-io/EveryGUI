@@ -5,29 +5,28 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { Measurement } from '@models/measurement.model';
 import { ApplicationState } from '@services/store/store.state';
-import { MeasurementsService } from '@modules/measurements_interfaces/measurements_interfaces.service';
+import { Measurement } from '@everywan/models/measurement.model';
+import { OverlayNetsService } from '@everywan/modules/overlaynets/overlaynets.service';
+import { OverlayNet } from '@everywan/models/overlaynets.model';
 
 @Injectable()
-export class DetailsResolver implements Resolve<Observable<Measurement>> {
+export class OverlayMeasurementAvailableResolver implements Resolve<Observable<OverlayNet[]>> {
     constructor(private store: Store<ApplicationState>,
-        private measurements: MeasurementsService) {
+        private overlaynets: OverlayNetsService) {
 
     }
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Measurement> {
-        const measurementIdentifier: string = route.paramMap.get('sessionId');
+    resolve(route: ActivatedRouteSnapshot): Observable<OverlayNet[]> {
 
-        // FIXME fetch from ngrx store and from remote if it doesn't exists
         return this.store.pipe(
             select('authentication'),
             select('user')
         ).pipe(
             take(1),
             switchMap((measurement: Measurement) => {
-                // if (!user || user.id !== measurementIdentifier) {
-                return this.measurements.getDetails(measurementIdentifier);
+                // if (!user || user.id !== overlaynetIdentifier) {
+                return this.overlaynets.fetch({ available: true });
                 // }
 
                 // return of(user);

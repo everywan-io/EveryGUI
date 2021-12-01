@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { TitleService } from '@services/title.service';
 import { Device, DeviceType } from '@models/devices.model';
@@ -22,23 +22,23 @@ import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
         PaginatorService
     ]
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
     readonly DeviceType = DeviceType;
     subscription: Subscription;
     lastFilters;
     instances: Device[];
 
     constructor(private title: TitleService,
-                private breadcrumb: BreadcrumbService,
-                private deviceService: DevicesService,
-                private device: ResponsiveState,
-                public paginator: PaginatorService,
-                private modal: NgbModal,
-                private translator: TranslateService,
-                private router: Router,
-                private notifications: NotificationsService,
-                private progress: NgProgress,
-                private dropDownConfig: NgbDropdownConfig) {
+        private breadcrumb: BreadcrumbService,
+        private deviceService: DevicesService,
+        private device: ResponsiveState,
+        public paginator: PaginatorService,
+        private modal: NgbModal,
+        private translator: TranslateService,
+        private router: Router,
+        private notifications: NotificationsService,
+        private progress: NgProgress,
+        private dropDownConfig: NgbDropdownConfig) {
 
         this.instances = [];
         this.dropDownConfig.placement = 'bottom-right';
@@ -67,12 +67,18 @@ export class ListComponent implements OnInit {
                 this.paginator.setFilters(this.lastFilters);
             });
 
+
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     handleSubscriptionResponse(devices: Device[], reset: boolean = this.paginator.pagination.offset === 0) {
         reset ?
             this.instances = devices :
             this.instances.push(...devices);
+        console.log(this.instances);
     }
 
     handleSubscriptionError(error: any) {

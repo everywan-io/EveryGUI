@@ -98,6 +98,8 @@ export interface MeasurementDescriptorInterface {
     sidlist: string;
     returnSidlist: string;
     results: MeasurementDescriptorResults;
+    overlayId: string;
+    overlayName: string;
 }
 
 export enum InterfaceType {

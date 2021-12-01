@@ -34,6 +34,8 @@ export class Measurement {
     reflectorStampIp: string;
     sidlist: string;
     returnSidlist: string;
+    overlayName: string;
+    overlayId: string;
     results: Results;
 
     defineExtraProperties() {
