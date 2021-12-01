@@ -180,7 +180,7 @@ export class EditComponent implements OnInit {
             'sidlist': new FormControl({ value: initialValues.sidlist, disabled: configure }, [Validators.required]),
             'returnSidlist': new FormControl({ value: initialValues.returnSidlist, disabled: configure }, [Validators.required]),
             'duration': new FormControl({ value: initialValues.duration, disabled: configure }),
-            'overlaySession': new FormControl({ value: initialValues.overlaySession, disabled: configure }, [Validators.required]),
+            'overlaySession': new FormControl({ value: initialValues.overlaySession, disabled: configure }),
             'measurementStatus': new FormControl({ value: 'Stopped', disabled: configure }),
             'runOptions': new FormControl({ value: initialValues.runOptions, disabled: configure })
         });
