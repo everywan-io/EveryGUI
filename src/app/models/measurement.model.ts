@@ -36,7 +36,9 @@ export class Measurement {
     returnSidlist: string;
     overlayName: string;
     overlayId: string;
+    duration: number;
     results: Results;
+
 
     defineExtraProperties() {
 

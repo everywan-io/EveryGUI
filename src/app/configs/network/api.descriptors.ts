@@ -100,6 +100,7 @@ export interface MeasurementDescriptorInterface {
     results: MeasurementDescriptorResults;
     overlayId: string;
     overlayName: string;
+    duration: number;
 }
 
 export enum InterfaceType {

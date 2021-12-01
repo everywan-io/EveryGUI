@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
     };
 
     authenticationModeTypes = [
-        { title: 'Unhautenticated', value: 'Unhautenticated' }];
+        { title: 'Unauthenticated', value: 'Unauthenticated' }];
 
     timestampFormatTypes = [
         { title: 'NTP', value: 'NTP' }];
@@ -159,7 +159,7 @@ export class EditComponent implements OnInit {
             sessionReflectorDeviceId: configure ? measurement.reflectorDeviceId : null,
             sidlist: configure ? measurement.sidlist : null,
             returnSidlist: configure ? measurement.returnSidlist : null,
-            duration: null,
+            duration: configure ? measurement.duration : null,
             measurementStatus: configure ? measurement.status : null,
             runOptions: null,
             overlaySession: configure ? measurement.overlayId : null,

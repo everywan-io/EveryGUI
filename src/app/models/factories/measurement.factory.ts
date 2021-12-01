@@ -43,7 +43,8 @@ export class MeasurementsFactory {
             returnSidlist: 'returnSidlist',
             results: 'results',
             overlayId: 'overlayId',
-            overlayName: 'overlayName'
+            overlayName: 'overlayName',
+            duration: 'duration'
         };
 
         const instance: Measurement = new Measurement();
