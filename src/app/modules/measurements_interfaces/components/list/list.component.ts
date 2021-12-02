@@ -117,11 +117,11 @@ export class ListComponent implements OnInit, OnDestroy {
 
                     modalConfirmReference.componentInstance.startLoading();
 
-                    this.measurementService.putRunStop(sessionId)
+                    this.measurementService.putRunStop(sessionId, "start")
                         .subscribe((measurement: Measurement) => {
                             modalConfirmReference.close(true);
 
-                            this.router.navigate(['/measurementsessions'], { queryParams: { sessionId: sessionId, command: "start" } });
+                            this.router.navigate(['/measurementsessions']);
                             this.notifications.success(
                                 this.translator.instant('measurements.list.notifications.run.title'),
                                 this.translator.instant('measurements.list.notifications.run.message')
@@ -163,11 +163,11 @@ export class ListComponent implements OnInit, OnDestroy {
 
                     modalConfirmReference.componentInstance.startLoading();
 
-                    this.measurementService.putRunStop(sessionId)
+                    this.measurementService.putRunStop(sessionId, "stop")
                         .subscribe((measurement: Measurement) => {
                             modalConfirmReference.close(true);
 
-                            this.router.navigate(['/measurementsessions'], { queryParams: { sessionId: sessionId, command: "stop" } });
+                            this.router.navigate(['/measurementsessions']);
                             this.notifications.success(
                                 this.translator.instant('measurements.list.notifications.stop.title'),
                                 this.translator.instant('measurements.list.notifications.stop.message')
@@ -222,7 +222,7 @@ export class ListComponent implements OnInit, OnDestroy {
                             this.router.navigate(['/measurementsessions']);
                             this.progress.ref().complete();
                             this.notifications.error(
-                                this.translator.instant('measurements.list.notifications.delete.title'),
+                                this.translator.instant('measurements.list.notifications.delete.title', { measurement: measurement.sessionId }),
                                 error.error.error
                             );
                         });

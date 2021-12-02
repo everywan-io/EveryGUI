@@ -23,9 +23,9 @@ export class MeasurementsService {
             );
     }
 
-    putRunStop(identifier: string): Observable<Measurement> {
+    putRunStop(identifier: string, command: string): Observable<Measurement> {
         return this.API.Measurement
-            .putRunStop({ sessionId: identifier })
+            .putRunStop({ sessionId: identifier, command: command })
             .pipe(
                 map((measurement: MeasurementDescriptorInterface) => MeasurementsFactory.create(measurement) as Measurement)
             );
