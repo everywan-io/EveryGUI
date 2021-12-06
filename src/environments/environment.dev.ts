@@ -1,4 +1,4 @@
 export const environment = {
-    endpoint: 'https://everywan-dev.everyup.it/api',
+    endpoint: 'http://debian-ipv6.netgroup.uniroma2.it/api',
     production: false
 };
