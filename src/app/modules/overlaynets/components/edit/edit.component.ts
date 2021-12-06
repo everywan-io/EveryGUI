@@ -50,6 +50,7 @@ export class EditComponent implements OnInit {
 
     tunnelTypes = [
         { title: 'VXLAN', value: 'VXLAN' },
+        { title: 'SRv6', value: 'SRv6' },
     ];
     slices: any;
 
