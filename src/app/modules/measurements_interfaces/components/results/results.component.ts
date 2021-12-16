@@ -130,7 +130,7 @@ export class ResultsComponent implements OnInit {
                 data: {
                     labels: arrayAsseX,
                     datasets: [{
-                        label: "Valore di Ritardo",
+                        label: "Delay Value",
                         data: arrayAsseY,
                         borderColor: 'blue'
                     }]
@@ -189,7 +189,7 @@ export class ResultsComponent implements OnInit {
                 data: {
                     labels: arrayAsseX,
                     datasets: [{
-                        label: "Valore di Ritardo",
+                        label: "Delay Value",
                         data: arrayAsseY,
                         borderColor: 'blue'
                     }]

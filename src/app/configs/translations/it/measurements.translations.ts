@@ -59,7 +59,7 @@ export const MeasurementsLanguagePartialDefinition = {
         modals: {
             delete: {
                 title: 'Delete session',
-                message: 'Stai per eliminare la sessione <b>{{ measurement }}</b>.<br />Sei sicuro di voler procedere con l\'eliminazione?',
+                message: 'You are about to delete the session <b>{{ measurement }}</b>.<br />Are you sure?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
@@ -67,7 +67,7 @@ export const MeasurementsLanguagePartialDefinition = {
             },
             run: {
                 title: 'Current status is STOPPED',
-                message: 'Stai per cambiare lo stato alla sessione <b>{{ measurement }}</b> in <b> RUNNING</b>.<br />Sei sicuro di voler procedere?',
+                message: 'You are about to change the status of the session <b>{{ measurement }}</b> in <b> RUNNING</b>.<br />Are you sure?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
@@ -75,7 +75,7 @@ export const MeasurementsLanguagePartialDefinition = {
             },
             stop: {
                 title: 'Current status is RUNNING',
-                message: 'Stai per cambiare lo stato alla sessione <b>{{ measurement }}</b> in <b> STOPPED</b>.<br />Sei sicuro di voler procedere?',
+                message: 'You are about to change the status of the session <b>{{ measurement }}</b> in <b> STOPPED</b>.<br />Are you sure?',
                 actions: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
@@ -85,7 +85,7 @@ export const MeasurementsLanguagePartialDefinition = {
         notifications: {
             delete: {
                 title: 'Session <b>{{measurement}}</b> removed',
-                message: 'Sessione eliminata correttamente'
+                message: 'Session deleted successfully'
             },
             run: {
                 title: 'Actually status is <b>Running</b>',
@@ -97,7 +97,7 @@ export const MeasurementsLanguagePartialDefinition = {
             },
             edit: {
                 title: 'Edit Measurement Sessions',
-                message: 'Sessione modificata correttamente'
+                message: 'Session created successfully'
             }
         },
     },
@@ -107,7 +107,7 @@ export const MeasurementsLanguagePartialDefinition = {
         },
         fields: {
             interval: {
-                label: 'Interval (in seconds)',
+                label: 'Interval [s]',
                 placeholder: 'insert an interval'
             },
             authenticationMode: {
@@ -147,16 +147,12 @@ export const MeasurementsLanguagePartialDefinition = {
                 placeholder: 'insert return sidlist'
             },
             duration: {
-                label: 'Session\'s Duration (in seconds)',
+                label: 'Session Duration [s] - \'0\' for Unlimited Duration',
                 placeholder: 'insert duration'
             },
             runOptions: {
                 label: 'Run After Creation',
                 placeholder: 'select an option'
-            },
-            overlaySession: {
-                label: 'Associated Overlay',
-                placeholder: 'select overlay'
             }
         },
         actions: {
@@ -165,7 +161,7 @@ export const MeasurementsLanguagePartialDefinition = {
         notifications: {
             create: {
                 title: 'Edit Measurement Sessions',
-                message: 'La sessione è stata creata con successo'
+                message: 'Session created successfully'
             }
         },
         modals: {
@@ -192,7 +188,7 @@ export const MeasurementsLanguagePartialDefinition = {
         fields: {
             sessionId: 'Session ID',
             status: 'Status',
-            interval: 'Interval (in seconds)',
+            interval: 'Interval [s]',
             authenticationMode: 'Authentication Mode',
             keyChain: 'Key Chain',
             timestampFormat: 'Timestamp Format',
@@ -206,8 +202,8 @@ export const MeasurementsLanguagePartialDefinition = {
             reflectorStampIp: 'STAMP IP',
             sidlist: 'Segment List',
             returnSidlist: 'Segment List',
-            delayDirectPath: 'Mean Delay (ms)',
-            delayReturnPath: 'Mean Delay (ms)',
+            delayDirectPath: 'Mean Delay [ms]',
+            delayReturnPath: 'Mean Delay [ms]',
             overlayId: 'Overlay ID',
             overlayName: 'Overlay Name'
         },
@@ -217,15 +213,15 @@ export const MeasurementsLanguagePartialDefinition = {
         notifications: {
             delete: {
                 title: 'Remove session',
-                message: 'Sessione eliminata correttamente'
+                message: 'Session deleted successfully'
             },
             enable: {
                 title: 'Enable session',
-                message: 'Session successful enbled'
+                message: 'Session enabled successfully'
             },
             disable: {
                 title: 'Disable session',
-                message: 'Session successful disabled'
+                message: 'Session disabled successfully'
             }
         }
     },
@@ -237,19 +233,19 @@ export const MeasurementsLanguagePartialDefinition = {
             returnSidlist: 'Segment List',
             delayDirectPath: {
                 delays: {
-                    id: "ID ritardo",
+                    id: "Delay ID",
                     timestamp: "Timestamp",
-                    value: "Valore di ritardo"
+                    value: "Delay Value"
                 },
-                averageDelay: "Media dei ritardi"
+                averageDelay: "Average Delay"
             },
             delayReturnPath: {
                 delays: {
-                    id: "ID ritardo",
+                    id: "Delay ID",
                     timestamp: "Timestamp",
-                    value: "Valore di ritardo"
+                    value: "Delay Value"
                 },
-                averageDelay: "Media dei ritardi"
+                averageDelay: "Average Delay"
             }
         }
     },
