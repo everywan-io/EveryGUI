@@ -281,7 +281,7 @@ export class ResultsComponent implements OnInit {
 
         var fileJsonDirect = function preparaStringa() {
             for (let i in arrayDirect) {
-                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayDirect[i].id + '",\n\t\t' + '"timestamp" : "' + arrayDirect[i].timestamp + '",\n\t\t' + '"value" : "' + arrayDirect[i].value + '"\n\t\t},\n\t\t';
+                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayDirect[i].id + '",\n\t\t' + '"timestamp" : "' + arrayDirect[i].timestamp.toFixed(4) + '",\n\t\t' + '"value" : "' + arrayDirect[i].value + '"\n\t\t},\n\t\t';
                 if (parseInt(i) == 0) {
                     var stringaFinale = stringaProvvisoria;
                 } else {
@@ -293,7 +293,7 @@ export class ResultsComponent implements OnInit {
 
         var fileJsonReturn = function preparaStringa() {
             for (let i in arrayReturn) {
-                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayReturn[i].id + '",\n\t\t' + '"timestamp" : "' + arrayReturn[i].timestamp + '",\n\t\t' + '"value" : "' + arrayReturn[i].value + '"\n\t\t},\n\t\t';
+                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayReturn[i].id + '",\n\t\t' + '"timestamp" : "' + arrayReturn[i].timestamp.toFixed(4) + '",\n\t\t' + '"value" : "' + arrayReturn[i].value + '"\n\t\t},\n\t\t';
                 if (parseInt(i) == 0) {
                     var stringaFinale = stringaProvvisoria;
                 } else {
