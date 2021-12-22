@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div id="measurement-results">
         <div class='paragraph-distance'>
-            <div class="title"> Gruppo DIRECT PATH </div>
+            <div class="title"> DIRECT PATH Group</div>
 
             <div class="container-results">
                 <label class="sinistra" for="sidlist">{{ 'measurements.results.fields.sidlist' | translate
@@ -13,11 +13,11 @@
             </div>
 
             <div class="container-results">
-                <label class="sinistra"> Valore Massimo:</label>
+                <label class="sinistra"> Maximum Value:</label>
                 <div class="destra" class="text" id="directDelayMaxValue"></div>
             </div>
             <div class="container-results">
-                <label class="sinistra"> Valore Minimo:</label>
+                <label class="sinistra"> Minimum Value:</label>
                 <div class="destra" class="text" id="directDelayMinValue"></div>
             </div>
 
@@ -26,7 +26,7 @@
                     'measurements.results.fields.delayDirectPath.averageDelay' |
                     translate }}:</label>
                 <span class="destra" class="text">{{ (measurement.results.delayDirectPath.averageDelay !== null) ?
-                    measurement.results.delayDirectPath.averageDelay :
+                    (measurement.results.delayDirectPath.averageDelay).toFixed(4) :
                     "--"}}</span>
             </div>
 
@@ -50,11 +50,11 @@
                         "--"}}</td>
                     <td class="text">{{
                         (delay.timestamp !== null) ?
-                        delay.timestamp :
+                        trasformaSecondiTimestamp(delay.timestamp) :
                         "--"}}</td>
                     <td class="text">{{
                         (delay.value !== null) ?
-                        delay.value :
+                        (delay.value).toFixed(4) :
                         "--"}}</td>
                 </tr>
             </table>
@@ -66,7 +66,7 @@
         </div>
 
         <div class='paragraph-distance'>
-            <div class="title"> Gruppo RETURN PATH </div>
+            <div class="title"> RETURN PATH Group </div>
 
             <div class="container-results">
                 <label class="sinistra" for="returnSidlist">{{ 'measurements.results.fields.returnSidlist' | translate
@@ -76,11 +76,11 @@
             </div>
 
             <div class="container-results">
-                <label class="sinistra"> Valore Massimo:</label>
+                <label class="sinistra"> Maximum Value:</label>
                 <div class="destra" class="text" id="returnDelayMaxValue"></div>
             </div>
             <div class="container-results">
-                <label class="sinistra"> Valore Minimo:</label>
+                <label class="sinistra"> Minimum Value:</label>
                 <div class="destra" class="text" id="returnDelayMinValue"></div>
             </div>
 
@@ -89,7 +89,7 @@
                     'measurements.results.fields.delayReturnPath.averageDelay' |
                     translate }}:</label>
                 <span class="destra" class="text">{{ (measurement.results.delayReturnPath.averageDelay !== null) ?
-                    measurement.results.delayReturnPath.averageDelay :
+                    (measurement.results.delayReturnPath.averageDelay).toFixed(4) :
                     "--"}}</span>
             </div>
 
@@ -113,11 +113,11 @@
                         "--"}}</td>
                     <td class="text">{{
                         (delay.timestamp !== null) ?
-                        delay.timestamp :
+                        trasformaSecondiTimestamp(delay.timestamp) :
                         "--"}}</td>
                     <td class="text">{{
                         (delay.value !== null) ?
-                        delay.value :
+                        (delay.value).toFixed(4) :
                         "--"}}</td>
                 </tr>
             </table>

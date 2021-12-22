@@ -20,7 +20,6 @@ import { FiltersComponent } from '@modules/measurements_interfaces/components/li
 import { FormsModule } from '@angular/forms';
 import { DeviceMeasurementAvailableResolver } from './resolvers/devices.resolver';
 import { DevicesService } from '../devices/devices.service';
-import { OverlayMeasurementAvailableResolver } from './resolvers/overlays.resolver';
 import { OverlayNetsService } from '../overlaynets/overlaynets.service';
 
 @NgModule({
@@ -37,7 +36,6 @@ import { OverlayNetsService } from '../overlaynets/overlaynets.service';
         MeasurementResolver,
         ResultsResolver,
         DeviceMeasurementAvailableResolver,
-        OverlayMeasurementAvailableResolver,
         MeasurementsService,
         DevicesService,
         OverlayNetsService

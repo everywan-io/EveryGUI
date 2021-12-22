@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
 import { ButtonStates } from '@modules/shared/components/button/button.component';
-import { OverlayNet, OverlayNetType } from '@models/overlaynets.model';
 import { Device } from '@models/devices.model';
 import { TitleService } from '@services/title.service';
 import { OverlayNetsService } from '@modules/overlaynets/overlaynets.service';
@@ -36,7 +35,6 @@ import { format } from 'url';
 })
 export class EditComponent implements OnInit {
 
-    overlaynets: OverlayNet[];
     device: Device[];
     form: FormGroup;
     mode: 'configure' | 'create';
@@ -68,8 +66,6 @@ export class EditComponent implements OnInit {
         { title: 'YES', value: 'YES' },
         { title: 'NO', value: 'NO' }];
 
-    overlayTypes = [];
-
     constructor(private title: TitleService,
         private breadcrumb: BreadcrumbService,
         private route: ActivatedRoute,
@@ -97,7 +93,6 @@ export class EditComponent implements OnInit {
         this.form = this.defineForm(this.mode === 'configure');
 
         this.defineDevice();
-        this.defineOverlay();
 
         this.button.state = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED;
         this.button.title = `measurements.edit.actions.${this.mode}`;
@@ -125,15 +120,6 @@ export class EditComponent implements OnInit {
 
     }
 
-    private defineOverlay() {
-        const overlaynets: OverlayNet = this.route.snapshot.data['overlaynets'];
-        var array = overlaynets;
-        for (let i in array) {
-            var stringa = array[i].name + '/' + array[i].id;
-            this.overlayTypes.push({ title: array[i].name + '/' + array[i].id, value: stringa });
-        }
-    }
-
     private defineDevice() {
         const device: Device = this.route.snapshot.data['device'];
         var array = device;
@@ -148,11 +134,11 @@ export class EditComponent implements OnInit {
 
         const initialValues = {
             interval: configure ? measurement.interval : null,
-            authenticationMode: configure ? measurement.authenticationMode : null,
+            authenticationMode: configure ? measurement.authenticationMode : this.authenticationModeTypes[0].value,
             keyChain: configure ? measurement.keyChain : null,
-            timestampFormat: configure ? measurement.timestampFormat : null,
+            timestampFormat: configure ? measurement.timestampFormat : this.timestampFormatTypes[0].value,
             delayMeasurementMode: configure ? measurement.delayMeasurementMode : null,
-            sessionReflectorMode: configure ? measurement.sessionReflectorMode : null,
+            sessionReflectorMode: configure ? measurement.sessionReflectorMode : this.sessionReflectorModeTypes[0].value,
             sessionSender: configure ? measurement.senderName : null,
             sessionSenderDeviceId: configure ? measurement.senderDeviceId : null,
             sessionReflector: configure ? measurement.reflectorName : null,
@@ -161,9 +147,7 @@ export class EditComponent implements OnInit {
             returnSidlist: configure ? measurement.returnSidlist : null,
             duration: configure ? measurement.duration : null,
             measurementStatus: configure ? measurement.status : null,
-            runOptions: null,
-            overlaySession: configure ? measurement.overlayId : null,
-            overlayName: configure ? measurement.overlayName : null
+            runOptions: this.checkTypes[1].value
         };
 
 
@@ -180,7 +164,6 @@ export class EditComponent implements OnInit {
             'sidlist': new FormControl({ value: initialValues.sidlist, disabled: configure }, [Validators.required]),
             'returnSidlist': new FormControl({ value: initialValues.returnSidlist, disabled: configure }, [Validators.required]),
             'duration': new FormControl({ value: initialValues.duration, disabled: configure }),
-            'overlaySession': new FormControl({ value: initialValues.overlaySession, disabled: configure }),
             'measurementStatus': new FormControl({ value: 'Stopped', disabled: configure }),
             'runOptions': new FormControl({ value: initialValues.runOptions, disabled: configure })
         });
@@ -233,8 +216,6 @@ export class EditComponent implements OnInit {
                         sessionSenderDeviceId: (this.form.get('sessionSender').value).split('/')[1],
                         sessionReflector: (this.form.get('sessionReflector').value).split('/')[0],
                         sessionReflectorDeviceId: (this.form.get('sessionReflector').value).split('/')[1],
-                        overlaySession: (this.form.get('overlaySession').value).split('/')[1],
-                        overlayName: (this.form.get('overlaySession').value).split('/')[0],
                         sidlist: this.form.get('sidlist').value,
                         returnSidlist: this.form.get('returnSidlist').value,
                         duration: this.form.get('duration').value,

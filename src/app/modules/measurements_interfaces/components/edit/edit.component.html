@@ -180,22 +180,6 @@
                                     serializeErrors:'errors.validations' }}</small>
                             </div>
 
-                            <div class="col-12 col-md-6 d-flex flex-column">
-                                <label for="overlaySession">{{ 'measurements.edit.fields.overlaySession.label' |
-                                    translate
-                                    }}</label>
-                                <select id="overlaySession" class="w-100 form-control" formControlName="overlaySession">
-                                    <option value="" selected>{{
-                                        'measurements.edit.fields.overlaySession.placeholder' | translate
-                                        }}</option>
-                                    <option *ngFor="let category of overlayTypes" [value]="category.value">{{
-                                        category.title }}</option>
-                                </select>
-                                <small class="error" invalidControlCheck="overlaySession">{{
-                                    form.get('overlaySession').errors |
-                                    serializeErrors:'errors.validations' }}</small>
-                            </div>
-
                             <!--<div class="col-12 col-md-6 d-flex flex-column">
                                 <label for="description">{{ 'overlaynets.edit.fields.description.label' | translate
                                     }}</label>

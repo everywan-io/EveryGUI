@@ -232,19 +232,7 @@ export class ListComponent implements OnInit, OnDestroy {
     }
 }
 
-/*function ottieniMisure(instances) {
-    var array = instances;
-    setTimeout(function () {
-        var run_stop = document.getElementsByClassName("run_stop_session");
-        for (let i in array) {
-            if (array[i].status == 'Running') {
-                run_stop[parseInt(i)].innerHTML = 'Stop';
-            } else {
-                run_stop[parseInt(i)].innerHTML = 'Run';
-            }
-        }
-    }, 1000);
-}*/
+
 
 
 
