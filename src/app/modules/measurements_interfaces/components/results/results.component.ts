@@ -325,54 +325,9 @@ export class ResultsComponent implements OnInit {
     }
 
     trasformaSecondiTimestamp(timestampSecond) {
-        var seconds = Math.floor(timestampSecond);
-        var minutes = Math.floor(seconds / 60);
-        var hours = Math.floor(minutes / 60);
-        var days = Math.floor(hours / 24);
-        var month = Math.floor(days / 30);
-        var years = Math.floor(month / 12);
-
-        if (Math.trunc(seconds) > 60) {
-            while (seconds > 60) {
-                seconds = seconds / 60;
-                minutes++;
-            }
-        }
-
-        if (Math.trunc(minutes) > 60) {
-            while (minutes > 60) {
-                minutes = minutes / 60;
-                hours++;
-            }
-        }
-
-        if (Math.trunc(hours) > 24) {
-            while (hours > 24) {
-                hours = hours / 24;
-                days++;
-            }
-        }
-
-        if (Math.trunc(days) > 30) {
-            while (days > 30) {
-                days = days / 30;
-                month++;
-            }
-        }
-
-        if (Math.trunc(month) > 12) {
-            while (month > 12) {
-                month = month / 12;
-                years++;
-            }
-        }
-
-        return Math.trunc(years) + "Y:" + Math.trunc(month) + "M:" + Math.trunc(days) + "D:" + Math.trunc(hours) + "h:" + Math.trunc(minutes) + "m:" + Math.trunc(seconds) + "s";
-
+        var data = (new Date(timestampSecond * 1000)).toLocaleString();
+        return data;
     }
-
-
-
 
     onSubmit() {
 
