@@ -26,7 +26,7 @@
                     'measurements.results.fields.delayDirectPath.averageDelay' |
                     translate }}:</label>
                 <span class="destra" class="text">{{ (measurement.results.delayDirectPath.averageDelay !== null) ?
-                    measurement.results.delayDirectPath.averageDelay :
+                    (measurement.results.delayDirectPath.averageDelay).toFixed(4) :
                     "--"}}</span>
             </div>
 
@@ -50,11 +50,11 @@
                         "--"}}</td>
                     <td class="text">{{
                         (delay.timestamp !== null) ?
-                        (delay.timestamp).toFixed(4) :
+                        trasformaSecondiTimestamp(delay.timestamp) :
                         "--"}}</td>
                     <td class="text">{{
                         (delay.value !== null) ?
-                        delay.value :
+                        (delay.value).toFixed(4) :
                         "--"}}</td>
                 </tr>
             </table>
@@ -89,7 +89,7 @@
                     'measurements.results.fields.delayReturnPath.averageDelay' |
                     translate }}:</label>
                 <span class="destra" class="text">{{ (measurement.results.delayReturnPath.averageDelay !== null) ?
-                    measurement.results.delayReturnPath.averageDelay :
+                    (measurement.results.delayReturnPath.averageDelay).toFixed(4) :
                     "--"}}</span>
             </div>
 
@@ -113,11 +113,11 @@
                         "--"}}</td>
                     <td class="text">{{
                         (delay.timestamp !== null) ?
-                        (delay.timestamp).toFixed(4) :
+                        trasformaSecondiTimestamp(delay.timestamp) :
                         "--"}}</td>
                     <td class="text">{{
                         (delay.value !== null) ?
-                        delay.value :
+                        (delay.value).toFixed(4) :
                         "--"}}</td>
                 </tr>
             </table>

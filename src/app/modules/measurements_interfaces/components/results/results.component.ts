@@ -78,8 +78,8 @@ export class ResultsComponent implements OnInit {
                     }
                 }
             }
-            delayMax.innerHTML = max;
-            delayMin.innerHTML = min;
+            delayMax.innerHTML = max.toFixed(4);
+            delayMin.innerHTML = min.toFixed(4);
         }
 
         function calcolaMassimoMinimoReturn() {
@@ -98,8 +98,8 @@ export class ResultsComponent implements OnInit {
                     }
                 }
             }
-            delayMax.innerHTML = max;
-            delayMin.innerHTML = min;
+            delayMax.innerHTML = max.toFixed(4);
+            delayMin.innerHTML = min.toFixed(4);
         }
 
         calcolaMassimoMinimoDirect();
@@ -281,7 +281,7 @@ export class ResultsComponent implements OnInit {
 
         var fileJsonDirect = function preparaStringa() {
             for (let i in arrayDirect) {
-                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayDirect[i].id + '",\n\t\t' + '"timestamp" : "' + arrayDirect[i].timestamp.toFixed(4) + '",\n\t\t' + '"value" : "' + arrayDirect[i].value + '"\n\t\t},\n\t\t';
+                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayDirect[i].id + '",\n\t\t' + '"timestamp" : "' + arrayDirect[i].timestamp.toFixed(4) + '",\n\t\t' + '"value" : "' + arrayDirect[i].value.toFixed(4) + '"\n\t\t},\n\t\t';
                 if (parseInt(i) == 0) {
                     var stringaFinale = stringaProvvisoria;
                 } else {
@@ -293,7 +293,7 @@ export class ResultsComponent implements OnInit {
 
         var fileJsonReturn = function preparaStringa() {
             for (let i in arrayReturn) {
-                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayReturn[i].id + '",\n\t\t' + '"timestamp" : "' + arrayReturn[i].timestamp.toFixed(4) + '",\n\t\t' + '"value" : "' + arrayReturn[i].value + '"\n\t\t},\n\t\t';
+                var stringaProvvisoria = '{\n\t\t"id" : "' + arrayReturn[i].id + '",\n\t\t' + '"timestamp" : "' + arrayReturn[i].timestamp.toFixed(4) + '",\n\t\t' + '"value" : "' + arrayReturn[i].value.toFixed(4) + '"\n\t\t},\n\t\t';
                 if (parseInt(i) == 0) {
                     var stringaFinale = stringaProvvisoria;
                 } else {
@@ -304,7 +304,7 @@ export class ResultsComponent implements OnInit {
         }
 
         function downloadDocument() {
-            const data = '[{\n"sessionId" : "' + session + '",\n"delayDirectPath" : {\n\t"delays" : [\n\t\t' + fileJsonDirect() + '\n\t],\n\t"averageDelay" : "' + mediaDirect + '",\n\t"maxValue" : "' + document.getElementById("directDelayMaxValue").innerHTML + '",\n\t"minValue" : "' + document.getElementById("directDelayMinValue").innerHTML + '",\n\t"sidlist" : [\n\t\t' + fileSidlist() + ']\n\t},\n"delayReturnPath" : {\n\t"delays" : [\n\t\t' + fileJsonReturn() + '\n\t],\n\t"averageDelay" : "' + mediaReturn + '",\n\t"maxValue" : "' + document.getElementById("returnDelayMaxValue").innerHTML + '",\n\t"minValue" : "' + document.getElementById("returnDelayMinValue").innerHTML + '",\n\t"sidlist" : [\n\t\t' + fileReturnSidlist() + ']\n\t}\n}]';
+            const data = '[{\n"sessionId" : "' + session + '",\n"delayDirectPath" : {\n\t"delays" : [\n\t\t' + fileJsonDirect() + '\n\t],\n\t"averageDelay" : "' + mediaDirect.toFixed(4) + '",\n\t"maxValue" : "' + document.getElementById("directDelayMaxValue").innerHTML + '",\n\t"minValue" : "' + document.getElementById("directDelayMinValue").innerHTML + '",\n\t"sidlist" : [\n\t\t' + fileSidlist() + ']\n\t},\n"delayReturnPath" : {\n\t"delays" : [\n\t\t' + fileJsonReturn() + '\n\t],\n\t"averageDelay" : "' + mediaReturn.toFixed(4) + '",\n\t"maxValue" : "' + document.getElementById("returnDelayMaxValue").innerHTML + '",\n\t"minValue" : "' + document.getElementById("returnDelayMinValue").innerHTML + '",\n\t"sidlist" : [\n\t\t' + fileReturnSidlist() + ']\n\t}\n}]';
             const blob = new Blob([data], { type: "json" });
 
             const href = URL.createObjectURL(blob);
@@ -323,6 +323,56 @@ export class ResultsComponent implements OnInit {
         setTimeout(scarica, 1000);
 
     }
+
+    trasformaSecondiTimestamp(timestampSecond) {
+        var seconds = Math.floor(timestampSecond);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        var month = Math.floor(days / 30);
+        var years = Math.floor(month / 12);
+
+        if (Math.trunc(seconds) > 60) {
+            while (seconds > 60) {
+                seconds = seconds / 60;
+                minutes++;
+            }
+        }
+
+        if (Math.trunc(minutes) > 60) {
+            while (minutes > 60) {
+                minutes = minutes / 60;
+                hours++;
+            }
+        }
+
+        if (Math.trunc(hours) > 24) {
+            while (hours > 24) {
+                hours = hours / 24;
+                days++;
+            }
+        }
+
+        if (Math.trunc(days) > 30) {
+            while (days > 30) {
+                days = days / 30;
+                month++;
+            }
+        }
+
+        if (Math.trunc(month) > 12) {
+            while (month > 12) {
+                month = month / 12;
+                years++;
+            }
+        }
+
+        return Math.trunc(years) + "Y:" + Math.trunc(month) + "M:" + Math.trunc(days) + "D:" + Math.trunc(hours) + "h:" + Math.trunc(minutes) + "m:" + Math.trunc(seconds) + "s";
+
+    }
+
+
+
 
     onSubmit() {
 

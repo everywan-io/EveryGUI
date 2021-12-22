@@ -234,16 +234,16 @@ export const MeasurementsLanguagePartialDefinition = {
             delayDirectPath: {
                 delays: {
                     id: "Delay ID",
-                    timestamp: "Timestamp",
-                    value: "Delay Value"
+                    timestamp: "Timestamp [s]",
+                    value: "Delay Value [ms]"
                 },
                 averageDelay: "Average Delay"
             },
             delayReturnPath: {
                 delays: {
                     id: "Delay ID",
-                    timestamp: "Timestamp",
-                    value: "Delay Value"
+                    timestamp: "Timestamp [s]",
+                    value: "Delay Value [ms]"
                 },
                 averageDelay: "Average Delay"
             }
