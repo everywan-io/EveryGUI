@@ -7,6 +7,7 @@ import { ListComponent } from '@modules/measurements_interfaces/components/list/
 import { ResultsComponent } from '@modules/measurements_interfaces/components/results/results.component';
 import { DeviceMeasurementAvailableResolver } from './resolvers/devices.resolver';
 import { resolve } from 'url';
+import { MeasurementAvailableResolver } from './resolvers/measurement.resolver';
 
 export const MeasurementsRoutes: Routes = [{
     path: '',
@@ -19,7 +20,8 @@ export const MeasurementsRoutes: Routes = [{
         mode: 'create'
     },
     resolve: {
-        device: DeviceMeasurementAvailableResolver
+        device: DeviceMeasurementAvailableResolver,
+        measurement: MeasurementAvailableResolver
     }
 }, {
     path: ':sessionId',

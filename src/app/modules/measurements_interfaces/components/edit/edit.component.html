@@ -134,15 +134,51 @@
                             </div>
 
                             <div class="col-12 col-md-6 d-flex flex-column">
+                                <label for="sidlist">{{
+                                    'measurements.edit.fields.sidlist.label' |
+                                    translate
+                                    }}</label>
+                                <select id="sidlist" class="w-100 form-control" formControlName="sidlist">
+                                    <option value="" selected>{{
+                                        'measurements.edit.fields.sidlist.placeholder' | translate
+                                        }}</option>
+                                    <option *ngFor="let category of sidlistTypes" [value]="category.value">
+                                        {{
+                                        category.title }}</option>
+                                </select>
+                                <small class="error" invalidControlCheck="sidlist">{{
+                                    form.get('sidlist').errors |
+                                    serializeErrors:'errors.validations' }}</small>
+                            </div>
+
+                            <!--<div class="col-12 col-md-6 d-flex flex-column">
                                 <label for="sidlist">{{ 'measurements.edit.fields.sidlist.label' | translate
                                     }}</label>
                                 <input type="text" autocomplete="off" id="sidlist" formControlName="sidlist"
                                     [placeholder]="'measurements.edit.fields.sidlist.placeholder' | translate">
                                 <small class="error" invalidControlCheck="sidlist">{{ form.get('sidlist').errors
                                     | serializeErrors:'errors.validations' }}</small>
-                            </div>
+                            </div>-->
 
                             <div class="col-12 col-md-6 d-flex flex-column">
+                                <label for="returnSidlist">{{
+                                    'measurements.edit.fields.returnSidlist.label' |
+                                    translate
+                                    }}</label>
+                                <select id="returnSidlist" class="w-100 form-control" formControlName="returnSidlist">
+                                    <option value="" selected>{{
+                                        'measurements.edit.fields.returnSidlist.placeholder' | translate
+                                        }}</option>
+                                    <option *ngFor="let category of returnsidlistTypes" [value]="category.value">
+                                        {{
+                                        category.title }}</option>
+                                </select>
+                                <small class="error" invalidControlCheck="returnSidlist">{{
+                                    form.get('returnSidlist').errors |
+                                    serializeErrors:'errors.validations' }}</small>
+                            </div>
+
+                            <!--<div class="col-12 col-md-6 d-flex flex-column">
                                 <label for="returnSidlist">{{ 'measurements.edit.fields.returnSidlist.label' | translate
                                     }}</label>
                                 <input type="text" autocomplete="off" id="returnSidlist" formControlName="returnSidlist"
@@ -150,7 +186,7 @@
                                 <small class="error" invalidControlCheck="returnSidlist">{{
                                     form.get('returnSidlist').errors
                                     | serializeErrors:'errors.validations' }}</small>
-                            </div>
+                            </div>-->
 
                             <div class="col-12 col-md-6 d-flex flex-column">
                                 <label for="duration">{{ 'measurements.edit.fields.duration.label' | translate

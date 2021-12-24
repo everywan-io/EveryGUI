@@ -62,6 +62,10 @@ export class EditComponent implements OnInit {
 
     sessionTypes = [];
 
+    sidlistTypes = [];
+
+    returnsidlistTypes = [];
+
     checkTypes = [
         { title: 'YES', value: 'YES' },
         { title: 'NO', value: 'NO' }];
@@ -93,6 +97,7 @@ export class EditComponent implements OnInit {
         this.form = this.defineForm(this.mode === 'configure');
 
         this.defineDevice();
+        this.defineMeasurement();
 
         this.button.state = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED;
         this.button.title = `measurements.edit.actions.${this.mode}`;
@@ -126,6 +131,15 @@ export class EditComponent implements OnInit {
         for (let i in array) {
             var stringa = array[i].name + '/' + array[i].id;
             this.sessionTypes.push({ title: array[i].name + '/' + array[i].id, value: stringa });
+        }
+    }
+
+    private defineMeasurement() {
+        const measurement: Measurement = this.route.snapshot.data['measurement'];
+        var array = measurement;
+        for (let i in array) {
+            this.sidlistTypes.push({ title: (array[i].sidlist).toString(), value: (array[i].sidlist).toString() });
+            this.returnsidlistTypes.push({ title: (array[i].returnSidlist).toString(), value: (array[i].returnSidlist).toString() });
         }
     }
 

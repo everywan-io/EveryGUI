@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { DeviceMeasurementAvailableResolver } from './resolvers/devices.resolver';
 import { DevicesService } from '../devices/devices.service';
 import { OverlayNetsService } from '../overlaynets/overlaynets.service';
+import { MeasurementAvailableResolver } from './resolvers/measurement.resolver';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { OverlayNetsService } from '../overlaynets/overlaynets.service';
         MeasurementResolver,
         ResultsResolver,
         DeviceMeasurementAvailableResolver,
+        MeasurementAvailableResolver,
         MeasurementsService,
         DevicesService,
         OverlayNetsService
