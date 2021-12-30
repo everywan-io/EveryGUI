@@ -64,6 +64,10 @@ export class EditComponent implements OnInit {
 
     sessionTypes = [];
 
+    sidlistTypes = [];
+
+    returnsidlistTypes = [];
+
     checkTypes = [
         { title: 'YES', value: 'YES' },
         { title: 'NO', value: 'NO' }];
