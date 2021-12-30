@@ -14,7 +14,11 @@
         </div> -->
         <div>
             <label for="{{ 'ipv4_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.ipv4_addrs.label' | translate }}: </label> 
-            <span id="{{ 'ipv4_' + interface.name }}" class="text">{{ (interface.ipv4Addrs !== null) ? interface.ipv4Addrs  : "--"}}</span>
+            <span id="{{ 'ipv4_' + interface.name }}" class="text">{{ (interface.ipv4Addrs !== null  && interface.ipv4Addrs.length > 0) ? interface.ipv4Addrs  : "--"}}</span>
+        </div>
+        <div>
+            <label for="{{ 'ipv6_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.ipv6_addrs.label' | translate }}: </label> 
+            <span id="{{ 'ipv6_' + interface.name }}" class="text">{{ (interface.ipv6Addrs !== null && interface.ipv6Addrs.length > 0) ? interface.ipv6Addrs  : "--"}}</span>
         </div>
         
     </div>
