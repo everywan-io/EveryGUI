@@ -103,6 +103,14 @@ export interface MeasurementDescriptorInterface {
     duration: number;
 }
 
+export interface SIDListDescriptorInterface {
+    direct_sid_list: [];
+    overlay_name: string;
+    overlayid: string;
+    return_sid_list: [];
+    tenantid: string;
+}
+
 export enum InterfaceType {
     LAN = 'lan',
     WAN = 'wan',

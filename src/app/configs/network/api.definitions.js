@@ -755,6 +755,50 @@ module.exports = {
         }]
       }
     },
+    "/measurement_sessions/sidlists": {
+      "get": {
+        "tags": ["Measurements"],
+        "summary": "Get SID Lists",
+        "operationId": "Measurements.getSidLists",
+        "parameters": [{
+          "name": "senderId",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "reflectorId",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returns the available SID Lists between two devices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SIDLists"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      }
+    },
 
     "/overlay_nets/": {
       "get": {
@@ -1190,6 +1234,35 @@ module.exports = {
           },
           "operators": {
             "type": "object"
+          }
+        }
+      },
+      "SIDLists": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "tenantid": {
+              "type": "string"
+            },
+            "overlayid": {
+              "type": "string"
+            },
+            "overlay_name": {
+              "type": "string"
+            },
+            "direct_sid_list": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "return_sid_list": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1993,6 +2066,28 @@ module.exports = {
                   "items": {
                     "$ref": "#/components/schemas/ConfigurationInterface"
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "SIDListsRequestBody": {
+        "description": "GetSidLists request body.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["tenantid"],
+              "type": "object",
+              "properties": {
+                "ingressDeviceID": {
+                  "type": "string"
+                },
+                "egressDeviceID": {
+                  "type": "string"
+                },
+                "tenantid": {
+                  "type": "string"
                 }
               }
             }

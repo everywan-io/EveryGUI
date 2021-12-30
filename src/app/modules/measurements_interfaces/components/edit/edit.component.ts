@@ -21,12 +21,14 @@ import { Interface } from '@everywan/models/interfaces.model';
 import { BreadcrumbService } from '@everywan/services/breadcrumb.service';
 import { MeasurementsService } from '../../measurements_interfaces.service';
 import { Measurement } from '@everywan/models/measurement.model';
+import { SIDList } from '@everywan/models/measurement.model';
 import { PaginatorService } from '@everywan/modules/shared/services/paginator.service';
 import { DevicesService } from '@everywan/modules/devices/devices.service';
 import { format } from 'url';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
-    selector: 'app-overlaynets-edit',
+    selector: 'app-measurementsessions-edit',
     templateUrl: './edit.component.html',
     styleUrls: ['./edit.component.scss'],
     providers: [
@@ -75,7 +77,8 @@ export class EditComponent implements OnInit {
         private translator: TranslateService,
         private router: Router,
         private notifications: NotificationsService,
-        private progress: NgProgress) {
+        private progress: NgProgress,
+        private http : HttpClient) {
 
         this.button = {
             state: ButtonStates.DISABLED,
@@ -246,5 +249,81 @@ export class EditComponent implements OnInit {
                     break;
             }
         });
+    }
+
+    onSessionSenderChange(senderDeviceId) {
+        const measurement: Measurement = this.route.snapshot.data['measurement'];
+
+        // Fetch SID lists
+        console.log('senderDeviceId', senderDeviceId);
+        this.sidlistTypes = [];
+        this.returnsidlistTypes = [];
+        if (this.form.get('sessionReflector').value != null) {
+            this.measurementService.getSidLists((this.form.get('sessionSender').value).split('/')[1], (this.form.get('sessionReflector').value).split('/')[1])
+                .subscribe((overlays : SIDList[]) => {
+                    console.log('overlays', overlays);
+                    
+                    for (const overlay of overlays) {
+                        //this.sidlistTypes.push({ title: (array[i].sidlist).toString(), value: (array[i].sidlist).toString() });
+                        //this.returnsidlistTypes.push({ title: (array[i].returnSidlist).toString(), value: (array[i].returnSidlist).toString() });
+                        console.log( overlay['direct_sid_list']);
+                        this.sidlistTypes.push({ title: (overlay['direct_sid_list']).toString(), value: (overlay['direct_sid_list']).toString() });
+                        this.returnsidlistTypes.push({ title: (overlay['return_sid_list']).toString(), value: (overlay['return_sid_list']).toString() });
+                        
+                        //this.sidlistTypes.push(overlay['direct_sid_list'];
+                        //this.returnsidlistTypes = overlay['return_sid_list'];
+                        console.log('sidist', this.sidlistTypes);
+                        console.log('ret sidlist', this.returnsidlistTypes);
+                    }
+                }, (error: any) => {
+                    this.progress.ref().complete();
+                    this.notifications.error(
+                        this.translator.instant(`measurements.edit.notifications.${this.route.snapshot.data['mode']}.title`),
+                        error.error.error
+                    );
+                });
+            //console.log(s);
+            //this.http.get('/measurement_sessions/sidlists').subscribe();
+        }
+    }
+
+    onSessionReflectorChange(reflectorDeviceId) {
+        // Fetch SID lists
+        const measurement: Measurement = this.route.snapshot.data['measurement'];
+
+        // Fetch SID lists
+        console.log('reflector', reflectorDeviceId);
+        console.log('sender', (this.form.get('sessionSender').value).split('/')[1]);
+        this.sidlistTypes = [];
+        this.returnsidlistTypes = [];
+        if (this.form.get('sessionSender').value != null) {
+            this.measurementService.getSidLists((this.form.get('sessionSender').value).split('/')[1], (this.form.get('sessionReflector').value).split('/')[1])
+                .subscribe((overlays : SIDList[]) => {
+                    console.log('overlays', overlays);
+                    
+                    for (const overlay of overlays) {
+                        //this.sidlistTypes.push({ title: (array[i].sidlist).toString(), value: (array[i].sidlist).toString() });
+                        //this.returnsidlistTypes.push({ title: (array[i].returnSidlist).toString(), value: (array[i].returnSidlist).toString() });
+                        console.log('overlay', overlay);
+                        console.log( overlay['direct_sid_list']);
+                        console.log('name', overlay['overlay_name']);
+                        this.sidlistTypes.push({ title: (overlay['direct_sid_list']).toString(), value: (overlay['direct_sid_list']).toString() });
+                        this.returnsidlistTypes.push({ title: (overlay['return_sid_list']).toString(), value: (overlay['return_sid_list']).toString() });
+                        //this.sidlistTypes = overlay['direct_sid_list'];
+                        //this.returnsidlistTypes = overlay['return_sid_list'];
+                        console.log('sidist', this.sidlistTypes);
+                        console.log('ret sidlist', this.returnsidlistTypes);
+                    }
+                }, (error: any) => {
+                    this.progress.ref().complete();
+                    this.notifications.error(
+                        this.translator.instant(`measurements.edit.notifications.${this.route.snapshot.data['mode']}.title`),
+                        error.error.error
+                    );
+                });
+
+            //console.log(s);
+            //this.http.get('/measurement_sessions/sidlists').subscribe();
+        }
     }
 }

@@ -44,3 +44,16 @@ export class Measurement {
 
     }
 }
+
+export class SIDList {
+    direct_sid_list: [];
+    overlay_name: string;
+    overlayid: string;
+    return_sid_list: [];
+    tenantid: string;
+
+
+    defineExtraProperties() {
+
+    }
+}

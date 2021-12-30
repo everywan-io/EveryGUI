@@ -4,9 +4,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Measurement } from '@models/measurement.model';
+import { SIDList } from '@models/measurement.model';
 import { ApiService } from '@modules/network/api.service';
 import { MeasurementsFactory } from '@models/factories/measurement.factory';
 import { MeasurementDescriptorInterface } from '@configs/network/api.descriptors';
+import { SIDListsFactory } from '@models/factories/sidlist.factory';
+import { SIDListDescriptorInterface } from '@configs/network/api.descriptors';
 
 
 @Injectable()
@@ -65,6 +68,14 @@ export class MeasurementsService {
 
     deleteMeasurement(sessionId: string) {
         return this.API.Measurement.deleteMeasurement({ sessionId: sessionId });
+    }
+
+    getSidLists(senderId: string, reflectorId: string): Observable<SIDList[]> {
+        return this.API.Measurement
+            .getSidLists({senderId: senderId, reflectorId: reflectorId})
+            .pipe(
+                map((measurement: SIDListDescriptorInterface[]) => SIDListsFactory.create(measurement) as SIDList[])
+            );
     }
 
 }

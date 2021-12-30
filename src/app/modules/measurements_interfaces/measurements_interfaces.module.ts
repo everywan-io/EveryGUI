@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { DeviceMeasurementAvailableResolver } from './resolvers/devices.resolver';
 import { DevicesService } from '../devices/devices.service';
 import { OverlayNetsService } from '../overlaynets/overlaynets.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { OverlayNetsService } from '../overlaynets/overlaynets.service';
         TranslateModule,
         RouterModule.forChild(MeasurementsRoutes),
         AngularSvgIconModule,
-        FormsModule
+        FormsModule,
+        NgSelectModule
     ],
     providers: [
         MeasurementResolver,
