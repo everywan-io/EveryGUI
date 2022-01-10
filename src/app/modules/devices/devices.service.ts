@@ -64,4 +64,12 @@ export class DevicesService {
                 map((interfaces: InterfaceDescriptorInterface[]) => InterfacesFactory.create(interfaces) as Interface[])
             );
     }
+
+    delete(identifier: string): Observable<Device> {
+        return this.API.Devices
+            .delete({ id: identifier })
+            .pipe(
+                map((device: DeviceDescriptorInterface) => DevicesFactory.create(device) as Device)
+            );
+    }
 }

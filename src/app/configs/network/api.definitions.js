@@ -544,6 +544,42 @@ module.exports = {
         }]
       }
     },
+    "/devices/{id}/delete": {
+      "post": {
+        "tags": ["Devices"],
+        "summary": "Delete devices",
+        "operationId": "Devices.delete",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Resource id identifier",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/DeviceConfigureRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "The request is successfull",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_204"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      }
+    },
     "/measurement_sessions/": {
       "get": {
         "tags": ["Measurements"],

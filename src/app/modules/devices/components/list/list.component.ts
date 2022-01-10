@@ -188,4 +188,52 @@ export class ListComponent implements OnInit, OnDestroy {
         });
     }
 
+    onDeleteDevice(id: string) {
+        let deleteIsInProgress = false;
+        const device = this.instances.find((instance: Device) => instance.id === id);
+        const modalConfirmReference = this.modal.open(ModalConfirmComponent, { centered: true });
+
+        modalConfirmReference.componentInstance.title = this.translator.instant('devices.list.modals.delete.title');
+        modalConfirmReference.componentInstance.message = this.translator.instant('devices.list.modals.delete.message', { device: device.id });
+        modalConfirmReference.componentInstance.buttons.dismiss = this.translator.instant('devices.list.modals.delete.actions.cancel');
+        modalConfirmReference.componentInstance.buttons.confirm = this.translator.instant('devices.list.modals.delete.actions.confirm');
+        modalConfirmReference.componentInstance.action.subscribe((action: string) => {
+            switch (action) {
+                case 'dismiss':
+                    modalConfirmReference.dismiss();
+                    break;
+                case 'confirm':
+                    if (deleteIsInProgress) {
+                        return;
+                    }
+
+                    deleteIsInProgress = true;
+
+                    this.deviceService
+                        .delete(id)
+                        .subscribe(() => {
+                            modalConfirmReference.close(true);
+
+                            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+                                this.router.navigate(['/devices']));
+                            this.notifications.success(
+                                this.translator.instant('devices.list.notifications.delete.title'),
+                                this.translator.instant('devices.list.notifications.delete.message')
+                            );
+                        }, (error: any) => {
+                            modalConfirmReference.dismiss();
+
+                            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+                                this.router.navigate(['/devices']));
+                            this.progress.ref().complete();
+                            this.notifications.error(
+                                this.translator.instant('devices.list.notifications.delete.title'),
+                                error.message
+                            );
+                        });
+                    break;
+            }
+        });
+    }
+
 }

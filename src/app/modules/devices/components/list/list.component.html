@@ -98,6 +98,9 @@
                                         <button *ngIf="device.enabled == false" ngbDropdownItem (click)="onEnableDevice(device.id)" >
                                             {{ 'devices.list.actions.enable.short' | translate }}
                                         </button>
+                                        <button ngbDropdownItem (click)="onDeleteDevice(device.id)">
+                                            {{ 'devices.list.actions.delete.short' | translate }}
+                                        </button>
                                     </div>
                                 </div>
                             </td>
