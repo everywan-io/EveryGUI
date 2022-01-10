@@ -271,8 +271,8 @@ export class EditComponent implements OnInit {
                         //this.sidlistTypes.push({ title: (array[i].sidlist).toString(), value: (array[i].sidlist).toString() });
                         //this.returnsidlistTypes.push({ title: (array[i].returnSidlist).toString(), value: (array[i].returnSidlist).toString() });
                         console.log( overlay['direct_sid_list']);
-                        this.sidlistTypes.push({ title: (overlay['direct_sid_list']).toString(), value: (overlay['direct_sid_list']).toString() });
-                        this.returnsidlistTypes.push({ title: (overlay['return_sid_list']).toString(), value: (overlay['return_sid_list']).toString() });
+                        this.sidlistTypes.push({ title: (overlay['direct_sid_list']).toString() + ' (' + (overlay['overlay_name']).toString() + ')', value: (overlay['direct_sid_list']).toString() });
+                        this.returnsidlistTypes.push({ title: (overlay['return_sid_list']).toString() + ' (' + (overlay['overlay_name']).toString() + ')', value: (overlay['return_sid_list']).toString() });
                         
                         //this.sidlistTypes.push(overlay['direct_sid_list'];
                         //this.returnsidlistTypes = overlay['return_sid_list'];
@@ -311,8 +311,8 @@ export class EditComponent implements OnInit {
                         console.log('overlay', overlay);
                         console.log( overlay['direct_sid_list']);
                         console.log('name', overlay['overlay_name']);
-                        this.sidlistTypes.push({ title: (overlay['direct_sid_list']).toString(), value: (overlay['direct_sid_list']).toString() });
-                        this.returnsidlistTypes.push({ title: (overlay['return_sid_list']).toString(), value: (overlay['return_sid_list']).toString() });
+                        this.sidlistTypes.push({ title: (overlay['direct_sid_list']).toString() + ' (' + (overlay['overlay_name']).toString() + ')', value: (overlay['direct_sid_list']).toString() });
+                        this.returnsidlistTypes.push({ title: (overlay['return_sid_list']).toString() + ' (' + (overlay['overlay_name']).toString() + ')', value: (overlay['return_sid_list']).toString() });
                         //this.sidlistTypes = overlay['direct_sid_list'];
                         //this.returnsidlistTypes = overlay['return_sid_list'];
                         console.log('sidist', this.sidlistTypes);
