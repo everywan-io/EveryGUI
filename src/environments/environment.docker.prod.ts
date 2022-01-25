@@ -1,4 +1,4 @@
 export const environment = {
-    endpoint: '',
+    endpoint: 'http://everyboss:8080/api',
     production: true
 };
