@@ -26,15 +26,19 @@ export class SwaggerInterceptor implements HttpInterceptor {
         let clonedRequest = null;
 
         try {
-            const definedHostname = environment.endpoint;
+            const definedHostname = environment.endpoint || `${window.location.protocol}//${window.location.host}`;
+            let baseApi = environment.baseApi || '';
+            baseApi = (baseApi.endsWith('/') && baseApi.startsWith('/')) ? baseApi.substr(1) : baseApi;
+            const basePath = environment.baseApi ? `${definedHostname}/${baseApi}` : definedHostname;
+
             const currentPath = request.url;
             const currentMethod = request.method.toLowerCase();
             const currentData = this.extractRequestParams(request);
             const descriptor = Definitions.paths[currentPath][currentMethod];
             const missing: string[] = [];
 
-            const uri = (definedHostname.endsWith('/') && currentPath.startsWith('/')) ? currentPath.substr(1) : currentPath;
-            const url = this.buildRequestUrl(`${definedHostname}${uri}`, currentData, missing, descriptor);
+            const uri = (basePath.endsWith('/') && currentPath.startsWith('/')) ? currentPath.substr(1) : currentPath;
+            const url = this.buildRequestUrl(`${basePath}${uri}`, currentData, missing, descriptor);
 
             if (!url) {
                 const error = `Missing required parameters ${missing.join(', ')} for operation ${descriptor.operationId}`;

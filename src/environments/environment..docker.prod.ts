@@ -1,4 +1,5 @@
 export const environment = {
-    endpoint: '',
+    endpoint: null,
+    baseApi: '/api/',
     production: true
 };
