@@ -136,6 +136,7 @@ export class EditComponent implements OnInit {
         this.devices.configure(payload)
             .subscribe(
                 (device_edited: Device) => {
+                    this.button.state = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED;
 
                     this.router.navigate(['/devices']);
                     this.notifications.success(
@@ -144,6 +145,7 @@ export class EditComponent implements OnInit {
                     );
                 },
                 (error: any) => {
+                    this.button.state = this.form.valid ? ButtonStates.ACTIVE : ButtonStates.DISABLED;
                     
                     this.notifications.error(
                         this.translator.instant(`devices.edit.notifications.edit.title`),
