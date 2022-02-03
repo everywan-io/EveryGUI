@@ -105,29 +105,32 @@ export class EditComponent implements OnInit {
             id: this.form.get('id').value,
         };
         const interfaces = this.form.get('interfaces').value;
-        
-        for (const i in interfaces) {
-            if (interfaces.hasOwnProperty(i)) {
-                if (interfaces[i]['ipv4_addrs'] && interfaces[i]['ipv4_addrs'] !== '') {
-                    interfaces[i]['ipv4_addrs'] = String(interfaces[i]['ipv4_addrs']).split(',');
+
+        const interfaces_json = [];
+        interfaces.forEach(val => interfaces_json.push(Object.assign({}, val)));
+
+        for (const i in interfaces_json) {
+            if (interfaces_json.hasOwnProperty(i)) {
+                if (interfaces_json[i]['ipv4_addrs'] && interfaces_json[i]['ipv4_addrs'] !== '') {
+                    interfaces_json[i]['ipv4_addrs'] = String(interfaces_json[i]['ipv4_addrs']).split(',');
                 }
                
-                if (interfaces[i]['ipv4_subnets'] && interfaces[i]['ipv4_subnets'] !== '') {
-                    interfaces[i]['ipv4_subnets'] = JSON.parse(interfaces[i]['ipv4_subnets']);
+                if (interfaces_json[i]['ipv4_subnets'] && interfaces_json[i]['ipv4_subnets'] !== '') {
+                    interfaces_json[i]['ipv4_subnets'] = JSON.parse(interfaces_json[i]['ipv4_subnets']);
                 }
 
-                if (interfaces[i]['ipv6_addrs'] && interfaces[i]['ipv6_addrs'] !== '') {
-                    interfaces[i]['ipv6_addrs'] = String(interfaces[i]['ipv6_addrs']).split(',');
+                if (interfaces_json[i]['ipv6_addrs'] && interfaces_json[i]['ipv6_addrs'] !== '') {
+                    interfaces_json[i]['ipv6_addrs'] = String(interfaces_json[i]['ipv6_addrs']).split(',');
                 }
                
-                if (interfaces[i]['ipv6_subnets'] && interfaces[i]['ipv6_subnets'] !== '') {
-                    interfaces[i]['ipv6_subnets'] = JSON.parse(interfaces[i]['ipv6_subnets']);
+                if (interfaces_json[i]['ipv6_subnets'] && interfaces_json[i]['ipv6_subnets'] !== '') {
+                    interfaces_json[i]['ipv6_subnets'] = JSON.parse(interfaces_json[i]['ipv6_subnets']);
                 }
                 
             }
         }
 
-        payload['interfaces'] = interfaces;
+        payload['interfaces'] = interfaces_json;
         this.button.state = ButtonStates.LOADING;
         
         this.devices.configure(payload)
