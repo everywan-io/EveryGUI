@@ -20,6 +20,7 @@ export class ApiService {
     public Operators: any;
     public Devices: any;
     public OverlayNets: any;
+    public User: any;
     public Measurement: any
     public Dashboard: any;
     public Tenants: any;
@@ -32,6 +33,7 @@ export class ApiService {
         this.Devices = this.constructApisForGroup('Devices');
         this.OverlayNets = this.constructApisForGroup('Overlays');
         this.Measurement = this.constructApisForGroup('Measurements');
+        this.User = this.constructApisForGroup('Users');
         this.Dashboard = this.constructApisForGroup('Dashboard');
         this.Tenants = this.constructApisForGroup('Tenants');
 

@@ -1,27 +1,29 @@
 import * as Moment from 'moment';
 
-import {Injectable} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
-import {finalize, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
 
-import {ClientKeys, StorageKeys} from '@everywan/app.constants';
+import { ClientKeys, StorageKeys } from '@everywan/app.constants';
 
-import {Operator} from '@models/operators.model';
-import {ApiService} from '@modules/network/api.service';
-import {OperatorsFactory} from '@models/factories/operators.factory';
-import {StorageService} from '@services/storage/storage.service';
-import {ApplicationState} from '@services/store/store.state';
-import {LoginDescriptorInterface, OperatorDescriptorInterface} from '@configs/network/api.descriptors';
-import {AuthenticationUserSignin, AuthenticationUserSignout} from '@services/store/actions/store.authentication.actions';
+import { Operator } from '@models/operators.model';
+import { ApiService } from '@modules/network/api.service';
+import { OperatorsFactory } from '@models/factories/operators.factory';
+import { StorageService } from '@services/storage/storage.service';
+import { ApplicationState } from '@services/store/store.state';
+import { LoginDescriptorInterface, OperatorDescriptorInterface, UserDescriptorInterface } from '@configs/network/api.descriptors';
+import { AuthenticationUserSignin, AuthenticationUserSignout } from '@services/store/actions/store.authentication.actions';
+import { User } from '@everywan/models/user.model';
+import { UsersFactory } from '@everywan/models/factories/user.factory';
 
 @Injectable()
 export class AuthenticationService {
     private loggedIn: boolean;
 
     constructor(private API: ApiService,
-                private store: Store<ApplicationState>,
-                private storage: StorageService) {
+        private store: Store<ApplicationState>,
+        private storage: StorageService) {
 
         this.store.pipe(
             select('authentication'),
@@ -71,6 +73,22 @@ export class AuthenticationService {
             );
     }
 
+    register(data: { domain: string, username: string, email: string, password: string, confirmPassword: string }): Observable<User> {
+        const payload = {
+            ...data
+        };
+
+        return this.API.User
+            .register(payload)
+            .pipe(
+                map((response: UserDescriptorInterface) => {
+                    const descriptor = response;
+                    const instance = UsersFactory.create(descriptor) as User;
+                    return instance;
+                })
+            );
+    }
+
     signout(): Observable<boolean> {
         return this.API.Authentication.Operators
             .signout()
@@ -86,15 +104,15 @@ export class AuthenticationService {
             );
     }
 
-    recoverPsw(data: {email: string}): Observable<boolean> {
+    recoverPsw(data: { email: string }): Observable<boolean> {
         return this.API.Authentication.Operators.Password.requestRecover(data);
     }
 
-    passwordTokenCheck(data: {token: string, email: string}) {
+    passwordTokenCheck(data: { token: string, email: string }) {
         return this.API.Authentication.Operators.Password.checkRecoverToken(data);
     }
 
-    changePsw(data: {token: string, password: string, email: string}): Observable<boolean>{
+    changePsw(data: { token: string, password: string, email: string }): Observable<boolean> {
         return this.API.Authentication.Operators.Password.reset(data);
     }
 

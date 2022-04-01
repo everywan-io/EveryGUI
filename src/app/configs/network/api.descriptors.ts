@@ -1,5 +1,3 @@
-
-
 export interface LoginDescriptorInterface {
     token_type: string;
     expired_in: string;
@@ -101,6 +99,14 @@ export interface MeasurementDescriptorInterface {
     overlayId: string;
     overlayName: string;
     duration: number;
+}
+
+export interface UserDescriptorInterface {
+    domain: string;
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
 }
 
 export enum InterfaceType {

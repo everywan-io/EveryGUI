@@ -1,0 +1,13 @@
+@import "index";
+
+.container-fluid {
+    .row {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+
+        #register-container {
+            max-width: 400px;
+        }
+    }
+}

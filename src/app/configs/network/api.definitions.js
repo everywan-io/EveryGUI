@@ -85,6 +85,29 @@ module.exports = {
         }]
       }
     },
+    "/auth/register": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Register a user",
+        "summary": "Register a user",
+        "operationId": "Users.register",
+        "responses": {
+          "200": {
+            "description": "The request is successfull",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        },
+        "security": [{
+          "bearerAuthentication": []
+        }]
+      }
+    },
     "/operators": {
       "get": {
         "tags": ["Operator"],
@@ -1843,6 +1866,33 @@ module.exports = {
                 "scope": {
                   "type": "string",
                   "example": "*"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RegistrationConfigureRequestBody": {
+        "description": "Registration Configure request body.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "domain": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "confirmPassword": {
+                  "type": "string"
                 }
               }
             }

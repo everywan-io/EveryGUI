@@ -1,5 +1,5 @@
-import {Action} from '@ngrx/store';
-import {StoreActions} from '@everywan/app.constants';
+import { Action } from '@ngrx/store';
+import { StoreActions } from '@everywan/app.constants';
 
 export class AuthenticationUserSignin implements Action {
     readonly type = StoreActions.STORE_AUTH_SIGNIN;
