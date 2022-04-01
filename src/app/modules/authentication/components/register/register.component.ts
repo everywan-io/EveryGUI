@@ -33,7 +33,9 @@ export class RegisterComponent implements OnInit {
         this.errors = {
             username: null,
             password: null,
-            domain: null
+            domain: null,
+            email: null,
+            confirmPassword: null
         };
     }
 
@@ -77,7 +79,7 @@ export class RegisterComponent implements OnInit {
                 this.progress.ref().complete();
                 this.notifications.error(
                     this.translator.instant('auth.register.notifications.error.message'),
-                    error.message
+                    error.error.error
                 );
             }
         );
