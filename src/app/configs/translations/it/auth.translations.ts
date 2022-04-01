@@ -25,7 +25,59 @@ export const AuthenticationLanguagePartialDefinition = {
     signout: {
         message: 'Effettuo la disconnessione...'
     },
-    recover : {
+    register: {
+        fields: {
+            domain: {
+                label: 'Domain',
+                placeholder: "Inserisci il dominio"
+            },
+            username: {
+                label: 'Username',
+                placeholder: 'Inserisci username'
+            },
+            email: {
+                label: 'E-mail',
+                placeholder: 'Inserisci e-mail'
+            },
+            password: {
+                label: 'Password',
+                placeholder: 'Inserisci password'
+            },
+            confirmPassword: {
+                label: 'Conferma password',
+                placeholder: 'Conferma la password'
+            }
+        },
+        title: {
+            create: 'Registrazione utente'
+        },
+        actions: {
+            submit: 'Registrati',
+            buttonConfirmRegistration: 'Conferma registrazione',
+            buttonUndoRegistration: 'Annulla registrazione'
+        },
+        modals: {
+            create: {
+                title: 'Configure user',
+                message: 'Stai per registrare l\'utente. <br />Sei sicuro di voler procedere?',
+                actions: {
+                    confirm: 'Register',
+                    cancel: 'Cancel'
+                }
+            }
+        },
+        notifications: {
+            create: {
+                title: 'User registration',
+                message: 'User registered succesfully'
+            },
+            error: {
+                title: 'Register error',
+                message: 'Registration failed'
+            }
+        }
+    },
+    recover: {
         headings: {
             title: 'Recupera password',
             subtitle: 'Inserisci l\'e-mail associata al tuo account.<br />Riceverai un link per il reset della password.'

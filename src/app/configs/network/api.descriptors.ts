@@ -1,5 +1,3 @@
-
-
 export interface LoginDescriptorInterface {
     token_type: string;
     expired_in: string;
@@ -109,6 +107,14 @@ export interface SIDListDescriptorInterface {
     overlayid: string;
     return_sid_list: [];
     tenantid: string;
+}
+
+export interface UserDescriptorInterface {
+    domain: string;
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
 }
 
 export enum InterfaceType {
