@@ -189,6 +189,12 @@ export class EditComponent implements OnInit {
         const interfaces = this.form.get('interfaces') as FormArray;
         if ( event.target.checked ) {
             interfaces.controls[i].enable();
+            if (interfaces.controls[i]['controls']['type'].value == 'wan') {
+                interfaces.controls[i]['controls']['ipv4_addrs'].disable()
+                interfaces.controls[i]['controls']['ipv6_addrs'].disable()
+                interfaces.controls[i]['controls']['ipv4_subnets'].disable()
+                interfaces.controls[i]['controls']['ipv6_subnets'].disable()
+            }
         } else {
             interfaces.controls[i].disable();
         }
