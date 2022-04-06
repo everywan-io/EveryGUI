@@ -1,8 +1,8 @@
 <div class="card" style="width: 20rem;">
     <div class="card-body">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="{{ interface.name }}" (change)="isChecked($event)">
-            <label class="custom-control-label" for="{{ interface.name }}"></label>
+            <input type="checkbox" class="custom-control-input" id="{{ interface.deviceid }}/{{ interface.name }}" (change)="isChecked($event)">
+            <label class="custom-control-label" for="{{ interface.deviceid }}/{{ interface.name }}"></label>
         </div>
         <div>
             <label for="{{ 'name_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.name.label' | translate }}: </label>
