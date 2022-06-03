@@ -95,12 +95,12 @@
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text"><!-- {{ devicesInterface.ipv4_subnets.toString() }} --></span>
+                                    <span class="text">{{ getSubnets(devicesInterface.ipv4_subnets) }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text upper">{{ devicesInterface.ipv6_subnets.toString() }}</span>
+                                    <span class="text upper">{{ getSubnets(devicesInterface.ipv6_subnets) }}</span>
                                 </span>
                             </td>
                             <td>

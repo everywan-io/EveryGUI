@@ -63,5 +63,11 @@ export class DetailsComponent implements OnInit {
 
     }
 
+    getSubnets(subnets) {
+        return subnets.map(function(subnet) {
+            return subnet['subnet'];
+          });
+    }
+
 
 }
