@@ -16,12 +16,14 @@
 
         <div class="col-12 col-md-6 d-flex flex-row">
             <label for="tenantInfo">{{ 'tenants.details.fields.info.label' | translate }}</label>
-            <span class="text">{{ (tenant.info !== null) ? tenant.info: "--"}}</span>
+            <span class="text">{{ (tenant.info !== null && tenant.info !== undefined) ? tenant.info: "--"}}</span>
         </div>
 
         <div class="col-12 col-md-6 d-flex flex-row">
             <label for="tenantInfo">{{ 'tenants.details.fields.configured.label' | translate }}</label>
-            <span class="text">{{ (tenant.configured !== null) ? tenant.configured: "--"}}</span>
+            <span *ngIf="tenant.configured; else notConfiguredBlock " class="text">{{ 'commons.yes' | translate }}</span>
+            <ng-template #notConfiguredBlock><span class="text">{{ 'commons.no' | translate }}</span></ng-template>
+            <!-- <span class="text">{{ (tenant.configured !== null) ? tenant.configured: "--"}}</span> -->
         </div>
 
 

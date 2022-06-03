@@ -16,7 +16,7 @@
         </div>
         <div class="col-12 col-md-6 d-flex flex-row ">
             <label for="type">{{ 'devices.details.fields.type' | translate }}</label>
-            <span class="text">{{ (device.type !== null ) ? device.type : "--"}}</span>
+            <span class="text">{{ (device.type !== null && device.type !== undefined) ? device.type : "--"}}</span>
         </div>
         <div class="col-12 col-md-6 d-flex flex-row ">
             <label for="natType">{{ 'devices.details.fields.natType' | translate }}</label>
@@ -80,37 +80,37 @@
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text">{{ devicesInterface.mac_addr }}</span>
+                                    <span class="text">{{ devicesInterface.mac_addr !== null ? devicesInterface.mac_addr : "--" }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text">{{ devicesInterface.ipv4_addrs }}</span>
+                                    <span class="text">{{ devicesInterface.ipv4_addrs.length !== 0 ? devicesInterface.ipv4_addrs : "--" }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text">{{ devicesInterface.ipv6_addrs }}</span>
+                                    <span class="text">{{ devicesInterface.ipv6_addrs.length !== 0 ? devicesInterface.ipv6_addrs : "--" }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text">{{ getSubnets(devicesInterface.ipv4_subnets) }}</span>
+                                    <span class="text">{{ getSubnets(devicesInterface.ipv4_subnets).length !== 0 ? getSubnets(devicesInterface.ipv4_subnets) : "--" }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text upper">{{ getSubnets(devicesInterface.ipv6_subnets) }}</span>
+                                    <span class="text upper">{{ getSubnets(devicesInterface.ipv6_subnets).length !== 0 ? getSubnets(devicesInterface.ipv6_subnets) : "--" }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text">{{ devicesInterface.ext_ipv4_addrs.toString() }}</span>
+                                    <span class="text">{{ devicesInterface.ext_ipv4_addrs.length !== 0 ? devicesInterface.ext_ipv4_addrs.toString() : "--" }}</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="role d-inline-flex align-items-center">
-                                    <span class="text">{{ devicesInterface.ext_ipv6_addrs.toString() }}</span>
+                                    <span class="text">{{ devicesInterface.ext_ipv6_addrs.length !== 0 ? devicesInterface.ext_ipv6_addrs.toString() : "--" }}</span>
                                 </span>
                             </td>
                             <td>
