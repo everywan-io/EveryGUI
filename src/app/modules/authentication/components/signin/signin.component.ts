@@ -70,7 +70,7 @@ export class SigninComponent implements OnInit {
                 this.progress.ref().complete();
                 this.notifications.error(
                     this.translator.instant('auth.signin.notifications.title'),
-                    error.message
+                    error.error.error
                 );
             }
         );
