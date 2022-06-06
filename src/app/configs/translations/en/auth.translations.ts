@@ -46,7 +46,7 @@ export const AuthenticationLanguagePartialDefinition = {
                 placeholder: 'Choose a password'
             },
             confirmPassword: {
-                label: 'Conferma password',
+                label: 'Confirm password',
                 placeholder: 'Confirm password'
             }
         },

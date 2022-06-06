@@ -14,7 +14,7 @@ export class TranslationLoader implements TranslateLoader {
         if (!translation) {
             console.warn(`No language definition found for ${lang}, falling back to english.`);
 
-            translation = TranslationDefinitions['it'];
+            translation = TranslationDefinitions['en'];
         }
 
         return of(translation);
