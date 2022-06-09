@@ -15,6 +15,7 @@ export class Interface {
     extIpv4Addrs: [];
     extIpv6Addrs: [];
     type: InterfaceType;
+    device_name: string;
 
     defineExtraProperties() {
         
