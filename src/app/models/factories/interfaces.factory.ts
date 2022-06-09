@@ -31,7 +31,8 @@ export class InterfacesFactory {
             ipv6Subnets: 'ipv6_subnets',
             extIpv4Addrs: 'ext_ipv4_addrs',
             extIpv6Addrs: 'ext_ipv6_addrs',
-            type: 'type'
+            type: 'type',
+            device_name: 'device_name'
         };
         const instance: Interface = new Interface();
 
