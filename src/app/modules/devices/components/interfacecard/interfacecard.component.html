@@ -8,6 +8,10 @@
             <label for="{{ 'name_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.name.label' | translate }}: </label>
             <span id="{{ 'name_' + interface.name }}" class="text">{{ (interface.name !== null) ? interface.name   : "--"}} ({{interface.type}})</span>
         </div>
+        <div>
+            <label for="{{ 'device_' + interface.device_name }}">{{ 'overlaynets.edit.fields.localslices.device.label' | translate }}: </label>
+            <span id="{{ 'device_' + interface.device_name }}" class="text">{{ (interface.device_name !== null) ? interface.device_name   : "--"}}</span>
+        </div>
 <!--         <div>
             <label for="{{ 'type_' + interface.name }}">{{ 'overlaynets.edit.fields.localslices.type.label' | translate }}: </label>
             <span  id="{{ 'type_' + interface.name }}" class="text">{{ (interface.type !== null) ? interface.type  : "--"}}</span>

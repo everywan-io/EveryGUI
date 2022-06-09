@@ -96,6 +96,9 @@ export const OverlayNetsLanguagePartialDefinition = {
                 name: {
                     label: 'Name'
                 },
+                device: {
+                    label: 'Device'
+                },
                 ipv4_addrs: {
                     label: 'IPv4'
                 },
